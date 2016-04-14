@@ -1,1 +1,1 @@
-console.info("geobase UI started");
+console.info("geocure UI started");

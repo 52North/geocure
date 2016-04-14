@@ -1,6 +1,6 @@
-# 52°North georadix
+# 52°North geocure
 
-_georadix_ is a REST API providing proxified access to an underlying geodata
+_geocure_ is a REST API providing proxified access to an underlying geodata
 server. Currently [geoserver](http://geoserver.org/) is supported.
 
 ## Installation

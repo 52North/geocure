@@ -1,10 +1,10 @@
 var should = require('should');
-var georadix = require('../lib/server');
+var geocure = require('../lib/server');
 var requestUtils = require('../lib/request-utils');
 
 describe('testRoutes', function () {
   it('testRoutes', function (done) {
-    georadix.server.routes.get.should.not.be.null;
+    geocure.server.routes.get.should.not.be.null;
     done();
   });
 });

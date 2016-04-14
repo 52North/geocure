@@ -1,5 +1,5 @@
 {
-    "name": "geobase",
+    "name": "geocure",
     "version": "1.0.0-SNAPSHOT",
     "author": {
         "name": "Matthes Rieke"
@@ -8,7 +8,7 @@
     "keywords": [
         "rest",
         "api",
-        "geobase",
+        "geocure",
         "geodata",
         "SDI",
         "raster",
@@ -19,10 +19,10 @@
     ],
     "repository": {
         "type": "git",
-        "url": "git://github.com/52North/geobase.git"
+        "url": "git://github.com/52North/geocure.git"
     },
     "bugs": {
-        "url": "https://github.com/52North/geobase/issues"
+        "url": "https://github.com/52North/geocure/issues"
     },
     "scripts": {
         "start": "node lib/server.js",
