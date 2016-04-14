@@ -25,13 +25,6 @@ module.exports = function (grunt) {
       ]
     },
     mochacov: {
-      coveralls: {
-        options: {
-          coveralls: {
-            serviceName: 'travis-ci'
-          }
-        }
-      },
       coverage: {
         options: {
           reporter: 'html-cov',
@@ -47,7 +40,6 @@ module.exports = function (grunt) {
 
   // Default task.
   grunt.registerTask('test', ['jshint', 'mochacli']);
-  grunt.registerTask('travis', ['test', 'mochacov:coveralls']);
   grunt.registerTask('coverage', ['test', 'mochacov:coverage']);
   grunt.registerTask('default', ['test']);
 
