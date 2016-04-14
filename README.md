@@ -1,6 +1,6 @@
-# 52°North geobase
+# 52°North georadix
 
-_geobase_ is a REST API providing proxified access to an underlying geodata
+_georadix_ is a REST API providing proxified access to an underlying geodata
 server. Currently [geoserver](http://geoserver.org/) is supported.
 
 ## Installation
@@ -9,7 +9,11 @@ server. Currently [geoserver](http://geoserver.org/) is supported.
 
 ## Execution
 
-`grunt`
+`grunt nodemon` or `node lib/server.js`
+
+## Tests
+
+Unit tests are executed by default `grunt`.
 
 ## License
 
