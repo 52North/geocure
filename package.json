@@ -1,0 +1,53 @@
+{
+    "name": "geobase",
+    "version": "1.0.0-SNAPSHOT",
+    "author": {
+        "name": "Matthes Rieke"
+    },
+    "license" : "MIT",
+    "keywords": [
+        "rest",
+        "api",
+        "geobase",
+        "geodata",
+        "SDI",
+        "raster",
+        "vector",
+        "wms",
+        "wfs",
+        "geojson"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/52North/geobase.git"
+    },
+    "bugs": {
+        "url": "https://github.com/52North/geobase/issues"
+    },
+    "scripts": {
+        "start": "node lib/server.js",
+        "test": "grunt test",
+        "blanket": {
+            "pattern": "//^(?!.*node_modules.*$).*lib\//"
+        }
+    },
+    "main": "lib/server",
+    "readmeFilename": "README.md",
+    "dependencies": {
+        "node-restify-validation": "~1.0.4",
+        "node-restify-swagger": "^0.1.8",
+        "underscore": "~1.8.3",
+        "restify": "~4.0.4",
+        "request": "~2.71.0"
+    },
+    "devDependencies": {
+        "grunt": "~0.4.1",
+        "grunt-contrib-jshint": "~0.6.0",
+        "grunt-contrib-watch": "~0.5.1",
+        "grunt-mocha-cli": "~1.0.1",
+        "matchdep": "~0.1.1",
+        "should": "~1.2.2",
+        "sinon": "~1.7.3",
+        "grunt-mocha-cov": "0.0.7"
+    }
+}
