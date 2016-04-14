@@ -34,7 +34,6 @@
     "main": "lib/server",
     "readmeFilename": "README.md",
     "dependencies": {
-        "node-restify-validation": "~1.0.4",
         "node-restify-swagger": "^0.1.8",
         "underscore": "~1.8.3",
         "restify": "~4.0.4",
