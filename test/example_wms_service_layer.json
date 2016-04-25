@@ -1,0 +1,9 @@
+{
+  "id": "topp",
+  "name":"topp",
+  "children": {
+    "map": {
+        "href": "http://localhost:8000/geocure/services/test-wms/topp/map",
+      }
+  }
+}

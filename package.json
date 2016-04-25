@@ -12,6 +12,7 @@
         "geodata",
         "SDI",
         "raster",
+
         "vector",
         "wms",
         "wfs",
@@ -24,6 +25,7 @@
     "bugs": {
         "url": "https://github.com/52North/geocure/issues"
     },
+
     "scripts": {
         "start": "node lib/server.js",
         "test": "grunt test",
@@ -31,6 +33,7 @@
             "pattern": "//^(?!.*node_modules.*$).*lib\//"
         }
     },
+
     "main": "lib/server",
     "readmeFilename": "README.md",
     "dependencies": {
