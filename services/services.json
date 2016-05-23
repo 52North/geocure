@@ -3,13 +3,25 @@
     "id": "wms",
     "label": "COLABIS-Data via WMS",
     "description": "Returns COLABIS-Data via a WM-Service",
-    "href": "<baseURL>/services/services1"
+    "href": "<baseURL>/services/services1",
+    "capabilities" : [
+      {
+        "maps": "<baseURL>/services/services1/maps",
+        "features" : "<baseURL>/services/services1/features"
+      }
+    ]
   },
   {
     "id": "WFS",
     "label": "COLABIS-Data via WFS",
     "description": "Returns COLABIS-Data via a WF-Service as GML",
-    "href": "<baseURL>/services/services2"
+    "href": "<baseURL>/services/services2",
+    "capabilities" : [
+      {
+        "maps": "<baseURL>/services/services2/maps",
+        "features" : "<baseURL>/services/services2/features"
+      }
+    ]
   }
 
 ]
