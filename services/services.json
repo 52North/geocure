@@ -1,11 +1,15 @@
-[{
-   “id”: “service1”,
-   “label” : “anzeigename”,
-   “description” : “beschreibung zum service”,
-   “href” : “<baseURL>/services/service1”
-},{
-   “id”: “service2”,
-   “label” : “anzeigename”,
-   “description” : “beschreibung zum service”,
-   “href” : “<baseURL>/services/service2”
-}]
+[
+  {
+    "id": "wms",
+    "label": "COLABIS-Data via WMS",
+    "description": "Returns COLABIS-Data via a WM-Service",
+    "href": "<baseURL>/services/services1"
+  },
+  {
+    "id": "WFS",
+    "label": "COLABIS-Data via WFS",
+    "description": "Returns COLABIS-Data via a WF-Service as GML",
+    "href": "<baseURL>/services/services2"
+  }
+
+]
