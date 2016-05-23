@@ -1,6 +1,11 @@
-{
+[{
    “id”: “service1”,
    “label” : “anzeigename”,
    “description” : “beschreibung zum service”,
    “href” : “<baseURL>/services/service1”
-}
+},{
+   “id”: “service2”,
+   “label” : “anzeigename”,
+   “description” : “beschreibung zum service”,
+   “href” : “<baseURL>/services/service2”
+}]
