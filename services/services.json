@@ -3,11 +3,11 @@
     "id": "wms",
     "label": "COLABIS-Data via WMS",
     "description": "Returns COLABIS-Data via a WM-Service",
-    "href": "<baseURL>/services/services1",
+    "href": "http://localhost:8080/geoserver/COLABIS_REST_TEST",
     "capabilities" : [
       {
-        "maps": "http://localhost:8080/geoserver/COLABIS_REST_TEST/wms?service=WMS&version=1.1.0&request=GetMap&layers=COLABIS_REST_TEST:de009l_dresden&styles=&bbox=4545148.970342018,3073855.5797838643,4630228.014722928,3131865.2641179655&width=768&height=523&srs=EPSG:3035&format=image%2Fpng",
-        "features": "http://localhost:8080/geoserver/COLABIS_REST_TEST/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=COLABIS_REST_TEST:de009l_dresden&maxFeatures=50"
+        "maps": "/wms?service=WMS&version=1.1.0&request=GetMap&layers=COLABIS_REST_TEST:de009l_dresden&styles=&bbox=4545148.970342018,3073855.5797838643,4630228.014722928,3131865.2641179655&width=768&height=523&srs=EPSG:3035&format=image%2Fpng",
+        "features": "/ows?service=WFS&version=1.0.0&request=GetFeature&typeName=COLABIS_REST_TEST:de009l_dresden&maxFeatures=50"
       }
     ]
   },
