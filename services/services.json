@@ -16,15 +16,6 @@
             "maps": "http://localhost:8001/service/wms/maps",
             "features": "http://localhost:8001/service/wms/features"
         }]
-    }, {
-        "id": "wfs",
-        "label": "COLABIS-Data via WFS",
-        "description": "Returns COLABIS-Data via a WF-Service as GML",
-        "href": "<baseURL>/services/services2",
-        "capabilities": [{
-            "maps": "<baseURL>/services/services2/maps",
-            "features": "<baseURL>/services/services2/features"
-        }]
     }
 
 ]
