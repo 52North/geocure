@@ -39,6 +39,7 @@
     "ogc-schemas": "^2.6.1",
     "request": "~2.71.0",
     "restify": "~4.0.4",
+    "restify-error": "^1.0.0",
     "underscore": "~1.8.3"
   },
   "devDependencies": {
