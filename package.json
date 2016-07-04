@@ -34,10 +34,11 @@
   "main": "lib/server",
   "readmeFilename": "README.md",
   "dependencies": {
+    "express": "^4.14.0",
     "jsonix": "^2.4.1",
     "node-restify-swagger": "^0.1.8",
     "ogc-schemas": "^2.6.1",
-    "request": "~2.71.0",
+    "request": "^2.71.0",
     "restify": "~4.0.4",
     "restify-error": "^1.0.0",
     "underscore": "~1.8.3"
