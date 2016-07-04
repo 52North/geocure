@@ -4,7 +4,6 @@
         "description": "Returns COLABIS-Data via a WM-Service",
         "href": "https://geoserver.colabis.de/geoserver/wms",
         "baseURLService" : "https://geoserver.colabis.de/geoserver/",
-        "getMapCapabilities" : "wms?request=GetCapabilities&service=wms",
         "layers": [{
             "id": "layer1",
             "href": "<baseURL>/services/services1/maps/layer1"
