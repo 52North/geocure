@@ -2,11 +2,6 @@
         "id": "COLABIS_REST_TEST",
         "label": "COLABIS-Data via WMS",
         "description": "Returns COLABIS-Data via a WM-Service",
-<<<<<<< HEAD
-        "href": "https://geoserver.colabis.de/geoserver/wms",
-        "baseURLService" : "https://geoserver.colabis.de/geoserver/",
-        "getMapCapabilities" : "wms?request=GetCapabilities&service=wms"
-=======
         "href": "http://localhost:8080/geoserver/wms",
         "baseURLService" : "http://localhost:8080/geoserver/",
         "layers": [{
@@ -20,7 +15,6 @@
             "maps": "http://localhost:8001/service/wms/maps",
             "features": "http://localhost:8001/service/wms/features"
         }]
->>>>>>> master
     }
 
 ]
