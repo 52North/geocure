@@ -4,6 +4,9 @@
         "description": "Returns COLABIS-Data via a WM-Service",
         "href": "http://localhost:8080/geoserver/wms",
         "baseURLService" : "http://localhost:8080/geoserver/",
+        "defaultWidth" : 1330,
+        "defaultHeight" : 944,
+        "defaultFormat" : "image/png",
         "layers": [{
             "id": "layer1"
         }, {
