@@ -1,0 +1,4 @@
+{
+  "badRequestError" : "returning badRequestError",
+  "internalServerError" : "returning internalServerError"
+}
