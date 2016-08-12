@@ -1,7 +1,7 @@
 [{
-        "id": "COLABIS_REST_TEST",
-        "label": "COLABIS-Data via WMS",
-        "description": "Returns COLABIS-Data via a WM-Service",
+        "id": "service1",
+        "label": "name of the service",
+        "description": "Returns sample data via a WM-Service",
         "href": "http://localhost:8080/geoserver/wms",
         "baseURLService" : "http://localhost:8080/geoserver/",
         "defaultWidth" : 1330,
