@@ -7,11 +7,6 @@
         "defaultWidth" : 1330,
         "defaultHeight" : 944,
         "defaultFormat" : "image/png",
-        "layers": [{
-            "id": "layer1"
-        }, {
-            "id": "layer2"
-        }],
         "capabilities": [{
             "maps": true,
             "features": false
