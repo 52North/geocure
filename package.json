@@ -38,6 +38,7 @@
     "jsonix": "^2.4.1",
     "node-restify-swagger": "^0.1.8",
     "ogc-schemas": "^2.6.1",
+    "proj4": "^2.3.14",
     "request": "^2.71.0",
     "restify": "~4.0.4",
     "restify-error": "^1.0.0",
