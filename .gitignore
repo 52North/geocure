@@ -1,0 +1,11 @@
+target
+.classpath
+.project
+.settings
+/bin/
+target
+log
+test/*
+!*.gitkeep/
+**/Thumbs.db
+nbactions.xml
