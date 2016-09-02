@@ -9,7 +9,7 @@
         "defaultFormat" : "image/png",
         "capabilities": [{
             "maps": true,
-            "features": false
+            "features": true
         }]
     }
 
