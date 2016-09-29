@@ -515,20 +515,17 @@ Content-Type: application/json;charset=UTF-8
                                     Just a recommendation, since I do not know about your development progress :)
                                 </div>
 
-                                <pre>GET &lt;base-url&gt;/services/service1/maps/render HTTP/1.1
-    Host: localhost:8001
+                                <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps/render HTTP/1.1
+    Host: colabis.dev.52north.org
     Accept: image/png</pre>
                                 <div id="service-maps-global-rendering-example" class="collapse">
                                   <pre>HTTP/1.1 200 OK
       Content-Type: image/png;
       </pre>
 
-                                  <img src="img/" alt="service-maps-global-rendering example" title="Examplar response for global rendering of all layers" />
+                                  <img src="img/exampleRender.png" alt="service-maps-global-rendering example" title="Examplar response for global rendering of all layers" />
                                 </div>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    insert image from img folder
-                                </div>
 
                                 <button data-toggle="collapse" data-parent="#service-maps-global-rendering-examples"
                                     data-target="#service-maps-global-rendering-example" class="btn btn-primary">Show/Hide
