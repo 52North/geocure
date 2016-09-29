@@ -344,7 +344,7 @@ Content-Type: application/json;charset=UTF-8
                                 <td><code>GET</code></td>
                                 <td><code>&lt;base-url&gt;/services/{service-id}</code></td>
                                 <td><code>application/json</code></td>
-                                <td>Returns the Capabilities of the specified service with id <code>{service-id}</code>.</td>
+                                <td>Returns the capabilities of a requested service.</td>
                             </tr>
 
                         </table>
@@ -356,25 +356,23 @@ Content-Type: application/json;charset=UTF-8
                         <div>
                             <h4>Service Capabilities Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
 
-                            <pre>GET &lt;base-url&gt;/services/service1 HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="service-capabilities-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-    "id": "service1",
+
+    "id": "service1COLABIS",
     "label": "name of the service",
     "description": "Returns sample data via a WM-Service",
     "capabilities": [
-        "http://localhost:8001/services/service1/maps",
-        "http://localhost:8001/services/service1/features"
+        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps",
+        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/features"
     ]
+
 }</pre>
                             <button data-toggle="collapse" data-parent="#service-capabilities-examples"
                                 data-target="#service-capabilities-example" class="btn btn-primary">Show/Hide
