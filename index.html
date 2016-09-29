@@ -380,12 +380,8 @@ Content-Type: application/json;charset=UTF-8
 
 
                                 <div class="n52-callout n52-callout-info">
-                                    The parameter <code>capabilities</code> show the supported services. In this example, we see endpoints for a WMS (<code>/maps</code>) and a WFS (<code>/features</code>).
+                                    The parameter <code>capabilities</code> contains the supported services. In this example, we see endpoints for a WMS (<code>/maps</code>) and a WFS (<code>/features</code>).
                                 </div>
-
-                            <div class="n52-callout n52-callout-info">
-                                The returned Capabilities document contains a parameter <code>capabilities</code> that ...
-                            </div>
 
                         </div>
 
@@ -433,34 +429,32 @@ Content-Type: application/json;charset=UTF-8
                         <div>
                             <h4>Service Maps Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
-
-                            <pre>GET &lt;base-url&gt;/services/service1/maps HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="service-maps-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-   "layers": [
-       {
-           "layer1": "http://localhost:8001/services/service1/maps/layer1/render",
-           "layer2": "http://localhost:8001/services/service1/maps/layer2/render"
-       }
-   ],
-   "crs": [
-       {
-           "TYPE_NAME": "WMS_1_3_0.BoundingBox",
-           "crs": "CRS:84",
-           "minx": 13.175925096825951,
-           "miny": 50.6931182592888,
-           "maxx": 14.428531545338213,
-           "maxy": 51.25344896064335
-       }
-   ]
+
+    "layers": [
+        {
+            "Sample measurements of road pollution in Dresden ": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render",
+            "DWD administrative areas": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/render",
+            "dwd-regionen-staedte-und-gemeinden": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116/render"
+        }
+    ],
+    "crs": [
+        {
+            "TYPE_NAME": "WMS_1_3_0.BoundingBox",
+            "crs": "EPSG:4326",
+            "minx": 5.82013988494873,
+            "miny": 47.2314224243164,
+            "maxx": 15.0836019515991,
+            "maxy": 55.0963134765625
+        }
+    ]
+
 }</pre>
                             <button data-toggle="collapse" data-parent="#service-maps-examples"
                                 data-target="#service-maps-example" class="btn btn-primary">Show/Hide
