@@ -510,10 +510,6 @@ Content-Type: application/json;charset=UTF-8
                             <div>
                                 <h4>Service Maps Global Rendering Request</h4>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                    Just a recommendation, since I do not know about your development progress :)
-                                </div>
 
                                 <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps/render HTTP/1.1
     Host: colabis.dev.52north.org
@@ -559,7 +555,7 @@ Content-Type: application/json;charset=UTF-8
                                     <td><code>GET</code></td>
                                     <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
                                     <td><code>application/json</code></td>
-                                    <td>Returns the specified layer with id <code>{layer-id}</code> for service with id <code>service-id</code> in the default format,
+                                    <td>Returns the by <code>{layer-id}</code> specified layer for a service with id <code>service-id</code> in the default format,
                                       which is defined in file <code>services/services.json</code>.
                                       Using a comma separated list, multiple layers can be requested.
                                       The order of rendering is analogous to the order in the list of layers.</td>
@@ -574,25 +570,18 @@ Content-Type: application/json;charset=UTF-8
                             <div>
                                 <h4>Service Maps Single Layer Rendering Request</h4>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                    Just a recommendation, since I do not know about your development progress :)
-                                </div>
 
-<pre>GET &lt;base-url&gt;/services/service1/maps/layer1/render HTTP/1.1
-Host: localhost:8001
+<pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/render HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: image/png</pre>
                                 <div id="service-maps-layer-rendering-example-single-layer" class="collapse">
 <pre>HTTP/1.1 200 OK
 Content-Type: image/png;
 </pre>
 
-                                  <img src="img/" alt="service maps layer rendering example with single layer" title="Examplar response for rendering a single layer" />
+                                  <img src="img/singleRequestLayer.png" alt="service maps layer rendering example with single layer" title="Examplar response for rendering a single layer" style="width: 50%; height: 50%" />
                                 </div>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    insert image from img folder
-                                </div>
 
                                 <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples"
                                     data-target="#service-maps-layer-rendering-example-single-layer" class="btn btn-primary">Show/Hide
