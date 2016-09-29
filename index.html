@@ -284,13 +284,9 @@
                         <div>
                             <h4>Available Services Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
 
-                            <pre>GET &lt;base-url&gt;/services HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="offered-services-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
