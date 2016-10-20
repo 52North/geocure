@@ -785,29 +785,30 @@ Content-Type: image/png;
 
                             </table>
 
-
-                                            <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render?minx=13&miny=50&maxx=14&maxy=52&width=250&height=350&crs=EPSG:4326&format=image/tiff
-                                            Host: localhost:8001
-                                            Accept: image/png</pre>
-                                            <div id="service-maps-layer-rendering-example-multiple-layers" class="collapse">
-                                            <pre>HTTP/1.1 200 OK
-                                            Content-Type: image/tiff;
-                                            </pre>
-
-                                            <img src="img/queryExample.tif" alt="service maps layer rendering example with two layers with query" title="Examplar response for rendering two layers with query" style="width: 50%; height: 50%" />
-                                            </div>
-
-                                                                            <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples"
-                                                                                data-target="#service-maps-layer-rendering-example-multiple-layers" class="btn btn-primary">Show/Hide
-                                                                                Response</button>
-
-                                                                                <div class="n52-callout n52-callout-info">
-                                                                                  The examplerequest contains all possible parameters for the query.
-                                                                                  Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed.
-                                                                                  If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding format.
-                                                                                </div>
-
                         </div>
+
+                        <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render?minx=13&miny=50&maxx=14&maxy=52&width=250&height=350&crs=EPSG:4326&format=image/tiff
+                        Host: localhost:8001
+                        Accept: image/png</pre>
+                        <div id="service-maps-layer-rendering-example-multiple-layers" class="collapse">
+                        <pre>HTTP/1.1 200 OK
+                        Content-Type: image/tiff;
+                        </pre>
+
+                        <img src="img/queryExample.tif" alt="service maps layer rendering example with two layers with query" title="Examplar response for rendering two layers with query" style="width: 50%; height: 50%" />
+                        </div>
+
+                                                        <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples"
+                                                            data-target="#service-maps-layer-rendering-example-multiple-layers" class="btn btn-primary">Show/Hide
+                                                            Response</button>
+
+                                                            <div class="n52-callout n52-callout-info">
+                                                              The examplerequest contains all possible parameters for the query.
+                                                              Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed.
+                                                              If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding format.
+                                                            </div>
+
+
 
                     </div>
 
