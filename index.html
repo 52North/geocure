@@ -799,7 +799,7 @@ Host: localhost:8001
 Accept: image/png</pre>
                     <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
 <pre>HTTP/1.1 200 OK
-Content-Type: image/png;
+Content-Type: image/tiff;
 </pre>
 
 <img src="img/queryExample.tif" alt="service maps layer rendering example with two layers and query" title="Examplar response for rendering two layers and query" style="width: 50%; height: 50%" />
@@ -810,8 +810,9 @@ Content-Type: image/png;
                         Response</button>
 
                         <div class="n52-callout n52-callout-info">
-                          Multiple layers can be requested. Just follow the pattern maps/layer1,layer2/render. Keep in mind: The order of the layers matters. The rightmost layer will be rendered on top.
-                        </div>
+                          The examplerequest contains all possible parameters for the query.
+                          Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed.
+                          If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding format.                         </div>
 
                 </div>
             </section>
