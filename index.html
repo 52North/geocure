@@ -739,6 +739,9 @@ Content-Type: image/png;
                                                 <code>EPSG:3068</code>
                                             </li>
                                             <li>
+                                                <code>EPSG:3857</code>
+                                            </li>
+                                            <li>
                                                 <code>May be restricted by the service.</code>
                                             </li>
                                         </ul>
@@ -888,7 +891,7 @@ Content-Type: image/tiff;
                                         <td><code>&lt;base-url&gt;/services/{service-id}/maps/{feature-id}/data</code></td>
                                         <td><code>application/json</code></td>
                                         <td>Returns the by <code>{feature-id}</code> specified features for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. Using a comma separated list,
-                                            multiple features can be requested. The order of rendering is analogous to the order in the list of layers.</td>
+                                            multiple features can be requested. </td>
                                     </tr>
 
                                 </table>
@@ -904,11 +907,75 @@ Content-Type: image/tiff;
                                     <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/features/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/data HTTP/1.1
             Host: colabis.dev.52north.org
             Accept: application/xml</pre>
-                                    <div id="service-feature-request-examples-single-feature" class="collapse">
-                                      vjhvhjvjhvh
-                                        <pre>HTTP/1.1 200 OK
-            Content-Type: application/xml
-            </pre>
+            <pre id="service-feature-request-examples-single-feature" class="collapse">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+<textarea rows="20" cols="95" style="border:none;">
+  <?xml version="1.0" encoding="UTF-8"?>
+  <wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ckandev="de.colabis.ckandev" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="403" timeStamp="2016-10-25T13:15:26.251Z" xsi:schemaLocation="http://www.opengis.net/wfs http://geoserver.colabis.de:80/geoserver/schemas/wfs/1.1.0/wfs.xsd de.colabis.ckandev http://geoserver.colabis.de:80/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=ckandev%3A_a2508d4e_74c1_4a02_b1cc_c05db68f538e">
+      <gml:featureMembers>
+          <ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e gml:id="_a2508d4e_74c1_4a02_b1cc_c05db68f538e.614">
+              <gml:name>Stadt Jena</gml:name>
+              <ckandev:wkb_geometry>
+                  <gml:MultiSurface srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                      <gml:surfaceMember>
+                          <gml:Polygon>
+                              <gml:exterior>
+                                  <gml:LinearRing>
+                                      <gml:posList>50.90692761 11.50466916 50.91479018 11.5090524 50.91716504 11.51017158 50.92533907 11.50768689 50.93376037 11.50469403 50.95398375 11.49897723 50.96734503 11.50329753 50.96780302 11.50860857 50.97232694 11.52432684 50.98672146 11.54590067 50.98897539 11.54741994 50.97133466 11.55880802 50.96612899 11.56719657 50.97107685 11.60115789 50.97428135 11.61240798 50.97676568 11.61702863 50.96448053 11.65325515 50.95864462 11.66638935 50.95250885 11.67253208 50.94992361 11.67279445 50.92064393 11.6708312 50.89164985 11.66011346 50.87955368 11.65308392 50.86369333 11.61391603 50.86167537 11.60567804 50.85956638 11.59367101 50.85606073 11.56420339 50.85673406 11.5604372 50.86370687 11.52851887 50.86913114 11.52973375 50.86972605 11.53771035 50.8723795 11.56075114 50.87438999 11.56426714 50.8868695 11.56244731 50.89594561 11.55093039 50.90144908 11.54132136 50.90284624 11.52586981 50.90390972 11.51439476 50.90692761 11.50466916</gml:posList>
+                                  </gml:LinearRing>
+                              </gml:exterior>
+                          </gml:Polygon>
+                      </gml:surfaceMember>
+                  </gml:MultiSurface>
+              </ckandev:wkb_geometry>
+              <ckandev:warncellid>116053000</ckandev:warncellid>
+              <ckandev:state>16</ckandev:state>
+              <ckandev:warncenter>205</ckandev:warncenter>
+              <ckandev:min_height>0</ckandev:min_height>
+              <ckandev:max_height>600</ckandev:max_height>
+              <ckandev:type>14</ckandev:type>
+              <ckandev:editable>1</ckandev:editable>
+              <ckandev:desc_>JXX</ckandev:desc_>
+          </ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e>
+          <ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e gml:id="_a2508d4e_74c1_4a02_b1cc_c05db68f538e.478">
+              <gml:name>Stadt Krefeld</gml:name>
+              <ckandev:wkb_geometry>
+                  <gml:MultiSurface srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                      <gml:surfaceMember>
+                          <gml:Polygon>
+                              <gml:exterior>
+                                  <gml:LinearRing>
+                                      <gml:posList>51.39251896 6.63587699 51.38603506 6.63705562 51.38603133 6.64845943 51.38643954 6.65651717 51.36338309 6.65948024 51.36228633 6.65817594 51.36151336 6.65740584 51.36052476 6.65665381 51.35907275 6.65578223 51.3583238 6.65547071 51.35760838 6.65535783 51.35585784 6.65527391 51.35465392 6.65537454 51.35328015 6.65579153 51.35241853 6.65616568 51.35149018 6.65670362 51.35071077 6.65738745 51.34992467 6.65841701 51.34949039 6.65918698 51.34899701 6.66007701 51.34828918 6.66184808 51.34760486 6.6640631 51.33645464 6.70542166 51.33197129 6.70245494 51.32837672 6.69967429 51.32586306 6.69689097 51.32457134 6.69484092 51.32311792 6.6916972 51.31040709 6.65639559 51.29143102 6.62187008 51.28761427 6.5975503 51.287468 6.59559425 51.28750595 6.58916849 51.28766747 6.58510291 51.28769753 6.58465494 51.28854877 6.56998407 51.29048814 6.53582039 51.29040528 6.52858522 51.29019131 6.52572973 51.28985711 6.52331575 51.28898603 6.51597633 51.29062987 6.50101868 51.30045491 6.49111034 51.30316041 6.48933677 51.30414128 6.49615104 51.30549327 6.50197022 51.31038047 6.51212671 51.31197589 6.5134693 51.31488752 6.51456863 51.31823274 6.51517047 51.32689804 6.5156282 51.33107301 6.5151948 51.33257085 6.51499321 51.33477082 6.51424174 51.33983248 6.51020691 51.3618975 6.4903597 51.38427965 6.47852917 51.39198671 6.47915092 51.39743897 6.48181382 51.40179827 6.49125677 51.40174992 6.49274468 51.39813709 6.51207257 51.39880758 6.52307642 51.39901988 6.52455601 51.3996245 6.52591529 51.40639955 6.53443381 51.39314791 6.54865401 51.39016511 6.55909168 51.3892978 6.56358693 51.39364189 6.60931358 51.39251896 6.63587699</gml:posList>
+                                  </gml:LinearRing>
+                              </gml:exterior>
+                          </gml:Polygon>
+                      </gml:surfaceMember>
+                  </gml:MultiSurface>
+              </ckandev:wkb_geometry>
+              <ckandev:warncellid>105114000</ckandev:warncellid>
+              <ckandev:state>5</ckandev:state>
+              <ckandev:warncenter>204</ckandev:warncenter>
+              <ckandev:min_height>0</ckandev:min_height>
+              <ckandev:max_height>200</ckandev:max_height>
+              <ckandev:type>14</ckandev:type>
+              <ckandev:editable>1</ckandev:editable>
+              <ckandev:desc_>KRX</ckandev:desc_>
+          </ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e>
+          <ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e gml:id="_a2508d4e_74c1_4a02_b1cc_c05db68f538e.482">
+              <gml:name>Kreis Hamm</gml:name>
+              <ckandev:wkb_geometry>
+                  <gml:MultiSurface srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                      <gml:surfaceMember>
+                          <gml:Polygon>
+                              <gml:exterior>
+                                  <gml:LinearRing>
+                                      <gml:posList>51.69998509 7.94564744 51.69109628 7.97309776 51.690255 7.97543257 51.68991609 7.97600162 51.68372696 7.98632079 51.683317 7.98693703 51.67458084 7.9977401 51.6724862 7.99574116 51.67000212 7.98642422 51.67516869 7.96659465 51.67532836 7.96396526 51.67471379 7.96049569 51.67255555 7.95389814 51.66757636 7.95216339 51.63858763 7.94116344 51.6349075 7.93542396 51.61710646 7.9145726 51.61376329 7.91153711 51.6023622 7.91583911 51.59577096 7.91452018 51.59359125 7.87572184 51.57871307 7.82730535 51.5781373 7.82414584 51.58793478 7.81516238 51.60041587 7.81375088 51.60401909 7.81424776 51.61457811 7.78587902 51.62058867 7.75963509 51.62084371 7.72162673 51.61464313 7.71942925 51.61224375 7.69980816 51.61427866 7.68656768 51.66045518 7.67642974 51.66340293 7.67922978 51.66379738 7.6799148 51.67058518 7.70644063 51.67224012 7.72433682 51.67456949 7.72730846 51.6757512 7.72817796 51.67921121 7.72562207 51.6822405 7.71929772 51.68445989 7.71452813 51.68777567 7.7077792 51.69520853 7.70116812 51.70646817 7.69915935 51.71237652 7.7023184 51.73881963 7.73539573 51.72966399 7.75976884 51.72416299 7.76908601 51.7247525 7.77200778 51.72734501 7.78060841 51.73470552 7.8021056 51.73942493 7.82044405 51.72920224 7.87482464 51.72599429 7.8787343 51.71754341 7.88858145 51.70651202 7.92244885 51.69998509 7.94564744</gml:posList>
+                                  </gml:LinearRing>
+                                  ...
+                                  ...
+                                  ...
+</textarea>
+          </pre>
 
 
 
@@ -920,33 +987,328 @@ Content-Type: image/tiff;
                                     The response shows an extract of the requested data from <code>ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e</code>.
                                 </div>
 
-                                <!-- <div>
-                                    <h4>Service Maps Multiple Layer Rendering Request</h4>
+                                <div>
+                                    <h4>Service Features Multiple Features Data Request</h4>
 
-                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render
+                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/features/ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2,ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/data
             Host: localhost:8001
-            Accept: image/png</pre>
-                                    <div id="service-maps-layer-rendering-example-multiple-layers" class="collapse">
+            Accept: application/xml</pre>
+                                    <div id="service-feature-request-example-multiple-features" class="collapse">
                                         <pre>HTTP/1.1 200 OK
             Content-Type: image/png;
             </pre>
+            <textarea rows="20" cols="95" style="border:none;">
+            <?xml version="1.0" encoding="UTF-8"?>
+            <wfs:FeatureCollection xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:wfs="http://www.opengis.net/wfs" xmlns:gml="http://www.opengis.net/gml" xmlns:ckandev="de.colabis.ckandev" xmlns:ogc="http://www.opengis.net/ogc" xmlns:ows="http://www.opengis.net/ows" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" numberOfFeatures="426" timeStamp="2016-10-25T14:19:35.207Z" xsi:schemaLocation="http://www.opengis.net/wfs http://geoserver.colabis.de:80/geoserver/schemas/wfs/1.1.0/wfs.xsd de.colabis.ckandev http://geoserver.colabis.de:80/geoserver/wfs?service=WFS&amp;version=1.1.0&amp;request=DescribeFeatureType&amp;typeName=ckandev%3A_23964ffe_67e1_476c_9c71_f25ed8dfe5e2%2Cckandev%3A_a2508d4e_74c1_4a02_b1cc_c05db68f538e">
+                <gml:featureMembers>
+                    <ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2 gml:id="_23964ffe_67e1_476c_9c71_f25ed8dfe5e2.fid-6dd99eca_1576afc0fd1_-7a42">
+                        <ckandev:_id>1</ckandev:_id>
+                        <ckandev:X>51.003874</ckandev:X>
+                        <ckandev:Y>13.726043</ckandev:Y>
+                        <ckandev:Timestamp>2012-07-20T:10:00GMT+1</ckandev:Timestamp>
+                        <ckandev:Place>Bannewitz</ckandev:Place>
+                        <ckandev:Zn_1000_-_400___micro_g_per_g_>127.3936706</ckandev:Zn_1000_-_400___micro_g_per_g_>
+                        <ckandev:Zn_400_-_100___micro_g_per_g_>418.9342066</ckandev:Zn_400_-_100___micro_g_per_g_>
+                        <ckandev:Zn_100_-_63___micro_g_per_g_>743.5718278</ckandev:Zn_100_-_63___micro_g_per_g_>
+                        <ckandev:Zn_63_-_0.45___micro_g_per_g_>528.2146161</ckandev:Zn_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Zn_SUMM___micro_g_per_g_>377.8245751</ckandev:Zn_SUMM___micro_g_per_g_>
+                        <ckandev:Cu_1000_-_400___micro_g_per_g_>48.0749849</ckandev:Cu_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cu_400_-_100___micro_g_per_g_>112.1762429</ckandev:Cu_400_-_100___micro_g_per_g_>
+                        <ckandev:Cu_100_-_63___micro_g_per_g_>164.8965903</ckandev:Cu_100_-_63___micro_g_per_g_>
+                        <ckandev:Cu_63_-_0.45___micro_g_per_g_>151.0506145</ckandev:Cu_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cu_SUMM___micro_g_per_g_>105.0860617</ckandev:Cu_SUMM___micro_g_per_g_>
+                        <ckandev:Cd_1000_-_400___micro_g_per_g_>0.056641806</ckandev:Cd_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cd_400_-_100___micro_g_per_g_>0.166999107</ckandev:Cd_400_-_100___micro_g_per_g_>
+                        <ckandev:Cd_100_-_63___micro_g_per_g_>0.264253773</ckandev:Cd_100_-_63___micro_g_per_g_>
+                        <ckandev:Cd_63_-_0.45___micro_g_per_g_>0.278181578</ckandev:Cd_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cd_SUMM___micro_g_per_g_>0.1663264</ckandev:Cd_SUMM___micro_g_per_g_>
+                        <ckandev:Shape>
+                            <gml:Point srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                                <gml:pos>51.003874 13.726043</gml:pos>
+                            </gml:Point>
+                        </ckandev:Shape>
+                    </ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2>
+                    <ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2 gml:id="_23964ffe_67e1_476c_9c71_f25ed8dfe5e2.fid-6dd99eca_1576afc0fd1_-7a41">
+                        <ckandev:_id>2</ckandev:_id>
+                        <ckandev:X>51.003874</ckandev:X>
+                        <ckandev:Y>13.726043</ckandev:Y>
+                        <ckandev:Timestamp>2012-07-21T:10:00GMT+1</ckandev:Timestamp>
+                        <ckandev:Place>Bannewitz</ckandev:Place>
+                        <ckandev:Zn_1000_-_400___micro_g_per_g_>274.4431419</ckandev:Zn_1000_-_400___micro_g_per_g_>
+                        <ckandev:Zn_400_-_100___micro_g_per_g_>463.6381592</ckandev:Zn_400_-_100___micro_g_per_g_>
+                        <ckandev:Zn_100_-_63___micro_g_per_g_>482.1082391</ckandev:Zn_100_-_63___micro_g_per_g_>
+                        <ckandev:Zn_63_-_0.45___micro_g_per_g_>384.6369836</ckandev:Zn_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Zn_SUMM___micro_g_per_g_>391.3405679</ckandev:Zn_SUMM___micro_g_per_g_>
+                        <ckandev:Cu_1000_-_400___micro_g_per_g_>60.9752856</ckandev:Cu_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cu_400_-_100___micro_g_per_g_>118.4296929</ckandev:Cu_400_-_100___micro_g_per_g_>
+                        <ckandev:Cu_100_-_63___micro_g_per_g_>182.2386215</ckandev:Cu_100_-_63___micro_g_per_g_>
+                        <ckandev:Cu_63_-_0.45___micro_g_per_g_>137.3505616</ckandev:Cu_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cu_SUMM___micro_g_per_g_>118.1398905</ckandev:Cu_SUMM___micro_g_per_g_>
+                        <ckandev:Cd_1000_-_400___micro_g_per_g_>0.051973427</ckandev:Cd_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cd_400_-_100___micro_g_per_g_>0.131937586</ckandev:Cd_400_-_100___micro_g_per_g_>
+                        <ckandev:Cd_100_-_63___micro_g_per_g_>0.235864297</ckandev:Cd_100_-_63___micro_g_per_g_>
+                        <ckandev:Cd_63_-_0.45___micro_g_per_g_>0.233052547</ckandev:Cd_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cd_SUMM___micro_g_per_g_>0.162077403</ckandev:Cd_SUMM___micro_g_per_g_>
+                        <ckandev:Shape>
+                            <gml:Point srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                                <gml:pos>51.003874 13.726043</gml:pos>
+                            </gml:Point>
+                        </ckandev:Shape>
+                    </ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2>
+                    <ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2 gml:id="_23964ffe_67e1_476c_9c71_f25ed8dfe5e2.fid-6dd99eca_1576afc0fd1_-7a40">
+                        <ckandev:_id>3</ckandev:_id>
+                        <ckandev:X>51.003874</ckandev:X>
+                        <ckandev:Y>13.726043</ckandev:Y>
+                        <ckandev:Timestamp>2012-07-22T:10:00GMT+1</ckandev:Timestamp>
+                        <ckandev:Place>Bannewitz</ckandev:Place>
+                        <ckandev:Zn_1000_-_400___micro_g_per_g_>247.8238896</ckandev:Zn_1000_-_400___micro_g_per_g_>
+                        <ckandev:Zn_400_-_100___micro_g_per_g_>505.9133023</ckandev:Zn_400_-_100___micro_g_per_g_>
+                        <ckandev:Zn_100_-_63___micro_g_per_g_>796.3988574</ckandev:Zn_100_-_63___micro_g_per_g_>
+                        <ckandev:Zn_63_-_0.45___micro_g_per_g_>531.1675608</ckandev:Zn_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Zn_SUMM___micro_g_per_g_>478.4958751</ckandev:Zn_SUMM___micro_g_per_g_>
+                        <ckandev:Cu_1000_-_400___micro_g_per_g_>125.5329189</ckandev:Cu_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cu_400_-_100___micro_g_per_g_>158.8592374</ckandev:Cu_400_-_100___micro_g_per_g_>
+                        <ckandev:Cu_100_-_63___micro_g_per_g_>235.7809123</ckandev:Cu_100_-_63___micro_g_per_g_>
+                        <ckandev:Cu_63_-_0.45___micro_g_per_g_>206.9252017</ckandev:Cu_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cu_SUMM___micro_g_per_g_>177.8100028</ckandev:Cu_SUMM___micro_g_per_g_>
+                        <ckandev:Cd_1000_-_400___micro_g_per_g_>0.064858491</ckandev:Cd_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cd_400_-_100___micro_g_per_g_>0.142139822</ckandev:Cd_400_-_100___micro_g_per_g_>
+                        <ckandev:Cd_100_-_63___micro_g_per_g_>0.417131385</ckandev:Cd_100_-_63___micro_g_per_g_>
+                        <ckandev:Cd_63_-_0.45___micro_g_per_g_>0.308716944</ckandev:Cd_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cd_SUMM___micro_g_per_g_>0.217986285</ckandev:Cd_SUMM___micro_g_per_g_>
+                        <ckandev:Shape>
+                            <gml:Point srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                                <gml:pos>51.003874 13.726043</gml:pos>
+                            </gml:Point>
+                        </ckandev:Shape>
+                    </ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2>
+                    <ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2 gml:id="_23964ffe_67e1_476c_9c71_f25ed8dfe5e2.fid-6dd99eca_1576afc0fd1_-7a3f">
+                        <ckandev:_id>4</ckandev:_id>
+                        <ckandev:X>51.003874</ckandev:X>
+                        <ckandev:Y>13.726043</ckandev:Y>
+                        <ckandev:Timestamp>2012-07-23T:10:00GMT+1</ckandev:Timestamp>
+                        <ckandev:Place>Bannewitz</ckandev:Place>
+                        <ckandev:Zn_1000_-_400___micro_g_per_g_>80.984687</ckandev:Zn_1000_-_400___micro_g_per_g_>
+                        <ckandev:Zn_400_-_100___micro_g_per_g_>318.944038</ckandev:Zn_400_-_100___micro_g_per_g_>
+                        <ckandev:Zn_100_-_63___micro_g_per_g_>248.0015829</ckandev:Zn_100_-_63___micro_g_per_g_>
+                        <ckandev:Zn_63_-_0.45___micro_g_per_g_>196.373057</ckandev:Zn_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Zn_SUMM___micro_g_per_g_>209.3379938</ckandev:Zn_SUMM___micro_g_per_g_>
+                        <ckandev:Cu_1000_-_400___micro_g_per_g_>36.9598748</ckandev:Cu_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cu_400_-_100___micro_g_per_g_>94.5925351</ckandev:Cu_400_-_100___micro_g_per_g_>
+                        <ckandev:Cu_100_-_63___micro_g_per_g_>105.8905574</ckandev:Cu_100_-_63___micro_g_per_g_>
+                        <ckandev:Cu_63_-_0.45___micro_g_per_g_>61.1546844</ckandev:Cu_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cu_SUMM___micro_g_per_g_>70.2893282</ckandev:Cu_SUMM___micro_g_per_g_>
+                        <ckandev:Cd_1000_-_400___micro_g_per_g_>0.070943981</ckandev:Cd_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cd_400_-_100___micro_g_per_g_>0.134862567</ckandev:Cd_400_-_100___micro_g_per_g_>
+                        <ckandev:Cd_100_-_63___micro_g_per_g_>0.153146023</ckandev:Cd_100_-_63___micro_g_per_g_>
+                        <ckandev:Cd_63_-_0.45___micro_g_per_g_>0.174571542</ckandev:Cd_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cd_SUMM___micro_g_per_g_>0.145742593</ckandev:Cd_SUMM___micro_g_per_g_>
+                        <ckandev:Shape>
+                            <gml:Point srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                                <gml:pos>51.003874 13.726043</gml:pos>
+                            </gml:Point>
+                        </ckandev:Shape>
+                    </ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2>
+                    <ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2 gml:id="_23964ffe_67e1_476c_9c71_f25ed8dfe5e2.fid-6dd99eca_1576afc0fd1_-7a3e">
+                        <ckandev:_id>5</ckandev:_id>
+                        <ckandev:X>51.003874</ckandev:X>
+                        <ckandev:Y>13.726043</ckandev:Y>
+                        <ckandev:Timestamp>2012-07-25T:10:00GMT+1</ckandev:Timestamp>
+                        <ckandev:Place>Bannewitz</ckandev:Place>
+                        <ckandev:Zn_1000_-_400___micro_g_per_g_>536.5858545</ckandev:Zn_1000_-_400___micro_g_per_g_>
+                        <ckandev:Zn_400_-_100___micro_g_per_g_>711.5107914</ckandev:Zn_400_-_100___micro_g_per_g_>
+                        <ckandev:Zn_100_-_63___micro_g_per_g_>745.9808102</ckandev:Zn_100_-_63___micro_g_per_g_>
+                        <ckandev:Zn_63_-_0.45___micro_g_per_g_>1041.5172414</ckandev:Zn_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Zn_SUMM___micro_g_per_g_>717.2869708</ckandev:Zn_SUMM___micro_g_per_g_>
+                        <ckandev:Cu_1000_-_400___micro_g_per_g_>795.6742658</ckandev:Cu_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cu_400_-_100___micro_g_per_g_>332.3551934</ckandev:Cu_400_-_100___micro_g_per_g_>
+                        <ckandev:Cu_100_-_63___micro_g_per_g_>363.6846305</ckandev:Cu_100_-_63___micro_g_per_g_>
+                        <ckandev:Cu_63_-_0.45___micro_g_per_g_>361.2885357</ckandev:Cu_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cu_SUMM___micro_g_per_g_>526.6559839</ckandev:Cu_SUMM___micro_g_per_g_>
+                        <ckandev:Cd_1000_-_400___micro_g_per_g_>0.072129834</ckandev:Cd_1000_-_400___micro_g_per_g_>
+                        <ckandev:Cd_400_-_100___micro_g_per_g_>0.272992417</ckandev:Cd_400_-_100___micro_g_per_g_>
+                        <ckandev:Cd_100_-_63___micro_g_per_g_>0.295309168</ckandev:Cd_100_-_63___micro_g_per_g_>
+                        <ckandev:Cd_63_-_0.45___micro_g_per_g_>0.487093596</ckandev:Cd_63_-_0.45___micro_g_per_g_>
+                        <ckandev:Cd_SUMM___micro_g_per_g_>0.241621343</ckandev:Cd_SUMM___micro_g_per_g_>
+                        <ckandev:Shape>
+                            <gml:Point srsName="urn:x-ogc:def:crs:EPSG:4326" srsDimension="2">
+                                <gml:pos>51.003874 13.726043</gml:pos>
+                            </gml:Point>        </textarea>                            </div>
 
-                                        <img src="img/multiRequestLayer.png" alt="service maps layer rendering example with two layers" title="Examplar response for rendering two layers" style="width: 50%; height: 50%" />
-                                    </div>
-
-                                    <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers" class="btn btn-primary">Show/Hide Response
+                                    <button data-toggle="collapse" data-parent="#service-feature-request-example-multiple-features" data-target="#service-feature-request-example-multiple-features" class="btn btn-primary">Show/Hide Response
                                     </button>
 
                                     <div class="n52-callout n52-callout-info">
-                                        Multiple layers can be requested. Just follow the pattern maps/layer1,layer2/render. Keep in mind: The order of the layers matters. The rightmost layer will be rendered on top.
+                                        Multiple features can be requested. Just follow the pattern maps/feature1,feature2/data.
                                     </div>
 
-                                </div> -->
+                                </div>
 
                             </div>
 
                         </div>
                     </section>
+
+                </div>
+            </section>
+
+
+            <!-- Queries
+                ================================================== -->
+            <section id="queries-features">
+                <div class="page-header">
+                    <h2>Queries</h2>
+                    <p class="pull-right up-link">
+                        <a href="#"><i class="icon-chevron-up"></i> top</a>
+                    </p>
+                </div>
+                <div>
+                    <div id="queries-urls">
+                        <!-- URLs -->
+                        <h3>URLs</h3>
+                        <p>For following URLs the subsequent query parameters may be used.</p>
+                        <table class="table">
+                            <tr>
+                                <th>Method</th>
+                                <th>Path</th>
+                                <th>Content-Type</th>
+                                <th>Description</th>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/maps/render</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Returns all features in the default format, which is defined in file <code>services/services.json</code>.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Returns the specified feature with id <code>{feature-id}</code> for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. Using a comma separated list,
+                                    multiple features can be requested.</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div id="queries-query-parameters">
+                        <!-- Examples -->
+                        <h3>Query Parameters</h3>
+                        <div>
+
+                            <table class="table">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Example</th>
+                                    <th>Supported Values</th>
+                                    <th>Description</th>
+                                </tr>
+
+                                <tr>
+                                    <td><code>minx</code></td>
+                                    <td><code>minx=5.8662505149842445</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the minimal x value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>miny</code></td>
+                                    <td><code>miny=47.27012252807623</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the minimal y value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>maxx</code></td>
+                                    <td><code>maxx=15.041815757751444</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the maximal x value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>maxy</code></td>
+                                    <td><code>maxy=55.05652618408206</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the maximal y value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>format</code></td>
+                                    <td><code>format=image/png</code></td>
+                                    <td>Depending on the service.
+                                        <ul>
+                                            <li>
+                                                for services <code>XY</code> and <code>YZ</code> valid values are: <code>image/png</code>
+                                            </li>
+                                            <li>
+                                                for services <code>XX</code> and <code>YY</code> valid values are: <code>MimeType</code>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>Sets the response format</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>crs</code></td>
+                                    <td><code>crs=EPSG:4326</code></td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <code>EPSG:4326</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4269</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:5243</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4839</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3068</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3857</code>
+                                            </li>
+                                            <li>
+                                                <code>May be restricted by the service.</code>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>Sets the coordinate reference system of the response</td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div>
+                    <h4>Service Maps Multiple Layer Rendering Request</h4>
+
+                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render?minx=13&miny=50&maxx=14&maxy=52&width=250&height=350&EPSG:4326&format=image/tiff
+Host: localhost:8001
+Accept: image/tiff</pre>
+                    <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
+                        <pre>HTTP/1.1 200 OK
+Content-Type: image/tiff;
+</pre>
+
+                        <img src="img/queryExample.png" alt="service maps layer rendering example with two layers and query" title="Examplar response for rendering two layers and query" style="width: 50%; height: 50%" />
+                    </div>
+
+                    <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
+                    </button>
+
+                    <div class="n52-callout n52-callout-info">
+                        The examplerequest contains all possible parameters for the query. Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed. If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding
+                        format. </div>
 
                 </div>
             </section>
