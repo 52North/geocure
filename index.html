@@ -734,12 +734,9 @@ Content-Type: image/png;
                                             <li>
                                                 <code>EPSG:3857</code>
                                             </li>
-                                            <li>
-                                                <code>May be restricted by the service.</code>
-                                            </li>
                                         </ul>
                                     </td>
-                                    <td>Sets the coordinate reference system of the response</td>
+                                    <td>Sets the coordinate reference system of the response. May be restricted by the service.</td>
                                 </tr>
 
                             </table>
@@ -883,7 +880,7 @@ Content-Type: image/tiff;
                                         <td><code>GET</code></td>
                                         <td><code>&lt;base-url&gt;/services/{service-id}/maps/{feature-id}/data</code></td>
                                         <td><code>application/json</code></td>
-                                        <td>Returns the by <code>{feature-id}</code> specified feature for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. 
+                                        <td>Returns the by <code>{feature-id}</code> specified feature for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>.
                                     </tr>
 
                                 </table>
@@ -1001,8 +998,7 @@ Content-Type: application/json;charset=UTF-8
                                 <td><code>GET</code></td>
                                 <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
                                 <td><code>application/json</code></td>
-                                <td>Returns the specified feature with id <code>{feature-id}</code> for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. Using a comma separated list,
-                                    Only one feature can be requested.</td>
+                                <td>Returns the specified feature with id <code>{feature-id}</code> for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. One feature can be requested at the time.</td>
                             </tr>
 
                         </table>
@@ -1081,12 +1077,9 @@ Content-Type: application/json;charset=UTF-8
                                             <li>
                                                 <code>EPSG:3857</code>
                                             </li>
-                                            <li>
-                                                <code>May be restricted by the service.</code>
-                                            </li>
                                         </ul>
                                     </td>
-                                    <td>Sets the coordinate reference system of the response</td>
+                                    <td>Sets the coordinate reference system of the response. May be restricted by the service.</td>
                                 </tr>
 
                             </table>
