@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-US">
-<head>
-<meta charset="UTF-8">
-<title>Documentation Geocure (Geodata REST-API)</title>
 
-<!-- Bootstrap -->
-<link href="css/bootstrap-3.0.0-rc1/bootstrap.min.css" rel="stylesheet">
-<link href="css/n52/apidoc-style.css" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentation Geocure (Geodata REST-API)</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-3.0.0-rc1/bootstrap.min.css" rel="stylesheet">
+    <link href="css/n52/apidoc-style.css" rel="stylesheet">
 </head>
+
 <body>
 
     <div class="container-fluid">
@@ -22,9 +24,6 @@
                 <div class="navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li><a href="http://52north.org/communities/geoprocessing/">Target Community Web</a>
-                          <div class="n52-callout n52-callout-todo">
-                              Update href attribute and text value with proper values! Then remove this div.
-                          </div>
                         </li>
 
                         <li><a href="https://github.com/52North/geocure">Sources</a></li>
@@ -40,12 +39,10 @@
             ================================================== -->
         <div class="col-lg-2 n52-sidebar">
             <div id="contents" class="bs-sidebar hidden-print">
-                <a href="http://52north.org" style="position: fixed"><img alt="52&deg;North logo"
-                    src="http://52north.org/templates/52n-2012/images/52n-logo.gif" /></a>
+                <a href="http://52north.org" style="position: fixed"><img alt="52&deg;North logo" src="http://52north.org/templates/52n-2012/images/52n-logo.gif" /></a>
                 <ul class="nav bs-sidenav" data-spy="affix">
                     <li>
-                        <!-- General --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#general-subitems" href="#general">General</a>
+                        <!-- General --><a data-toggle="collapse" data-parent="#contents" data-target="#general-subitems" href="#general">General</a>
                         <ul id="general-subitems" class="nav collapse">
                             <li><a href="#architecture-and-role">Architecture and Role</a></li>
                             <li><a href="#general-content-types">Content Types</a></li>
@@ -54,8 +51,7 @@
                         </ul>
                     </li>
                     <li>
-                        <!-- Offered Services --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#offered-services-subitems" href="#offered-services">Offered Services</a>
+                        <!-- Offered Services --><a data-toggle="collapse" data-parent="#contents" data-target="#offered-services-subitems" href="#offered-services">Offered Services</a>
                         <ul id="offered-services-subitems" class="nav collapse">
                             <li><a href="#offered-services-urls">URLs</a></li>
                             <li><a href="#offered-services-examples">Examples</a></li>
@@ -63,8 +59,7 @@
                     </li>
 
                     <li>
-                        <!-- Service Capabilities --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#service-capabilities-subitems" href="#service-capabilities">Service Capabilities</a>
+                        <!-- Service Capabilities --><a data-toggle="collapse" data-parent="#contents" data-target="#service-capabilities-subitems" href="#service-capabilities">Service Capabilities</a>
                         <ul id="service-capabilities-subitems" class="nav collapse">
                             <li><a href="#service-capabilities-urls">URLs</a></li>
                             <li><a href="#service-capabilities-examples">Examples</a></li>
@@ -72,8 +67,7 @@
                     </li>
 
                     <li>
-                        <!-- Service Maps --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#service-maps-subitems" href="#service-maps">Service Maps</a>
+                        <!-- Service Maps --><a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-subitems" href="#service-maps">Service Maps</a>
                         <ul id="service-maps-subitems" class="nav collapse">
                             <li><a href="#service-maps-urls">URLs</a></li>
                             <li><a href="#service-maps-examples">Examples</a></li>
@@ -81,32 +75,28 @@
                     </li>
 
                     <li>
-                        <!-- Global View --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#global-view-subitems" href="#global-view">Global View</a>
+                        <!-- Global View --><a data-toggle="collapse" data-parent="#contents" data-target="#global-view-subitems" href="#global-view">Global View</a>
                         <ul id="global-view-subitems" class="nav collapse">
                             <li>
-                              <!-- Service Maps Global Rendering --> <a data-toggle="collapse" data-parent="#contents"
-                            data-target="#service-maps-global-rendering-subitems" href="#service-maps-global-rendering">Service Maps Global Rendering</a>
-                            <ul id="service-maps-global-rendering-subitems" class="nav collapse">
-                                <li><a href="#service-maps-global-rendering-urls">URLs</a></li>
-                                <li><a href="#service-maps-global-rendering-examples">Examples</a></li>
-                            </ul>
-                          </li>
+                                <!-- Service Maps Global Rendering --><a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-global-rendering-subitems" href="#service-maps-global-rendering">Service Maps Global Rendering</a>
+                                <ul id="service-maps-global-rendering-subitems" class="nav collapse">
+                                    <li><a href="#service-maps-global-rendering-urls">URLs</a></li>
+                                    <li><a href="#service-maps-global-rendering-examples">Examples</a></li>
+                                </ul>
+                            </li>
 
-                          <li>
-                            <!-- Service Maps Layer Rendering --> <a data-toggle="collapse" data-parent="#contents"
-                          data-target="#service-maps-layer-rendering-subitems" href="#service-maps-layer-rendering">Service Maps Layer Rendering</a>
-                          <ul id="service-maps-layer-rendering-subitems" class="nav collapse">
-                              <li><a href="#service-maps-layer-rendering-urls">URLs</a></li>
-                              <li><a href="#service-maps-layer-rendering-examples">Examples</a></li>
-                          </ul>
-                        </li>
+                            <li>
+                                <!-- Service Maps Layer Rendering --><a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-layer-rendering-subitems" href="#service-maps-layer-rendering">Service Maps Layer Rendering</a>
+                                <ul id="service-maps-layer-rendering-subitems" class="nav collapse">
+                                    <li><a href="#service-maps-layer-rendering-urls">URLs</a></li>
+                                    <li><a href="#service-maps-layer-rendering-examples">Examples</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </li>
 
                     <li>
-                        <!-- Queries --> <a data-toggle="collapse" data-parent="#contents"
-                        data-target="#queries-subitems" href="#queries">Queries</a>
+                        <!-- Queries --><a data-toggle="collapse" data-parent="#contents" data-target="#queries-subitems" href="#queries">Queries</a>
                         <ul id="queries-subitems" class="nav collapse">
                             <li><a href="#queries-urls">URLs</a></li>
                             <li><a href="#queries-query-parameters">Query Parameters</a></li>
@@ -125,13 +115,12 @@
                 <h2>About</h2>
                 <div>
                     <p>
-                        The <a href="http://52north.org">52&deg;North</a> Geocure Rest API serves as a proxy for <a
-                            href="http://opengeospatial.org">OGC</a> Web- and Featureservices,
-                        which enables a REST-like interaction with the service. The goal is to provide an easy to use interface for accessing geodata.
+                        The <a href="http://52north.org">52&deg;North</a> Geocure Rest API serves as a proxy for <a href="http://opengeospatial.org">OGC</a> Web- and Featureservices, which enables a REST-like interaction with WM- and WF-services. The
+                        goal is to provide an easy to use interface for accessing geodata.
                     </p>
 
                     <p>
-                      Currently the <a href="http://geoserver.org/">GeoServer</a> is supported.
+                        Currently the <a href="http://geoserver.org/">GeoServer</a> is supported.
                     </p>
 
                 </div>
@@ -165,44 +154,34 @@
                 </div>
                 <div>
 
-                  <div id="architecture-and-role">
-                    <h3>Architecture and Role of Geocure REST API</h3>
-
-                    <div class="n52-callout n52-callout-todo">
-                      if available, describe the overall architecture (possibly including a figure) and extend the description about the role / use cases of the API.
-
-                      E.g. take a look at <a href="http://52north.github.io/tamis-rest-api/">Tamis REST API</a>  or <a href="http://52north.github.io/series-rest-api/">Series REST API</a>.
-
-                      Else, just remove unneeded sections completely (also remove them from the Content nav / sidebar above!).
+                    <div id="architecture-and-role">
+                        <h3>Architecture and Role of Geocure REST API</h3>
+                        <img src="img/ComponentDiagram.png" title="Role of the Geocure Proxy." />
+                        <p>
+                            From a developer's perspective, the Geocure REST API is implemented as a proxy as shown in the previous figure. Clients access the Geocure WMS REST Proxy via REST URLs explained in this document. The Geocure WMS REST Proxy accesses performes the requests
+                            on a specified WMS and returns the results.
+                        </p>
+                        <img src="img/ComponentDiagramDetail.png" title="Modules in detail." />
+                        <p>
+                            The above image shows the internal structure of Geocure. Modules in blue are developed for - and are delivered with the service. Modules in gray are imported from external sources.
+                        </p>
                     </div>
 
-                    <div class="n52-callout n52-callout-info">
-                        This is an info box that you can use to highlight certain information.
+                    <div id="general-content-types">
+                        <!-- Content-Types -->
+                        <h3>Content-Types</h3>
+
+                        <p>
+                            The content type for message exchange is
+                            <code>application/json</code> . It is set as the default content type but can be set via HTTP header.
+                        </p>
+
                     </div>
-
-                  </div>
-
-                  <div id="general-content-types">
-                      <!-- Content-Types -->
-                      <h3>Content-Types</h3>
-
-                      <p>
-                          The content type for message exchange is
-                          <code>application/json</code>
-                          . It is set as the default content type but can be set via HTTP header.
-                      </p>
-
-                  </div>
 
                     <div id="general-common-status-codes">
                         <!-- Status Codes -->
                         <h3>Common Status Codes</h3>
                         <p>A client shall expect the following HTTP status codes returned by the API.</p>
-
-                        <div class="n52-callout n52-callout-todo">
-                            Check all status codes and modify table accordingly!
-
-                        </div>
 
                         <table class="table">
                             <tr>
@@ -216,31 +195,13 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td><code>201</code></td>
-                                <td>Status <code>Created</code>.
-                                </td>
-                            </tr>
-                            <tr>
                                 <td><code>400</code></td>
-                                <td>Status <code>Bad Request</code>. The request data cannot be read.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><code>404</code></td>
-                                <td>Status <code>Not Found</code>. The resource is not available.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td><code>415</code></td>
-                                <td>Status <code>Unsupported Media Type</code>. The media-type of the request payload is not supported.
-                                  Prevent this error by setting the <code>Content-Type</code> header to <code>application/json</code>.
+                                <td>Status <code>Bad Request</code>. The request is not valid.
                                 </td>
                             </tr>
                             <tr>
                                 <td><code>500</code></td>
-                                <td>Status <code>Internal Server Error</code>. Please contact the webadmin. In some
-                                    cases an error message will be shown. But in general the server logs will help to
-                                    trace the problem.
+                                <td>Status <code>Internal Server Error</code>. Please contact the webadmin. In some cases an error message will be shown. But in general the server logs will help to trace the problem.
                                 </td>
                             </tr>
 
@@ -252,15 +213,7 @@
                         <h3>Endpoint URL</h3>
                         <p></p>
 
-                          <div class="n52-callout n52-callout-todo">
-                              I used this to describe the entry point into the API (URL without extensions for certain REST functionalities), which I denoted as <code>&lt;base-url&gt;</code>.
-                              If not needed, then just remove the whole section.
-
-                              In particular, you could use this to provide the reader with a working Endpoint, offering the described features, like below.
-                          </div>
-
-                        <p>For instance, a valid endpoint is provided by the following
-                          enpoint URL: <code><a href="http://tamis.dev.52north.org/tamis-rest/api/v1/services/1/">http://tamis.dev.52north.org/tamis-rest/api/v1/services/1/</a></code>.</p>
+                        <p>For instance, a valid endpoint is provided by the following enpoint URL: <code><a href="http://colabis.dev.52north.org/geocure/services">http://colabis.dev.52north.org/geocure/services</a></code>.</p>
 
                     </div>
 
@@ -305,31 +258,29 @@
                         <div>
                             <h4>Available Services Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
 
-                            <pre>GET &lt;base-url&gt;/services HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="offered-services-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 [
+
     {
-        "id": "service1",
+        "id": "service1COLABIS",
         "label": "name of the service",
         "description": "Returns sample data via a WM-Service",
-        "href": "http://localhost:8001/services/service1"
+        "href": "http://colabis.dev.52north.org/geocure/services/service1COLABIS"
     }
+
 ]</pre>
-                            <button data-toggle="collapse" data-parent="#offered-services-examples"
-                                data-target="#offered-services-example" class="btn btn-primary">Show/Hide
-                                Response</button>
+                            <button data-toggle="collapse" data-parent="#offered-services-examples" data-target="#offered-services-example" class="btn btn-primary">Show/Hide Response
+                            </button>
 
                             <div class="n52-callout n52-callout-info">
-                                The returned values are defined in the file <code>services/services.json</code>
+                                The returned values are defined in the file <code>services/services.json</code>.
+                                <br> In this file, several services can be deposited.
                             </div>
 
                         </div>
@@ -366,7 +317,7 @@ Content-Type: application/json;charset=UTF-8
                                 <td><code>GET</code></td>
                                 <td><code>&lt;base-url&gt;/services/{service-id}</code></td>
                                 <td><code>application/json</code></td>
-                                <td>Returns the Capabilities of the specified service with id <code>{service-id}</code>.</td>
+                                <td>Returns the capabilities of a requested service.</td>
                             </tr>
 
                         </table>
@@ -378,37 +329,30 @@ Content-Type: application/json;charset=UTF-8
                         <div>
                             <h4>Service Capabilities Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
 
-                            <pre>GET &lt;base-url&gt;/services/service1 HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="service-capabilities-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-    "id": "service1",
+
+    "id": "service1COLABIS",
     "label": "name of the service",
     "description": "Returns sample data via a WM-Service",
     "capabilities": [
-        "http://localhost:8001/services/service1/maps",
-        "http://localhost:8001/services/service1/features"
+        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps",
+        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/features"
     ]
-}</pre>
-                            <button data-toggle="collapse" data-parent="#service-capabilities-examples"
-                                data-target="#service-capabilities-example" class="btn btn-primary">Show/Hide
-                                Response</button>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Maybe you could add a little more information about the structure of the response document.
-                                E.g., why there are two entries in property 'capabilities' with their respective REST endpoint
-                            </div>
+}</pre>
+                            <button data-toggle="collapse" data-parent="#service-capabilities-examples" data-target="#service-capabilities-example" class="btn btn-primary">Show/Hide Response
+                            </button>
+
 
                             <div class="n52-callout n52-callout-info">
-                                The returned Capabilities document contains a parameter <code>capabilities</code> that ...
+                                The parameter <code>capabilities</code> contains the supported services. In this example, we see endpoints for a WMS (<code>/maps</code>) and a WFS (<code>/features</code>).
                             </div>
 
                         </div>
@@ -457,39 +401,49 @@ Content-Type: application/json;charset=UTF-8
                         <div>
                             <h4>Service Maps Request</h4>
 
-                            <div class="n52-callout n52-callout-todo">
-                                Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                Just a recommendation, since I do not know about your development progress :)
-                            </div>
-
-                            <pre>GET &lt;base-url&gt;/services/service1/maps HTTP/1.1
-Host: localhost:8001
+                            <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: application/json</pre>
                             <pre id="service-maps-example" class="collapse">HTTP/1.1 200 OK
 Content-Type: application/json;charset=UTF-8
 
 {
-   "layers": [
-       {
-           "layer1": "http://localhost:8001/services/service1/maps/layer1/render",
-           "layer2": "http://localhost:8001/services/service1/maps/layer2/render"
-       }
-   ],
-   "crs": [
-       {
-           "TYPE_NAME": "WMS_1_3_0.BoundingBox",
-           "crs": "CRS:84",
-           "minx": 13.175925096825951,
-           "miny": 50.6931182592888,
-           "maxx": 14.428531545338213,
-           "maxy": 51.25344896064335
-       }
-   ]
-}</pre>
-                            <button data-toggle="collapse" data-parent="#service-maps-examples"
-                                data-target="#service-maps-example" class="btn btn-primary">Show/Hide
-                                Response</button>
 
+    "layers": [
+        {
+            "id": "ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2",
+            "title": "Sample measurements of road pollution in Dresden ",
+            "href": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render"
+        },
+        {
+            "id": "ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e",
+            "title": "DWD administrative areas",
+            "href": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/render"
+        },
+        {
+            "id": "ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116",
+            "title": "dwd-regionen-staedte-und-gemeinden",
+            "href": "http://localhost:8001/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116/render"
+        }
+    ],
+    "crs": [
+        {
+            "TYPE_NAME": "WMS_1_3_0.BoundingBox",
+            "crs": "EPSG:4326",
+            "minx": 5.82013988494873,
+            "miny": 47.2314224243164,
+            "maxx": 15.0836019515991,
+            "maxy": 55.0963134765625
+        }
+    ]
+
+}</pre>
+                            <button data-toggle="collapse" data-parent="#service-maps-examples" data-target="#service-maps-example" class="btn btn-primary">Show/Hide Response
+                            </button>
+
+                        </div>
+                        <div class="n52-callout n52-callout-info">
+                            The response shows an array of layer-objects. Each object has the property "id", which is used to request the laye from the service. The property "title" describes the layer. "href" is the url to request the layer.
                         </div>
 
                     </div>
@@ -509,7 +463,7 @@ Content-Type: application/json;charset=UTF-8
                 </div>
 
                 <section id="service-maps-global-rendering">
-                        <h3>Service Maps Global Rendering</h3>
+                    <h3>Service Maps Global Rendering</h3>
 
                     <div>
                         <div id="service-maps-global-rendering-urls">
@@ -540,29 +494,21 @@ Content-Type: application/json;charset=UTF-8
                             <div>
                                 <h4>Service Maps Global Rendering Request</h4>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                    Just a recommendation, since I do not know about your development progress :)
-                                </div>
 
-                                <pre>GET &lt;base-url&gt;/services/service1/maps/render HTTP/1.1
-    Host: localhost:8001
+                                <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps/render HTTP/1.1
+    Host: colabis.dev.52north.org
     Accept: image/png</pre>
                                 <div id="service-maps-global-rendering-example" class="collapse">
-                                  <pre>HTTP/1.1 200 OK
+                                    <pre>HTTP/1.1 200 OK
       Content-Type: image/png;
       </pre>
 
-                                  <img src="img/" alt="service-maps-global-rendering example" title="Examplar response for global rendering of all layers" />
+                                    <img src="img/renderExample.png" alt="service-maps-global-rendering example" title="Examplar response for global rendering of all layers" style="width: 50%; height: 50%" />
                                 </div>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    insert image from img folder
-                                </div>
 
-                                <button data-toggle="collapse" data-parent="#service-maps-global-rendering-examples"
-                                    data-target="#service-maps-global-rendering-example" class="btn btn-primary">Show/Hide
-                                    Response</button>
+                                <button data-toggle="collapse" data-parent="#service-maps-global-rendering-examples" data-target="#service-maps-global-rendering-example" class="btn btn-primary">Show/Hide Response
+                                </button>
 
                             </div>
 
@@ -573,7 +519,7 @@ Content-Type: application/json;charset=UTF-8
                 </section>
 
                 <section id="service-maps-layer-rendering">
-                        <h3>Service Maps Layer Rendering</h3>
+                    <h3>Service Maps Layer Rendering</h3>
 
                     <div>
                         <div id="service-maps-layer-rendering-urls">
@@ -592,10 +538,8 @@ Content-Type: application/json;charset=UTF-8
                                     <td><code>GET</code></td>
                                     <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
                                     <td><code>application/json</code></td>
-                                    <td>Returns the specified layer with id <code>{layer-id}</code> for service with id <code>service-id</code> in the default format,
-                                      which is defined in file <code>services/services.json</code>.
-                                      Using a comma separated list, multiple layers can be requested.
-                                      The order of rendering is analogous to the order in the list of layers.</td>
+                                    <td>Returns the by <code>{layer-id}</code> specified layer for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. Using a comma separated list,
+                                        multiple layers can be requested. The order of rendering is analogous to the order in the list of layers.</td>
                                 </tr>
 
                             </table>
@@ -607,58 +551,47 @@ Content-Type: application/json;charset=UTF-8
                             <div>
                                 <h4>Service Maps Single Layer Rendering Request</h4>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                    Just a recommendation, since I do not know about your development progress :)
-                                </div>
 
-<pre>GET &lt;base-url&gt;/services/service1/maps/layer1/render HTTP/1.1
-Host: localhost:8001
+                                <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/render HTTP/1.1
+Host: colabis.dev.52north.org
 Accept: image/png</pre>
                                 <div id="service-maps-layer-rendering-example-single-layer" class="collapse">
-<pre>HTTP/1.1 200 OK
+                                    <pre>HTTP/1.1 200 OK
 Content-Type: image/png;
 </pre>
 
-                                  <img src="img/" alt="service maps layer rendering example with single layer" title="Examplar response for rendering a single layer" />
+                                    <img src="img/singleRequestLayer.png" alt="service maps layer rendering example with single layer" title="Examplar response for rendering a single layer" style="width: 50%; height: 50%" />
                                 </div>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    insert image from img folder
-                                </div>
 
-                                <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples"
-                                    data-target="#service-maps-layer-rendering-example-single-layer" class="btn btn-primary">Show/Hide
-                                    Response</button>
+                                <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-single-layer" class="btn btn-primary">Show/Hide Response
+                                </button>
 
+                            </div>
+                            <div class="n52-callout n52-callout-info">
+                                The response shows the requested layer <code>ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e</code>.
                             </div>
 
                             <div>
                                 <h4>Service Maps Multiple Layer Rendering Request</h4>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    Here, it would be nice, if you could provide a working example, not just the REST extension, by replacing the URL and HOST with "real" examples.
-                                    Just a recommendation, since I do not know about your development progress :)
-                                </div>
-
-<pre>GET &lt;base-url&gt;/services/service1/maps/layer1,layer2/render HTTP/1.1
+                                <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render
 Host: localhost:8001
 Accept: image/png</pre>
                                 <div id="service-maps-layer-rendering-example-multiple-layers" class="collapse">
-<pre>HTTP/1.1 200 OK
+                                    <pre>HTTP/1.1 200 OK
 Content-Type: image/png;
 </pre>
 
-                                  <img src="img/" alt="service maps layer rendering example with multiple layers" title="Examplar response for rendering multiple layers" />
+                                    <img src="img/multiRequestLayer.png" alt="service maps layer rendering example with two layers" title="Examplar response for rendering two layers" style="width: 50%; height: 50%" />
                                 </div>
 
-                                <div class="n52-callout n52-callout-todo">
-                                    insert image from img folder
-                                </div>
+                                <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers" class="btn btn-primary">Show/Hide Response
+                                </button>
 
-                                <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples"
-                                    data-target="#service-maps-layer-rendering-example-multiple-layers" class="btn btn-primary">Show/Hide
-                                    Response</button>
+                                <div class="n52-callout n52-callout-info">
+                                    Multiple layers can be requested. Just follow the pattern maps/layer1,layer2/render. Keep in mind: The order of the layers matters. The rightmost layer will be rendered on top.
+                                </div>
 
                             </div>
 
@@ -683,7 +616,7 @@ Content-Type: image/png;
                 <div>
                     <div id="queries-urls">
 
-                      <p>The <a href="#global-view">rendering</a> requests can be enriched with certain query parameters, as shown in this section.</p>
+                        <p>The <a href="#global-view">rendering</a> requests can be enriched with certain query parameters, as shown in this section.</p>
 
                         <!-- URLs -->
                         <h3>URLs</h3>
@@ -707,10 +640,8 @@ Content-Type: image/png;
                                 <td><code>GET</code></td>
                                 <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
                                 <td><code>application/json</code></td>
-                                <td>Returns the specified layer with id <code>{layer-id}</code> for service with id <code>service-id</code> in the default format,
-                                  which is defined in file <code>services/services.json</code>.
-                                  Using a comma separated list, multiple layers can be requested.
-                                  The order of rendering is analogous to the order in the list of layers.</td>
+                                <td>Returns the specified layer with id <code>{layer-id}</code> for service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. Using a comma separated list,
+                                    multiple layers can be requested. The order of rendering is analogous to the order in the list of layers.</td>
                             </tr>
 
                         </table>
@@ -774,15 +705,8 @@ Content-Type: image/png;
                                 <tr>
                                     <td><code>format</code></td>
                                     <td><code>format=image/png</code></td>
-                                    <td>Depending on the service.
-                                        <ul>
-                                          <li>
-                                            for services <code>XY</code> and <code>YZ</code> valid values are: <code>image/png</code>
-                                          </li>
-                                          <li>
-                                            for services <code>XX</code> and <code>YY</code> valid values are: <code>MimeType</code>
-                                          </li>
-                                        </ul>
+                                    <td>
+                                      <code>numeric</code>
                                     </td>
                                     <td>Sets the response format</td>
                                 </tr>
@@ -792,27 +716,28 @@ Content-Type: image/png;
                                     <td><code>crs=EPSG:4326</code></td>
                                     <td>
                                         <ul>
-                                          <li>
-                                            <code>EPSG:4326</code>
-                                          </li>
-                                          <li>
-                                            <code>EPSG:4269</code>
-                                          </li>
-                                          <li>
-                                            <code>EPSG:5243</code>
-                                          </li>
-                                          <li>
-                                            <code>EPSG:4839</code>
-                                          </li>
-                                          <li>
-                                            <code>EPSG:3068</code>
-                                          </li>
-                                          <li>
-                                            <code>May be restricted by the service.</code>
-                                          </li>
+                                            <li>
+                                                <code>EPSG:4326</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4269</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:5243</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4839</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3068</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3857</code>
+                                            </li>
                                         </ul>
                                     </td>
-                                    <td>Sets the coordinate reference system of the response</td>
+                                    <td>Sets the coordinate reference system of the response.<br>
+                                      May be restricted by the service.</td>
                                 </tr>
 
                             </table>
@@ -822,52 +747,423 @@ Content-Type: image/png;
                     </div>
 
                 </div>
+
+                <div>
+                    <h4>Service Maps Multiple Layer Rendering Request</h4>
+
+                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/render?minx=13&miny=50&maxx=14&maxy=52&width=250&height=350&EPSG:4326&format=image/tiff
+Host: localhost:8001
+Accept: image/tiff</pre>
+                    <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
+                        <pre>HTTP/1.1 200 OK
+Content-Type: image/tiff;
+</pre>
+
+                        <img src="img/queryExample.png" alt="service maps layer rendering example with two layers and query" title="Examplar response for rendering two layers and query" style="width: 50%; height: 50%" />
+                    </div>
+
+                    <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
+                    </button>
+
+                    <div class="n52-callout n52-callout-info">
+                        The examplerequest contains all possible parameters for the query. Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed. If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding
+                        format. </div>
+
+                </div>
             </section>
 
-    <!-- Footer
-        ================================================== -->
 
-    <div class="col-lg-12">
-        <footer class="footer">
-            <div>
-                <div class="pull-right">
-                    <a href="#">top</a>
+
+
+            <!-- Service Features
+                ================================================== -->
+            <section id="service-features">
+                <div class="page-header">
+                    <h2>Service Features</h2>
+                    <p class="pull-right up-link">
+                        <a href="#"><i class="icon-chevron-up"></i> top</a>
+                    </p>
+                </div>
+                <div>
+                    <div id="service-features-urls">
+                        <!-- URLs -->
+                        <h3>URLs</h3>
+                        <p>API calls are triggered by using the following URLs.</p>
+                        <table class="table">
+                            <tr>
+                                <th>Method</th>
+                                <th>Path</th>
+                                <th>Content-Type</th>
+                                <th>Description</th>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/data</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Returns an overview of the offered layers and their global extent for the service with id <code>{service-id}</code>.</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div id="service-features-examples">
+                        <!-- Examples -->
+                        <h3>Examples</h3>
+                        <div>
+                            <h4>Service Data Request</h4>
+
+                            <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/features HTTP/1.1
+        Host: colabis.dev.52north.org
+        Accept: application/json</pre>
+                            <pre id="service-features-example" class="collapse">HTTP/1.1 200 OK
+        Content-Type: application/json;charset=UTF-8
+
+        {
+
+            "features": [
+                {
+                    "id": "ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e",
+                    "title": "DWD administrative areas",
+                    "href": "http://localhost:8001/services/service1COLABIS/features/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/data"
+                },
+                {
+                    "id": "ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2",
+                    "title": "Sample measurements of road pollution in Dresden ",
+                    "href": "http://localhost:8001/services/service1COLABIS/features/ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2/data"
+                },
+                {
+                    "id": "ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116",
+                    "title": "dwd-regionen-staedte-und-gemeinden",
+                    "href": "http://localhost:8001/services/service1COLABIS/features/ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116/data"
+                }
+            ],
+            "crs": [
+                {
+                    "TYPE_NAME": "wgs84BoundingBox",
+                    "crs": "EPSG:4326",
+                    "minx": 13.726043,
+                    "miny": 51.003874,
+                    "maxx": 15.0836019515991,
+                    "maxy": 55.0963134765625
+                }
+            ]
+
+        }</pre>
+                            <button data-toggle="collapse" data-parent="#service-features-example" data-target="#service-features-example" class="btn btn-primary">Show/Hide Response
+                            </button>
+
+                        </div>
+                        <div class="n52-callout n52-callout-info">
+                            The response shows an array of feature-objects. Each object has the property "id", which is used to request the feature from the service. The property "title" describes the feature. "href" is the url to request the feature.
+                        </div>
+
+                    </div>
+
+
+                    <section id="service-features-data">
+                        <h3>Service Features Data Request</h3>
+
+                        <div>
+                            <div id="service-features-data-urls">
+                                <!-- URLs -->
+                                <h4><b>URLs</b></h4>
+                                <p>API calls are triggered by using the following URLs.</p>
+                                <table class="table">
+                                    <tr>
+                                        <th>Method</th>
+                                        <th>Path</th>
+                                        <th>Content-Type</th>
+                                        <th>Description</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td><code>GET</code></td>
+                                        <td><code>&lt;base-url&gt;/services/{service-id}/maps/{feature-id}/data</code></td>
+                                        <td><code>application/json</code></td>
+                                        <td>Returns the by <code>{feature-id}</code> specified feature for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>.
+                                    </tr>
+
+                                </table>
+                            </div>
+
+                            <div id="service-feature-request-examples">
+                                <!-- Examples -->
+                                <h4><b>Examples</b></h4>
+                                <div>
+                                    <h4>Service Features Single Feature Data Request</h4>
+
+
+                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/features/ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e/data HTTP/1.1
+            Host: colabis.dev.52north.org
+            Accept: application/json</pre>
+            <pre id="service-feature-request-examples-single-feature" class="collapse">HTTP/1.1 200 OK
+Content-Type: application/json;charset=UTF-8
+{
+  "type": "FeatureCollection",
+  "totalFeatures": 403,
+  "features": [
+    {
+      "type": "Feature",
+      "id": "_a2508d4e_74c1_4a02_b1cc_c05db68f538e.614",
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                11.50466915716252,
+                50.90692760854206
+              ],
+              [
+                11.50905239913563,
+                50.91479018440299
+              ],
+              [
+                11.510171577362986,
+                50.91716503595331
+              ],
+              [
+                11.507686894628645,
+                50.92533907105912
+              ],
+              [
+                11.504694033263837,
+                50.93376036553791
+              ],
+              [
+                11.498977225909524,
+                50.95398374662671
+              ],
+              [
+                11.50329752641306,
+                50.96734502642258
+              ],
+              [
+                11.508608573086736,
+                ...
+                ...
+                ...
+
+          </pre>
+
+
+
+                                    <button data-toggle="collapse" data-parent="#service-feature-request-examples-single-feature" data-target="#service-feature-request-examples-single-feature" class="btn btn-primary">Show/Hide Response
+                                    </button>
+
+                                </div>
+                                <div class="n52-callout n52-callout-info">
+                                    The response shows an extract of the requested data from <code>ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e</code>.
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </section>
+
+                </div>
+            </section>
+
+
+            <!-- Queries
+                ================================================== -->
+            <section id="queries-features">
+                <div class="page-header">
+                    <h2>Queries</h2>
+                    <p class="pull-right up-link">
+                        <a href="#"><i class="icon-chevron-up"></i> top</a>
+                    </p>
+                </div>
+                <div>
+                    <div id="queries-urls">
+                        <!-- URLs -->
+                        <h3>URLs</h3>
+                        <p>For following URLs the subsequent query parameters may be used.</p>
+                        <table class="table">
+                            <tr>
+                                <th>Method</th>
+                                <th>Path</th>
+                                <th>Content-Type</th>
+                                <th>Description</th>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/maps/render</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Returns all features in the default format, which is defined in file <code>services/services.json</code>.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/maps/{layer-id}/render</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Returns the specified feature with id <code>{feature-id}</code> for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>. One feature can be requested at the time.</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div id="queries-query-parameters">
+                        <!-- Examples -->
+                        <h3>Query Parameters</h3>
+                        <div>
+
+                            <table class="table">
+                                <tr>
+                                    <th>Parameter</th>
+                                    <th>Example</th>
+                                    <th>Supported Values</th>
+                                    <th>Description</th>
+                                </tr>
+
+                                <tr>
+                                    <td><code>minx</code></td>
+                                    <td><code>minx=5.8662505149842445</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the minimal x value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>miny</code></td>
+                                    <td><code>miny=47.27012252807623</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the minimal y value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>maxx</code></td>
+                                    <td><code>maxx=15.041815757751444</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the maximal x value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>maxy</code></td>
+                                    <td><code>maxy=55.05652618408206</code></td>
+                                    <td><code>numeric</code></td>
+                                    <td>Puts the maximal y value.</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>format</code></td>
+                                    <td><code>format=application/json</code></td>
+                                    <td>
+                                      <code>numeric</code>
+                                    </td>
+                                    <td>Sets the response format</td>
+                                </tr>
+
+                                <tr>
+                                    <td><code>crs</code></td>
+                                    <td><code>crs=EPSG:4326</code></td>
+                                    <td>
+                                        <ul>
+                                            <li>
+                                                <code>EPSG:4326</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4269</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:5243</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:4839</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3068</code>
+                                            </li>
+                                            <li>
+                                                <code>EPSG:3857</code>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                    <td>Sets the coordinate reference system of the response.<br>
+                                      May be restricted by the service.</td>
+                                </tr>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <p>
-                    Design and Content <a href="http://52north.org/" target="_blank">52&deg;North</a>.
-                </p>
+                <div>
+                    <h4>Service Feature Data Request</h4>
 
-                <p>
-                    Content licensed under <a href="https://github.com/52North/geocure/blob/master/LICENSE.md">MIT</a>.
-                </p>
+                    <pre>GET http://colabis.dev.52north.org/services/service1/features/COLABIS_REST_TEST:gis.osm_waterways_v06/data?minx=1557352.87110&miny=6613867.768936746&maxx=1558472.87111&maxy=7361866.11305&crs=EPSG:3857&format=csv
+Host: localhost:8001
+Accept: text/csv</pre>
+                    <div id="service-feature-data-request-example" class="collapse">
+                        <pre>HTTP/1.1 200 OK
+Content-Type: text/csv;
+</pre>
 
-                <p>
-                    <a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a
-                        href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
-                </p>
+FID,the_geom,osm_id,lastchange,code,fclass,name,width
+gis.osm_waterways_v06.1111,"MULTILINESTRING ((1557285.7155282141 6652863.81549924, 1557333.8612079823 6652885.923121373, 1557368.5817571608 6652899.329780743, 1557397.0016231602 6652915.648644755, 1557401.209499912 6652921.703857196, 1557419.6217436893 6652933.2815779075))",201855608,2013-01-19T03:28:56Z,8102,stream,,0
+                    </div>
 
-                <ul class="footer-links">
-                    <li><a href="http://52north.org/communities/geoprocessing/">Geoprocessing Community</a>
+                    <button data-toggle="collapse" data-parent="#service-feature-data-request-example" data-target="#service-feature-data-request-example" class="btn btn-primary">Show/Hide Response
+                    </button>
 
-                      <div class="n52-callout n52-callout-todo">
-                          Update community information! Then remove this div.
-                      </div>
-                    </li>
-                    <li class="muted">&middot;</li>
-                    <li><a href="mailto:m.rieke@52north.org">Contact</a>
+                    <div class="n52-callout n52-callout-info">
+                        The examplerequest contains all possible parameters for the query. Please note: If no spatial reference system (srs) is defindet, EPSG:4326 is assumed. If you specify a srs, you should provide coordinates (minx, miny, maxx, maxy) in the corresponding
+                        format. </div>
 
-                      <div class="n52-callout n52-callout-todo">
-                          Update contact information! Then remove this div.
-                      </div>
-                    </li>
-                </ul>
+                </div>
+            </section>
 
+
+
+            <!-- Footer
+        ================================================== -->
+
+            <div class="col-lg-12">
+                <footer class="footer">
+                    <div>
+                        <div class="pull-right">
+                            <a href="#">top</a>
+                        </div>
+
+                        <p>
+                            Design and Content <a href="http://52north.org/" target="_blank">52&deg;North</a>.
+                        </p>
+
+                        <p>
+                            Content licensed under <a href="https://github.com/52North/geocure/blob/master/LICENSE.md">MIT</a>.
+                        </p>
+
+                        <p>
+                            <a href="http://glyphicons.com">Glyphicons Free</a> licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.
+                        </p>
+
+                        <ul class="footer-links">
+                            <li><a href="http://52north.org/communities/geoprocessing/">Geoprocessing Community</a>
+
+                                <div class="n52-callout n52-callout-todo">
+                                    Update community information! Then remove this div.
+                                </div>
+                            </li>
+                            <li class="muted">&middot;</li>
+                            <li><a href="mailto:m.rieke@52north.org">Contact</a>
+
+                                <div class="n52-callout n52-callout-todo">
+                                    Update contact information! Then remove this div.
+                                </div>
+                            </li>
+                        </ul>
+
+                    </div>
+                </footer>
             </div>
-        </footer>
-    </div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="js/bootstrap-3.0.0-rc1/bootstrap.min.js"></script>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+            <script src="js/bootstrap-3.0.0-rc1/bootstrap.min.js"></script>
 </body>
+
 </html>
