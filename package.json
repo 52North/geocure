@@ -23,8 +23,11 @@
     "jasmine-node": "^1.14.5"
   },
   "dependencies": {
+    "jsonix": "^2.4.1",
     "node-restify-swagger": "^0.1.8",
+    "ogc-schemas": "^2.6.1",
     "request": "^2.79.0",
-    "restify": "^4.3.0"
+    "restify": "^4.3.0",
+    "w3c-schemas": "^1.4.0"
   }
 }

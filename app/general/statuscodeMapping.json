@@ -1,0 +1,27 @@
+/**
+ * This file serves as a mapping of statuscodes.
+ * "code" will be added to the "praefix" of its father. Both can be changed.
+ * The "description" should deliver human readable information. It can be also changed.
+ * But please do not change the schema and names of keys
+ */
+
+{
+  "services": {
+    "praefix": 1000,
+    "schemaError": {
+      "code": 100,
+      "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
+    },
+    "serviceNotAvailable" : {
+      "code": 200,
+      "description": "Was not able to establish a connection to the Geoserver."
+    }
+  },
+  "general": {
+    "praefix": 2000,
+    "functionError": {
+      "code": 100,
+      "description": "An error occurred during the execution."
+    }
+  },
+}

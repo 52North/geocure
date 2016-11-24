@@ -1,6 +1,6 @@
 var errorHandling = require("../app/general/errorhandling.js")
 
-describe("The function app/general/errorhandling.getError", function() {
+describe("app/general/errorhandling.getError", function() {
 
 
     it("maps from app/services/statuscodeMapping.json without additional message", function(done) {
@@ -9,7 +9,6 @@ describe("The function app/general/errorhandling.getError", function() {
             "code" : 1100,
             "description" : "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'.",
         }
-
         expect(errormessage).toEqual(testobj);
         done();
     });
@@ -21,8 +20,6 @@ describe("The function app/general/errorhandling.getError", function() {
             "description" : "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'.",
             "info" : "Things went wrong",
         }
-
-
         expect(errormessage).toEqual(testobj);
         done();
     });

@@ -1,0 +1,16 @@
+{
+  "services": {
+    "praefix": 1000,
+    "schemaError": {
+      "code": 100,
+      "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
+    }
+  },
+  "general": {
+    "praefix": 2000,
+    "functionError": {
+      "code": 100,
+      "description": "An error occurred during the execution."
+    }
+  }
+}
