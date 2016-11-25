@@ -1,13 +1,13 @@
 // External libraries
-var restify = require("restify");
-var restifySwagger = require("node-restify-swagger");
-var requesting = require("request");
+const restify = require("restify");
+const restifySwagger = require("node-restify-swagger");
+const requesting = require("request");
 
-// Introducing local libraries
+// Local libraries
+const wmsCache = require("./wms/capabilitiesCache.js");
 
 
-
-var server = module.exports.server = restify.createServer();
+const server = module.exports.server = restify.createServer();
 
 server.name = "geocure";
 
@@ -78,10 +78,8 @@ restifySwagger.loadRestifyRoutes();
 /**
  * Start server
  */
-const serverStartup = new Promomise((resolve, reject) => {
-
+wmsCache.loadCache().then(() => {
+        server.listen(8000, function() {
+                console.log("%s started: %s", server.name, server.url);
+        });
 })
-
-server.listen(8000, function() {
-        console.log("%s started: %s", server.name, server.url);
-});

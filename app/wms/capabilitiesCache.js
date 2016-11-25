@@ -9,7 +9,7 @@ const errorhandling = require("../general/errorhandling.js");
  * @type {Array}
  */
 let cache = [];
-let requestURLs[];
+let requestURLs = [];
 
 /**
  * Indicates whether loadingprocess of the cache finished.
@@ -28,20 +28,26 @@ function getCache() {
         return (ready ? cache : (errorhandling("services", "wmsCacheNotReady")));
 }
 
+
 /**
  * Function which conduct the loading of the cache
+ * @return {Boolean}  Will be returned, if the loading finished.
  */
 function loadCache() {
         "use strict";
-        /**
-         * Make shure the array is empty, so no multiple entries exists for one service
-         * @type {Array}
-         */
-        cache = [];
-        requestURLs = loadURLs();
-        console.log("loadCache")
-        console.log("requestURLs.lwngth = " + requestURLs.length);
-        async.async(getCapabilitiesGenerator);
+
+        return new Promise((resolve, reject) => {
+                /**
+                 * Make shure the array is empty, so no multiple entries exists for one service
+                 * @type {Array}
+                 */
+                cache = [];
+                requestURLs = loadURLs();
+                console.log("loadCache")
+                console.log("requestURLs.lwngth = " + requestURLs.length);
+                async.async(getCapabilitiesGenerator, resolve());
+        });
+
 }
 
 /**
