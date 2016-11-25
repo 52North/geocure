@@ -1,5 +1,0 @@
-
-
-function getCapabilities(baseURL){
-
-}

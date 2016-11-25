@@ -1,0 +1,92 @@
+const services = require("../config/services.json");
+const requestsURL = require("./requestsURL.js");
+const async = require("../general/asyncrone.js");
+const getCapabilities = require("../general/getCapabilities.js");
+const errorhandling = require("../general/errorhandling.js");
+
+/**
+ * Stores the getCapabilities [JSON]
+ * @type {Array}
+ */
+let cache = [];
+let requestURLs[];
+
+/**
+ * Indicates whether loadingprocess of the cache finished.
+ * @type {Boolean}
+ */
+let ready = false;
+
+/**
+ * Interface to return the cache (Array with objects, which describe the capabilities of the oddered services)
+ * @method getCache
+ * @return {Array} The cache
+ * @throws {Error} If one tries to obtain the cache, but it is not ready, one gets an "wmsCacheNotReady"-Error
+ */
+function getCache() {
+        "use strict";
+        return (ready ? cache : (errorhandling("services", "wmsCacheNotReady")));
+}
+
+/**
+ * Function which conduct the loading of the cache
+ */
+function loadCache() {
+        "use strict";
+        /**
+         * Make shure the array is empty, so no multiple entries exists for one service
+         * @type {Array}
+         */
+        cache = [];
+        requestURLs = loadURLs();
+        console.log("loadCache")
+        console.log("requestURLs.lwngth = " + requestURLs.length);
+        async.async(getCapabilitiesGenerator);
+}
+
+/**
+ * The following functions serve loadCache()
+ */
+
+/**
+ * Constructs an array which contains the getCapabilitie urls for enabled map-services (enabled in services.json)
+ * These urls are used to performe the asynchrone request to load the cache.
+ * @return {Array} The getCapabilitie urls
+ */
+function loadURLs() {
+        "use strict";
+        const getCapabilitiesURL = [];
+        services.forEach(currentObject => {
+                try {
+                        if (currentObject["capabilities"]["maps"]["enabled"]) {
+                                getCapabilitiesURL.push(requestsURL.getCapabilities(currentObject["url"]));
+                        }
+                } catch (error) {
+                        console.log("Error in loadURLS :" + error);
+                }
+        });
+
+        return getCapabilitiesURL;
+}
+
+/**
+ * Generator for requests to services, which stores the result in the array 'cache'.
+ * @return {Iterator} Iterator
+ */
+function* getCapabilitiesGenerator() {
+        "use strict";
+        let count = 0;
+        while (count < requestURLs.length) {
+                let capabilities = yield getCapabilities.getJSON_WMS(requestURLs[count]);
+                cache.push(capabilities);
+                ++count;
+                console.log("ready = " + ready);
+        }
+        ready = true;
+        console.log("ready now " + ready);
+}
+
+module.exports = {
+        loadCache: loadCache,
+        getCache: getCache
+}

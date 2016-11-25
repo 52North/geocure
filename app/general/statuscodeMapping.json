@@ -12,9 +12,13 @@
       "code": 100,
       "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
     },
-    "serviceNotAvailable" : {
+    "wmsCacheNotReady" : {
       "code": 200,
-      "description": "Was not able to establish a connection to the Geoserver."
+      "description": "The cache for the wms getCapabilities is not ready."
+    },
+    "wfsCacheNotReady" : {
+      "code": 300,
+      "description": "The cache for the wfs getCapabilities is not ready."
     }
   },
   "general": {

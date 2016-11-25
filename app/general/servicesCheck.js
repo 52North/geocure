@@ -11,16 +11,17 @@ const errorhandling = require("./errorhandling.js");
  * @throws {Error}                  If an object and the metadescription do not fit.
  */
 function check(objectArray, metadescription) {
-    try {
-        for (let element of objectArray) {
-            checkObject(element, metadescription);
+        "use strict";
+        try {
+                for (let element of objectArray) {
+                        checkObject(element, metadescription);
+                }
+
+        } catch (error) {
+                throw error;
         }
 
-    } catch (error) {
-        throw error;
-    }
-
-    return true;
+        return true;
 }
 
 /**
@@ -31,32 +32,23 @@ function check(objectArray, metadescription) {
  * @throws {Error}                  If the tests are not passed
  */
 function checkObject(obj, metadescription) {
+        "use strict";
+        try {
+                for (let key in obj) {
+                        let checkOK = typeof(metadescription[key]) === "object" ? checkObject(obj[key], metadescription[key]) : typeof(obj[key]) === metadescription[key];
+                        if (checkOK === false) {
+                                throw errorhandling.getError("services", "schemaError");
+                        }
+                }
 
-    try {
-
-        for (let key in obj) {
-
-            let checkOK = typeof(metadescription[key]) === "object" ? checkObject(obj[key], metadescription[key]) : typeof(obj[key]) === metadescription[key];
-
-
-            if (checkOK === false) {
-
-                throw errorhandling.getError("services", "schemaError");
-            }
-
+        } catch (error) {
+                throw error;
         }
-
-    } catch (error) {
-
-        throw error;
-    }
-
-    return true;
-
+        return true;
 }
 
 
 module.exports = {
-    check: check,
-    checkObject: checkObject
+        check: check,
+        checkObject: checkObject
 };
