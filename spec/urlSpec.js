@@ -15,7 +15,7 @@ describe("The iterator from URLBaseGenerator", function(){
       res = next.value;
     });
 
-      expect(res).toBe("abc?SERVICE=wms&VERSION=1.3.0");
+      expect(res).toBe("abc/wms?SERVICE=wms&VERSION=1.3.0");
       done();
   })
 });
@@ -27,7 +27,7 @@ describe("baseURL", function(){
     const serviceURL = "abc";
 
     const res = urlConstructor.getBaseURL(serviceURL, arg);
-      expect(res).toBe("abc?SERVICE=wms&VERSION=1.3.0");
+      expect(res).toBe("abc/wms?SERVICE=wms&VERSION=1.3.0");
       done();
   })
 });
