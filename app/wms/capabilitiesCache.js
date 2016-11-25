@@ -43,8 +43,6 @@ function loadCache() {
                  */
                 cache = [];
                 requestURLs = loadURLs();
-                console.log("loadCache")
-                console.log("requestURLs.lwngth = " + requestURLs.length);
                 async.async(getCapabilitiesGenerator, resolve());
         });
 
@@ -86,10 +84,8 @@ function* getCapabilitiesGenerator() {
                 let capabilities = yield getCapabilities.getJSON_WMS(requestURLs[count]);
                 cache.push(capabilities);
                 ++count;
-                console.log("ready = " + ready);
         }
         ready = true;
-        console.log("ready now " + ready);
 }
 
 module.exports = {
