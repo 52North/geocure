@@ -12,31 +12,31 @@ var statuscodeMapping = require("../config/statuscodeMapping.json")
  */
 
 function getError(category, type, info) {
-    "use strict";
+        "use strict";
 
-    try {
-        console.log("Parameterchecking getError = " + JSON.stringify(arguments));
-        const response = new Error(category.toString() + " " + type.toString());
+        try {
+                const response = new Error(category + " " + type);
+                const statuscodePraefix = statuscodeMapping[category]["praefix"];
+                const mappingObject = JSON.parse(JSON.stringify(statuscodeMapping[category][type])); // Make a copy of the statuscodeMapping-Object
+                response["code"] = statuscodePraefix + mappingObject["code"];
+                response["description"] = mappingObject["description"];
 
-        const statuscodePraefix = statuscodeMapping[category]["praefix"];
-        const mappingObject = JSON.parse(JSON.stringify(statuscodeMapping[category][type])); // Make a copy of the statuscodeMapping-Object
+                if (info) {
+                        response["info"] = info;
+                }
 
-        response["code"] = statuscodePraefix + mappingObject["code"];
-        response["description"] = mappingObject["description"];
+                return response;
 
-
-        if (info) {
-            response["info"] = info;
+        } catch (error) {
+                const err = new Error("getError - error");
+                err["code"] = "0000";
+                err["description"] = "An error occured during the execution of getError()."
+                err["info"] = error;
+                throw err;
         }
-
-        return response;
-
-    } catch (error) {
-        throw new Error("getError function")
-    }
 }
 
 
 module.exports = {
-    getError: getError
+        getError: getError
 };

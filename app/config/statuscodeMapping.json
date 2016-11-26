@@ -1,16 +1,31 @@
 {
-  "services": {
-    "praefix": 1000,
-    "schemaError": {
-      "code": 100,
-      "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
+    "services": {
+        "praefix": 1000,
+        "schemaError": {
+            "code": 100,
+            "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
+        },
+        "wmsCacheNotReady": {
+            "code": 200,
+            "description": "The cache for the wms getCapabilities is not ready."
+        },
+        "wfsCacheNotReady": {
+            "code": 300,
+            "description": "The cache for the wfs getCapabilities is not ready."
+        }
+    },
+    "general": {
+        "praefix": 2000,
+        "functionError": {
+            "code": 100,
+            "description": "An error occurred during the execution."
+        }
+    },
+    "requestResponses": {
+        "praefix": 3000,
+        "/services": {
+            "code": 10,
+            "description": "An error occurred during the construction of the response."
+        }
     }
-  },
-  "general": {
-    "praefix": 2000,
-    "functionError": {
-      "code": 100,
-      "description": "An error occurred during the execution."
-    }
-  }
 }
