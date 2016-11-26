@@ -28,6 +28,7 @@
     "ogc-schemas": "^2.6.1",
     "request": "^2.79.0",
     "restify": "^4.3.0",
+    "restify-errors": "^4.3.0",
     "w3c-schemas": "^1.4.0"
   }
 }
