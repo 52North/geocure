@@ -2,13 +2,18 @@
  * Handles asynchrone requests based on generators
  * @param  {Generator} generator Generator with the urls to request
  */
-function async(generator) {
+function async(generator, callback) {
         "use strict";
         const iterator = generator();
 
         function handle(iteratorResult) {
                 if (iteratorResult.done) {
-                        return;
+
+                        if (callback) {
+                                callback();
+                        } else {
+                                return;
+                        }
                 }
 
                 let iteratorValue = iteratorResult.value;
