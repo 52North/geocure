@@ -5,7 +5,9 @@ const requesting = require("request");
 
 // Local libraries
 const wmsCache = require("./wms/capabilitiesCache.js");
-
+const services = require("./config/services.json");
+const wmsServices = require("./wms/wmsServices.js");
+const url = require("./general/url.js");
 
 const server = module.exports.server = restify.createServer();
 
@@ -49,10 +51,6 @@ restifySwagger.configure(server, {
  */
 
 
-// Check the configuration of services before startup
-//serviceCheck.check(services, servicesMetadescription)
-
-
 server.get({
         url: "/services",
         swagger: {
@@ -60,6 +58,7 @@ server.get({
                 notes: "this resource provides access to geodata services",
         }
 }, function(req, res, next) {
+        url.injectFullUrl(req);
         /*
          // Information for tracing
          requestUtils.injectFullUrl(req);
@@ -68,7 +67,7 @@ server.get({
          res.send(processGetCapabilities.getServicesInfo(services, serviceCache, req));
          controlExecution.logEnd(req.fullUrl);*/
 
-        res.send(serviceCheck.checkServices(services));
+        res.send(wmsServices.getAllServices(services, req));
 });
 
 
@@ -77,6 +76,12 @@ restifySwagger.loadRestifyRoutes();
 
 /**
  * Start server
+ */
+
+/**
+ * TODO
+ * // Check the configuration of services before startup
+ //serviceCheck.check(services, servicesMetadescription)
  */
 wmsCache.loadCache().then(() => {
         server.listen(8000, function() {

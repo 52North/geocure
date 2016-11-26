@@ -34,7 +34,18 @@ function getBaseURL(serviceURL, args) {
 }
 
 
+/**
+ * Updates property of req.fullUrl
+ * @param  {Object}      req Object from the requests.
+ * @return {Object}          Updated req
+ */
+function injectFullUrl(req) {
+        req.fullUrl = (req.isSecure()) ? 'https' : 'http' + '://' + req.headers.host + req.url;
+        return req;
+}
+
 module.exports = {
         URLBaseGenerator: URLBaseGenerator,
-        getBaseURL: getBaseURL
+        getBaseURL: getBaseURL,
+        injectFullUrl: injectFullUrl
 }
