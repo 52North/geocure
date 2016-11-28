@@ -2,6 +2,7 @@
 const restify = require("restify");
 const restifySwagger = require("node-restify-swagger");
 const requesting = require("request");
+const errors = require("restify-errors");
 
 // Local libraries
 const wmsCache = require("./wms/capabilitiesCache.js");
@@ -66,8 +67,29 @@ server.get({
 
          res.send(processGetCapabilities.getServicesInfo(services, serviceCache, req));
          controlExecution.logEnd(req.fullUrl);*/
+        try {
+                const respone = wmsServices.getAllServices(services, req);
+                res.send(respone);
+        } catch (error) {
+                res.send(500, JSON.stringify(error));
+        }
+});
 
-        res.send(wmsServices.getAllServices(services, req));
+
+server.get({
+        url: "/services/:id",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access to a service by id",
+        }
+}, function(req, res, next) {
+        url.injectFullUrl(req);
+        try {
+                const respone = wmsServices.getServiceDescriptionById(services, req);
+                res.send(respone);
+        } catch (error) {
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error)); 
+        }
 });
 
 
