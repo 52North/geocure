@@ -4,7 +4,7 @@ const errorhandling = require("../general/errorhandling.js");
  * Returns the offered layers and the max bbox (see getExGeographicBoundingBox).
  * @param  {Object}    serviceCache The WMS-cache
  * @param  {Object}    requestargs  Argument of the requests
- * @return {Object}                 JSON-Object 
+ * @return {Object}                 JSON-Object
  */
 function describeMap(serviceCache, requestargs){
   // console.log(serviceCache);
@@ -39,7 +39,11 @@ catch (error) {
 function getExGeographicBoundingBox(capabilities){
   try
   {
-    return capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
+    const response = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
+
+    // Adding missing Information
+    response["crs"] = "EPSG:4326";
+    return response;
   }
   catch (error)
   {
@@ -71,6 +75,10 @@ function getAllLayers(capabilities, requestargs){
   catch (error) {
     throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get all Layers");
   }
+}
+
+function render(capabilities, requestargs){
+
 }
 
 module.exports = {
