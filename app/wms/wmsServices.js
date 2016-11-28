@@ -44,6 +44,63 @@ function getAllServices(services, requestargs) {
         return response;
 }
 
+
+
+/**
+ * Constructs a description of a service.
+ * The result will be infulenced by the status of the enablement of maps/features (see services.json)
+ * @param  {Array}       services    Servicedescription, structured like in services.json
+ * @param  {Object}      requestargs Contains the id of the requested service
+ * @return {Object}                   Information about the service, its capabilities (maps, features)
+ */
+function getServiceDescriptionById(services, requestargs) {
+        "use strict";
+        try {
+                const allServices = getAllServices(services, requestargs);
+                /* Use information from endpoint /services
+                    {
+                    "id": "service1COLABIS",
+                    "label": "name of the service",
+                    "description": "Returns sample data via a WM-Service",
+                    "href": "http://localhost:8888/geocure/services/service1COLABIS"
+                    }
+                 */
+                const serviceById = allServices.find(service => {
+                        return service.id == requestargs.params.id
+                })
+
+                if (!serviceById) {
+                        throw errorhandling.getError("requestResponses", "/services:id");
+                }
+
+
+                // Having a look at services.json so I can see in the following which capabilities are enabled
+                const serviceConfiguration = services.find(service => {
+                        return service.id == requestargs.params.id;
+                })
+
+                const capabilities = {};
+
+                // By "for (let prop in obj)" we are more flexible, if a capabilitie is added to server.json
+                for (let key in serviceConfiguration["capabilities"]) {
+                        if (serviceConfiguration["capabilities"][key]["enabled"]) {
+                                capabilities[key] = requestargs.fullUrl + "/" + key;
+                        }
+                }
+
+                // Basically we have everything. Only the property 'href' is superfluous.
+                delete serviceById["href"];
+                serviceById["capabilities"] = capabilities;
+
+                return serviceById;
+
+
+        } catch (error) {
+                throw error;
+        }
+}
+
 module.exports = {
-        getAllServices: getAllServices
+        getAllServices: getAllServices,
+        getServiceDescriptionById: getServiceDescriptionById
 }
