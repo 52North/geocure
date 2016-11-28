@@ -42,7 +42,7 @@ function loadCache() {
                  * @type {Array}
                  */
                 cache = [];
-                requestURLs = loadURLs();
+                requestURLs = loadCapabilitiesURLs();
                 async.async(getCapabilitiesGenerator, resolve());
         });
 
@@ -57,13 +57,18 @@ function loadCache() {
  * These urls are used to performe the asynchrone request to load the cache.
  * @return {Array} The getCapabilitie urls
  */
-function loadURLs() {
+function loadCapabilitiesURLs() {
         "use strict";
         const getCapabilitiesURL = [];
         services.forEach(currentObject => {
                 try {
-                        if (currentObject["capabilities"]["maps"]["enabled"]) {
-                                getCapabilitiesURL.push(requestsURL.getCapabilities(currentObject["url"]));
+                        if (currentObject["capabilities"]["maps"]["enabled"] && currentObject["id"]) {
+                                const capabilitiesRequestParameters = {
+                                        "id": currentObject["id"],
+                                        "capabilitiesURL": requestsURL.getCapabilities(currentObject["url"])
+                                };
+
+                                getCapabilitiesURL.push(capabilitiesRequestParameters);
                         }
                 } catch (error) {
                         console.log("Error in loadURLS :" + error);
@@ -73,6 +78,7 @@ function loadURLs() {
         return getCapabilitiesURL;
 }
 
+
 /**
  * Generator for requests to services, which stores the result in the array 'cache'.
  * @return {Iterator} Iterator
@@ -81,8 +87,19 @@ function* getCapabilitiesGenerator() {
         "use strict";
         let count = 0;
         while (count < requestURLs.length) {
-                let capabilities = yield getCapabilities.getJSON_WMS(requestURLs[count]);
-                cache.push(capabilities);
+                let capabilities = yield getCapabilities.getJSON_WMS(requestURLs[count]["capabilitiesURL"]);
+                cache.push({
+                        "id": requestURLs[count]["id"],
+                        "capabilities": capabilities
+                });
+
+                /**
+                 * log for tests
+                 */
+                // console.log(JSON.stringify({
+                //         "id": requestURLs[count]["id"],
+                //         "capabilities": capabilities
+                // }));
                 ++count;
         }
         ready = true;
