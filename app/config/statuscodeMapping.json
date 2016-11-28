@@ -31,9 +31,9 @@
             "code": 20,
             "description": "Requested service-id is not supported."
         },
-        "/services:id:maps": {
+        "badCapabilitiesAccess": {
             "code": 30,
-            "description": "Was not able to generate "
+            "description": "Was not able to get required information from the getCapabilities "
         }
     }
 }
