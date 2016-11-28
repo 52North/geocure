@@ -26,6 +26,10 @@
         "/services": {
             "code": 10,
             "description": "An error occurred during the construction of the response."
+        },
+        "/services:id": {
+            "code": 20,
+            "description": "Requested service-id is not supported."
         }
     }
 }
