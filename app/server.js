@@ -11,6 +11,9 @@ const wmsServices = require("./wms/wmsServices.js");
 const url = require("./general/url.js");
 const maps = require("./wms/maps.js");
 
+// Chaches
+const cacheWMS = require("./wms/capabilitiesCache.js");
+
 const server = module.exports.server = restify.createServer();
 
 server.name = "geocure";
@@ -89,6 +92,7 @@ server.get({
                 const response = wmsServices.getServiceDescriptionById(services, req);
                 res.send(response);
         } catch (error) {
+
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
 });
@@ -103,7 +107,7 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = maps.describeMap(services, req);
+                const response = maps.describeMap(cacheWMS.getCache(), req)
                 res.send(response);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
