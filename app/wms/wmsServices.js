@@ -70,7 +70,7 @@ function getServiceDescriptionById(services, requestargs) {
                 })
 
                 if (!serviceById) {
-                        throw errorhandling.getError("requestResponses", "/services:id");
+                        throw errorhandling.getError("requestResponses", "bad:id");
                 }
 
 
