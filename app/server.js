@@ -9,6 +9,7 @@ const wmsCache = require("./wms/capabilitiesCache.js");
 const services = require("./config/services.json");
 const wmsServices = require("./wms/wmsServices.js");
 const url = require("./general/url.js");
+const maps = require("./wms/maps.js");
 
 const server = module.exports.server = restify.createServer();
 
@@ -68,8 +69,8 @@ server.get({
          res.send(processGetCapabilities.getServicesInfo(services, serviceCache, req));
          controlExecution.logEnd(req.fullUrl);*/
         try {
-                const respone = wmsServices.getAllServices(services, req);
-                res.send(respone);
+                const response = wmsServices.getAllServices(services, req);
+                res.send(response);
         } catch (error) {
                 res.send(500, JSON.stringify(error));
         }
@@ -85,11 +86,40 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const respone = wmsServices.getServiceDescriptionById(services, req);
-                res.send(respone);
+                const response = wmsServices.getServiceDescriptionById(services, req);
+                res.send(response);
         } catch (error) {
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error)); 
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
+});
+
+
+server.get({
+        url: "/services/:id/maps",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access maps",
+        }
+}, function(req, res, next) {
+        url.injectFullUrl(req);
+        try {
+                const response = maps.describeMap(services, req);
+                res.send(response);
+        } catch (error) {
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+        }
+});
+
+
+server.get({
+        url: "/test",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access maps",
+        }
+}, function(req, res, next) {
+        var serve = require("../spec/expetedWMSGetCapabilities");
+        res.send(serve.get());
 });
 
 
