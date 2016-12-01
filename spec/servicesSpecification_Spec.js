@@ -128,7 +128,135 @@ const correctConfiguration =
 
 };
 
+const correctConfiguration1 =
+{
+    "id": "local011",
+    "label": "Local Testservice",
+    "description": "Offers data (points and areas) for development.",
+    "url": "http://localhost:8080/geoserver/geocure",
+    "capabilities": {
+        "maps": {
+            "enabled": true,
+            "defaultvalues": {
+                "width": 1330,
+                "height": 944,
+                "format": "image/png"
+            }
 
+        },
+        "features": {
+            "enabled": false,
+            "defaultvalues": {
+                "format": "application/json"
+            }
+        }
+    }
+
+};
+
+const correctConfiguration2 =
+{
+    "id": "local0111",
+    "label": "Local Testservice",
+    "description": "Offers data (points and areas) for development.",
+    "url": "http://localhost:8080/geoserver/geocure",
+    "capabilities": {
+        "maps": {
+            "enabled": true,
+            "defaultvalues": {
+                "width": 1330,
+                "height": 944,
+                "format": "image/png"
+            }
+
+        },
+        "features": {
+            "enabled": false,
+            "defaultvalues": {
+                "format": "application/json"
+            }
+        }
+    }
+
+};
+
+const correctConfiguration3 =
+{
+    "id": "local0111",
+    "label": "Local Testservice",
+    "description": "Offers data (points and areas) for development.",
+    "url": "http://localhost:8080/geoserver/geocure",
+    "capabilities": {
+        "maps": {
+            "enabled": true,
+            "defaultvalues": {
+                "width": 1330,
+                "height": 944,
+                "format": "image/png"
+            }
+
+        },
+        "features": {
+            "enabled": false,
+            "defaultvalues": {
+                "format": "application/json"
+            }
+        }
+    }
+
+};
+
+const correctConfiguration4 =
+{
+    "id": "local0111",
+    "label": "Local Testservice",
+    "description": "Offers data (points and areas) for development.",
+    "url": "http://localhost:8080/geoserver/geocure",
+    "capabilities": {
+        "maps": {
+            "enabled": true,
+            "defaultvalues": {
+                "width": 1330,
+                "height": 944,
+                "format": "image/png"
+            }
+
+        },
+        "features": {
+            "enabled": false,
+            "defaultvalues": {
+                "format": "application/json"
+            }
+        }
+    }
+
+};
+
+const correctConfiguration5 =
+{
+    "id": "local0111",
+    "label": "Local Testservice",
+    "description": "Offers data (points and areas) for development.",
+    "url": "http://localhost:8080/geoserver/geocure",
+    "capabilities": {
+        "maps": {
+            "enabled": true,
+            "defaultvalues": {
+                "width": 1330,
+                "height": 944,
+                "format": "image/png"
+            }
+
+        },
+        "features": {
+            "enabled": false,
+            "defaultvalues": {
+                "format": "application/json"
+            }
+        }
+    }
+
+};
 // Wrong configurations
 
 const wrongConfiguration_01 =
@@ -232,8 +360,8 @@ const wrongConfiguration_04 =
 
 // Array
 const correctArray_01=[correctConfiguration];
-const correctArray_02=[correctConfiguration, correctConfiguration];
-const correctArray_03=[correctConfiguration, correctConfiguration, correctConfiguration];
+const correctArray_02=[correctConfiguration1, correctConfiguration2];
+const correctArray_03=[correctConfiguration3, correctConfiguration4, correctConfiguration5];
 
 const wrongArray_01=[wrongConfiguration_01];
 const wrongArray_02=[correctConfiguration, wrongConfiguration_01];
