@@ -15,6 +15,7 @@ function check(objectArray, metadescription) {
         try {
                 for (let element of objectArray) {
                         checkObject(element, metadescription);
+                        uniqueID(element);
                 }
 
         } catch (error) {
@@ -39,6 +40,7 @@ function checkObject(obj, metadescription) {
                         if (checkOK === false) {
                                 throw errorhandling.getError("services", "schemaError");
                         }
+
                 }
 
         } catch (error) {
@@ -48,7 +50,37 @@ function checkObject(obj, metadescription) {
 }
 
 
+/**
+ * Takes in object with a id-property and checks whether the value of obj.id has been seen before
+ * If so, an error will be thrown
+ * @param  {Object} obj  Object should have the property obj.id
+ * @return {Boolean}     true if the current id has not been seen before.
+ * @throws {Error}       Otherwise
+ */
+function uniqueID(obj){
+  if(!obj.id){
+    // Should not be thrown due to previous test of the compliance whith the servicesSpec.js
+    throw errorhandling.getError("services", "schemaError", "obj.id is undefined")
+  }
+  // Context will be the function check
+  if(!this.ids){
+    this["ids"] = [obj.id];
+  }
+  else{
+    if(this.ids.find(id => {return id == obj.id})){
+      throw errorhandling.getError("services", "schemaError", ("id '" + obj.id +"' is not unique"));
+    }
+    else {
+      this.ids.push(obj.id);
+    }
+  }
+
+  return true;
+}
+
+
 module.exports = {
         check: check,
-        checkObject: checkObject
+        checkObject: checkObject,
+        uniqueID: uniqueID
 };

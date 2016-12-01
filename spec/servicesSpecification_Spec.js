@@ -182,7 +182,7 @@ const correctConfiguration2 =
 
 const correctConfiguration3 =
 {
-    "id": "local0111",
+    "id": "local0111~",
     "label": "Local Testservice",
     "description": "Offers data (points and areas) for development.",
     "url": "http://localhost:8080/geoserver/geocure",
@@ -208,7 +208,7 @@ const correctConfiguration3 =
 
 const correctConfiguration4 =
 {
-    "id": "local0111",
+    "id": "local01111",
     "label": "Local Testservice",
     "description": "Offers data (points and areas) for development.",
     "url": "http://localhost:8080/geoserver/geocure",
@@ -234,7 +234,7 @@ const correctConfiguration4 =
 
 const correctConfiguration5 =
 {
-    "id": "local0111",
+    "id": "local011111",
     "label": "Local Testservice",
     "description": "Offers data (points and areas) for development.",
     "url": "http://localhost:8080/geoserver/geocure",
