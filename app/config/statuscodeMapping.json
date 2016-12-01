@@ -33,7 +33,11 @@
         },
         "badCapabilitiesAccess": {
             "code": 30,
-            "description": "Was not able to get required information from the getCapabilities "
+            "description": "Was not able to get required information from the getCapabilities."
+        },
+        "badLayerRequest": {
+            "code": 40,
+            "description": "The requested layer is not supported."
         }
     }
 }
