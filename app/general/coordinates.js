@@ -18,10 +18,12 @@ function transformation(x, y, from, to){
 
     const transformed = proj4(from, to, {
       x: x,
-      y: y
+      y: y,
+      crs: to
     });
 
-    return {x : transformed.x, y : transformed.y, crs: to};
+
+    return transformed;
 
   }
   catch (error) {
