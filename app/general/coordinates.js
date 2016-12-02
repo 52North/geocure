@@ -12,25 +12,31 @@ const transformationParameters = require("../config/transformationParameter.js")
  */
 function transformation(x, y, from, to){
   "use strict";
+  return new Promise((resolve, reject) => {
+    if(!(typeof x === "number" && typeof y === "number")){
+      reject(errorhandling.getError("requestResponses","coordinateTransformation", "Not all coordinates are numbers."));
+    }
 
-  try{
-    proj4.defs(transformationParameters.get());
+    try{
+      proj4.defs(transformationParameters.get());
 
-    const transformed = proj4(from, to, {
-      x: x,
-      y: y,
-      crs: to
-    });
+      const transformed = proj4(from, to, {
+        x: x,
+        y: y,
+        crs: to
+      });
 
+            resolve(transformed);
+    }
+    catch (error) {
+      const err = errorhandling.getError("requestResponses","coordinateTransformation", "Unsupported crs.");
+      reject(err);
+    }
 
-    return transformed;
-
-  }
-  catch (error) {
-    throw errorhandling.getError("requestResponses","coordinateTransformation", ("'" + error + "'is not supported."));
-  }
-
+  });
 }
+
+// function extentValidation(getCapabilities, )
 
 module.exports = {
   transformation: transformation
