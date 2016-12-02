@@ -39,7 +39,7 @@
             "code": 40,
             "description": "The requested layer is not supported."
         },
-        "transformation": {
+        "coordinateTransformation": {
             "code": 50,
             "description": "An error occured during corrdinate transformation."
         }
