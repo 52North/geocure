@@ -38,6 +38,11 @@
         "badLayerRequest": {
             "code": 40,
             "description": "The requested layer is not supported."
+        },
+        "transformation": {
+            "code": 50,
+            "description": "An error occured during corrdinate transformation."
         }
+
     }
 }
