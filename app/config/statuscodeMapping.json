@@ -47,7 +47,7 @@
             "code": 60,
             "description": "The requested bbox eceeds the maximal extent."
         },
-        "bbox": {
+        "crs": {
             "code": 70,
             "description": "The requested crs is not supported."
         }
