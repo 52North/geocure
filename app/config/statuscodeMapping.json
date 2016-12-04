@@ -42,6 +42,14 @@
         "coordinateTransformation": {
             "code": 50,
             "description": "An error occured during corrdinate transformation."
+        },
+        "bbox": {
+            "code": 60,
+            "description": "The requested bbox eceeds the maximal extent."
+        },
+        "bbox": {
+            "code": 70,
+            "description": "The requested crs is not supported."
         }
 
     }
