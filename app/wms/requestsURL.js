@@ -34,8 +34,13 @@ function getMap(serviceURL, requestargs) {
 
 
 
-function GetMapURL(serviceCache, baseURL, requestargs) {
+function GetMapURL(serviceCache, baseURL, requestargs, services) {
         "use strict"
+
+        const serviceConfiguration = services.find(service => {return service.id === requestargs.id});
+
+        //TODO: Damit, für ein service welcher später von enabled = true auf false gesetzt wurde nicht mehr zugegruffen werden kann,
+        //Hier überprüfen, ob der service enabled ist. Wenn nicht, dann Fehler zurück gegben!!!!
 
         let url = baseURL;
 
@@ -52,31 +57,78 @@ function GetMapURL(serviceCache, baseURL, requestargs) {
 
         // Adding CRS
         try {
-                const crs = getCRS(serviceCache, requestargs);
+                url += "&CRS=" + getCRS(serviceCache, requestargs);
         } catch (error) {
                 throw error;
         }
 
-        url += "&CRS=" + crs;
-
 
         // Adding bbox
 
+        try{
+          url += "&BBOX=" + getBbox(serviceCache, requestargs)
+        }
+        catch (error){
+          throw error;
+        }
+
+        // Adding width
+        //
+
+        try{
+          url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs)
+        }
+        catch(error){
+          throw error;
+        }
 
 }
 
+/**
+ * If no width is given as request argument, the default width (services.json) will be checked and returned.
+ * If a default width is given, it will be checked and returned.
+ * @param  {Object} serviceConfiguration The configuration of the current service
+ * @param  {Object} requestargs          The requestarguments
+ * @return {Number}                      The width
+ * @throws {Error}                        Otherwise
+ */
+function getWidth(serviceConfiguration, requestargs){
+  try{
+    if(!requestargs.width){
+      const defaultWidth = serviceConfiguration.capabilities.maps.defaultvalues.width;
+      // If no width is given in the request
+      if (typeof defaultWidth === "number" && defaultWidth > 0){
+        return defaultWidth;
+      }
+      else {
+        throw errorhandling.getError("services", "width", ("width = " + defaultWidth));
+      }
+    }
+
+    // If width is given.
+    if(typeof requestargs.width != "number" || requestargs.width < 0){
+      throw errorhandling.getError("services", "width", ("width = " + equestargs.width));
+    }
+    else{
+      return requestargs.width;
+    }
+  }
+  catch (error) {
+    throw error;
+  }
+}
 
 
 /**
  * If no bbox is requested, the maximum bbox will be returned.
  * Otherwise the parameter will be evaluated. If valid (within the maximum bbox) they will be returnes as a string.
  * Else an error will be thrown
- * @param  {Object}       capabilities Capabilities of the requested service.
+ * @param  {Object}       serviceCache Capabilities of the requested service.
  * @param  {Object}       requestargs  The arguments from the requestargs
  * @return {String}                    Concatenation if minx,miny,maxx,maxy
  * @throws {Error}                     Otherwise        [description]
  */
-function getBbox(capabilities, requestargs) {
+function getBbox(serviceCache, requestargs) {
         "use strict";
         // If no bbox is given, return a default-bbox.
         // If no crs is given, use EPGS:4326
@@ -84,7 +136,7 @@ function getBbox(capabilities, requestargs) {
         // This is important, because images can be returned with a spatial reference.
 
         try {
-                const defaultBbox = getdefaultBbox(capabilities, requestargs);
+                const defaultBbox = getdefaultBbox(serviceCache, requestargs);
 
                 if (!requestargs.bbox) {
                         return defaultBbox;
@@ -110,21 +162,21 @@ function getBbox(capabilities, requestargs) {
  * Returns a stringrepresentation of the bbox, which is maximum in extend.
  * If no crs is given: EPSG:4326
  * Otherwise and if the given crs is valid, coordinates in this system will be returned.
- * @param  {Object}       capabilities Capabilities of the requested service.
+ * @param  {Object}       serviceCache Capabilities of the requested service.
  * @param  {Object}       requestargs  The arguments from the requestargs
  * @return {String}                    Concatenation if minx,miny,maxx,maxy
  * @throws {Error}                     Otherwise
  */
-function getdefaultBbox(capabilities, requestargs) {
+function getdefaultBbox(serviceCache, requestargs) {
         "use strict";
         try {
-                const maxBbox = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
+                const maxBbox = serviceCache.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
 
                 if (!maxBbox) {
                         throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
                 }
 
-                const targetCrs = getCRS(capabilities, requestargs);
+                const targetCrs = getCRS(serviceCache, requestargs);
 
                 if (targetCrs === "EPSG:4326") {
                         //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
@@ -149,12 +201,12 @@ function getdefaultBbox(capabilities, requestargs) {
  * If crs is a requestargument, it will be checked against the crs in the getCapabilities
  * and transformationParameter.js. If everything is ok, the crs will be returned,
  * otherwise an error will be thrown.
- * @param  {Object} capabilities Object describing the Capabilities of a service (JSON)
+ * @param  {Object} serviceCache Object describing the Capabilities of a service (JSON)
  * @param  {Object} requestargs  Arguments of the request
  * @return {String}              EPSG Code of a crs
  * @throws {Error}               Otherwise
  */
-function getCRS(capabilities, requestargs) {
+function getCRS(serviceCache, requestargs) {
         "use strict"
         if (!requestargs.crs) {
                 return defaultCRS;
@@ -163,7 +215,7 @@ function getCRS(capabilities, requestargs) {
                 var supportedByTransformationParameter = transformationParameters.get().find(element => {
                         return element[0] === requestargs.crs
                 })
-                var supportedByGetCapabilities = capabilities.capabilities.WMS_Capabilities.capability.layer.crs.find(element => {
+                var supportedByGetCapabilities = serviceCache.capabilities.WMS_Capabilities.capability.layer.crs.find(element => {
                         return element === requestargs.crs
                 });
 
@@ -222,5 +274,6 @@ module.exports = {
         layerValid: layerValid,
         getCRS: getCRS,
         getdefaultBbox: getdefaultBbox,
-        getBbox: getBbox
+        getBbox: getBbox,
+        getWidth: getWidth
 }
