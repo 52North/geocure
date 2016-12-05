@@ -73,10 +73,17 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
         }
 
         // Adding width
-        //
 
         try{
           url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs)
+        }
+        catch(error){
+          throw error;
+        }
+
+        // Adding height
+        try{
+          url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs)
         }
         catch(error){
           throw error;
@@ -86,7 +93,7 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
 
 /**
  * If no width is given as request argument, the default width (services.json) will be checked and returned.
- * If a default width is given, it will be checked and returned.
+ * If a width is given, it will be checked and returned.
  * @param  {Object} serviceConfiguration The configuration of the current service
  * @param  {Object} requestargs          The requestarguments
  * @return {Number}                      The width
@@ -107,10 +114,43 @@ function getWidth(serviceConfiguration, requestargs){
 
     // If width is given.
     if(typeof requestargs.width != "number" || requestargs.width < 0){
-      throw errorhandling.getError("services", "width", ("width = " + equestargs.width));
+      throw errorhandling.getError("services", "width", ("width = " + requestargs.width));
     }
     else{
       return requestargs.width;
+    }
+  }
+  catch (error) {
+    throw error;
+  }
+}
+/**
+ * If no height is given as request argument, the default height (services.json) will be checked and returned.
+ * If a height is given, it will be checked and returned.
+ * @param  {Object} serviceConfiguration The configuration of the current service
+ * @param  {Object} requestargs          The requestarguments
+ * @return {Number}                      The width
+ * @throws {Error}                        Otherwise
+ */
+function getHeight(serviceConfiguration, requestargs){
+  try{
+    if(!requestargs.height){
+      const defaultHeight = serviceConfiguration.capabilities.maps.defaultvalues.height;
+      // If no height is given in the request
+      if (typeof defaultHeight === "number" && defaultHeight > 0){
+        return defaultHeight;
+      }
+      else {
+        throw errorhandling.getError("services", "height", ("height = " + defaultHeight));
+      }
+    }
+
+    // If height is given.
+    if(typeof requestargs.height != "number" || requestargs.height < 0){
+      throw errorhandling.getError("services", "height", ("height = " + requestargs.height));
+    }
+    else{
+      return requestargs.height;
     }
   }
   catch (error) {
@@ -275,5 +315,6 @@ module.exports = {
         getCRS: getCRS,
         getdefaultBbox: getdefaultBbox,
         getBbox: getBbox,
-        getWidth: getWidth
+        getWidth: getWidth,
+        getHeight: getHeight
 }

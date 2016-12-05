@@ -9,6 +9,10 @@
             "code": 101,
             "description": "The default width is not a number > 0'."
         },
+        "height": {
+            "code": 102,
+            "description": "The default height is not a number > 0'."
+        },
         "wmsCacheNotReady": {
             "code": 200,
             "description": "The cache for the wms getCapabilities is not ready."
