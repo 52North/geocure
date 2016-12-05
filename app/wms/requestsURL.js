@@ -5,7 +5,7 @@ const maps = require("./maps.js");
 const transformationParameters = require("../config/transformationParameter.js");
 
 // Constants
-const version = "1.3.0";
+const version = "1.1.1";
 const defaultCRS = "EPSG:4326"
         /**
          * Takes the URL of an service and creates the basic part for all requests.
@@ -23,18 +23,8 @@ function getCapabilities(serviceURL) {
 
 
 
-function getMap(serviceURL, requestargs) {
-        "use strict"
 
-        let baseURL = generalURLConstructor.getBaseURL(serviceURL, ["wms", version]) + "&REQUEST=GetMap";
-
-
-}
-
-
-
-
-function GetMapURL(serviceCache, baseURL, requestargs, services) {
+function getMapURL(cacheWMS, requestargs, services) {
         "use strict"
 
         const serviceConfiguration = services.find(service => {
@@ -44,12 +34,22 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
         //TODO: Damit, für ein service welcher später von enabled = true auf false gesetzt wurde nicht mehr zugegruffen werden kann,
         //Hier überprüfen, ob der service enabled ist. Wenn nicht, dann Fehler zurück gegben!!!!
 
-        let url = baseURL;
+        if (!serviceConfiguration){
+          throw errorhandling.getError("services", "id", ("id = " + requestargs.id));
+        }
+
+        const serviceCache = cacheWMS.find(obj => {return obj.id === requestargs.id});
+        if (!serviceCache){
+          throw errorhandling.getError("services", "serviceCache");
+        }
+
+
+        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version]) + "&REQUEST=GetMap";
 
         // Adding Layers
         try {
                 layerValid(serviceCache, requestargs);
-                url += "&LAYERS=" + requestargs.layers;
+                url += "&LAYERS=" + requestargs.layer;
         } catch (error) {
                 throw error
         }
@@ -68,7 +68,7 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
         // Adding bbox
 
         try {
-                url += "&BBOX=" + getBbox(serviceCache, requestargs)
+                url += "&BBOX=" + getBbox(serviceCache, requestargs);
         } catch (error) {
                 throw error;
         }
@@ -76,18 +76,60 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
         // Adding width
 
         try {
-                url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs)
+                url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs);
         } catch (error) {
                 throw error;
         }
 
         // Adding height
         try {
-                url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs)
+                url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
         } catch (error) {
                 throw error;
         }
 
+        try{
+          url += "&FORMAT=" + getFormat(serviceConfiguration, serviceCache, requestargs);
+        }
+        catch (error){
+          throw error;
+        }
+
+        try{
+          url += "&TRANSPARENT=" + getTransparent(requestargs);
+        }
+        catch(error)
+        {
+          throw error;
+        }
+
+
+
+        return url;
+}
+
+
+
+
+
+/**
+ * Returns an boolean.
+ * True for transparent
+ * False for not transparent
+ * @param  {Object}       requestargs RequestArguments
+ * @return {Boolean}                   see description
+ * @throws {Error}                    Otherwise
+ */
+function getTransparent(requestargs){
+  if(!requestargs.transparent){
+    return false;
+  }
+  else{
+    if(typeof requestargs.transparent === "boolean"){
+      return requestargs.transparent;
+    }
+  }
+  throw errorhandling.getError("requestResponses", "transparent");
 }
 
 /**
@@ -316,7 +358,7 @@ function getCRS(serviceCache, requestargs) {
 
 
 /**
- * Checks the layers, given as a queryparameter, whether they are valid
+ * Checks the layer, given as a queryparameter, whether they are valid
  * @param  {Object}   capabilities Cache of the WMS-getCapabilities
  * @param  {Object}   requestargs  Arguments of the request
  * @return {Boolean}               If everything is ok
@@ -326,12 +368,13 @@ function layerValid(capabilities, requestargs) {
         "use strict"
 
         // We need at least one layer for a request
-        if (requestargs.layers === "undefined") {
+        if (requestargs.layer === "undefined") {
                 throw errorhandling.getError("requestResponses", "badLayerRequest", "No layer was given.");
         }
 
-        // Are all requested layers supported?
-        var requestedLayers = requestargs.layers.split(",");
+        // Are all requested layer supported?
+        var requestedLayers = requestargs.layer.split(",");
+
 
         // As the result is constructed from the getCapabilities, it can be used to validate the layer request
         let supportedLayers = maps.getAllLayers(capabilities, requestargs);
@@ -357,12 +400,12 @@ function layerValid(capabilities, requestargs) {
 
 module.exports = {
         getCapabilities: getCapabilities,
-        getMap: getMap,
         layerValid: layerValid,
         getCRS: getCRS,
         getdefaultBbox: getdefaultBbox,
         getBbox: getBbox,
         getWidth: getWidth,
         getHeight: getHeight,
-        getFormat: getFormat
+        getFormat: getFormat,
+        getMapURL: getMapURL
 }
