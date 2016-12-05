@@ -54,7 +54,7 @@ function GetMapURL(serviceCache, baseURL, requestargs) {
         try {
                 const crs = getCRS(serviceCache, requestargs);
         } catch (error) {
-          throw error;
+                throw error;
         }
 
         url += "&CRS=" + crs;
@@ -66,57 +66,80 @@ function GetMapURL(serviceCache, baseURL, requestargs) {
 }
 
 
-// TODO bbox realisieren.
-// function getBbox(capabilities, requestargs) {
-// "use strict";
-//   // If no bbox is given, return a default-bbox.
-//   // If no crs is given, use EPGS:4326
-//   // Otherwise use cooedinates in the given crs.
-//   // This is important, because images can be returned with a spatial reference.
-//   if(!requestargs.bbox){
-//     const defaultBbox(capabilities, requestargs);
-//   }
-//   else{
-//
-//   }
-// }
+
+/**
+ * If no bbox is requested, the maximum bbox will be returned.
+ * Otherwise the parameter will be evaluated. If valid (within the maximum bbox) they will be returnes as a string.
+ * Else an error will be thrown
+ * @param  {Object}       capabilities Capabilities of the requested service.
+ * @param  {Object}       requestargs  The arguments from the requestargs
+ * @return {String}                    Concatenation if minx,miny,maxx,maxy
+ * @throws {Error}                     Otherwise        [description]
+ */
+function getBbox(capabilities, requestargs) {
+        "use strict";
+        // If no bbox is given, return a default-bbox.
+        // If no crs is given, use EPGS:4326
+        // Otherwise use cooedinates in the given crs.
+        // This is important, because images can be returned with a spatial reference.
+
+        try {
+                const defaultBbox = getdefaultBbox(capabilities, requestargs);
+
+                if (!requestargs.bbox) {
+                        return defaultBbox;
+                } else {
+                        const defaultBboxArray = defaultBbox.split(",");
+                        const givenCoordinatesArray = requestargs.bbox.split(",");
+
+                        const validRequstedBbox = givenCoordinatesArray[0] >= defaultBboxArray[0] && givenCoordinatesArray[1] >= defaultBboxArray[1] && givenCoordinatesArray[2] <= defaultBboxArray[2] && givenCoordinatesArray[3] <= defaultBboxArray[3];
+
+                        if (!validRequstedBbox) {
+                                throw errorhandling.getError("requestResponses", "bbox");
+                        }
+
+                        return requestargs.bbox
+                }
+        } catch (error) {
+                throw error;
+        }
+
+}
 
 /**
  * Returns a stringrepresentation of the bbox, which is maximum in extend.
  * If no crs is given: EPSG:4326
- * Otherwise the given system if valid
+ * Otherwise and if the given crs is valid, coordinates in this system will be returned.
  * @param  {Object}       capabilities Capabilities of the requested service.
  * @param  {Object}       requestargs  The arguments from the requestargs
  * @return {String}                    Concatenation if minx,miny,maxx,maxy
  * @throws {Error}                     Otherwise
  */
-function getdefaultBbox(capabilities, requestargs){
-  "use strict";
-  try{
-    const maxBbox = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
+function getdefaultBbox(capabilities, requestargs) {
+        "use strict";
+        try {
+                const maxBbox = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
 
-    if(!maxBbox){
-      throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
-    }
+                if (!maxBbox) {
+                        throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
+                }
 
-    const targetCrs = getCRS(capabilities, requestargs);
+                const targetCrs = getCRS(capabilities, requestargs);
 
-    if(targetCrs === "EPSG:4326"){
-      //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
-      return "" + maxBbox.westBoundLongitude + "," + maxBbox.southBoundLatitude + "," + maxBbox.eastBoundLongitude + "," + maxBbox.northBoundLatitude;
-    }
-    else {
-      // Targetsystem validation already happened in getCrs
-      const minis = coordinates.transformation(maxBbox.westBoundLongitude, maxBbox.southBoundLatitude, "EPSG:4326", targetCrs);
-      const maxis = coordinates.transformation(maxBbox.eastBoundLongitude, maxBbox.northBoundLatitude, "EPSG:4326", targetCrs);
+                if (targetCrs === "EPSG:4326") {
+                        //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
+                        return "" + maxBbox.westBoundLongitude + "," + maxBbox.southBoundLatitude + "," + maxBbox.eastBoundLongitude + "," + maxBbox.northBoundLatitude;
+                } else {
+                        // Targetsystem validation already happened in getCrs
+                        const minis = coordinates.transformation(maxBbox.westBoundLongitude, maxBbox.southBoundLatitude, "EPSG:4326", targetCrs);
+                        const maxis = coordinates.transformation(maxBbox.eastBoundLongitude, maxBbox.northBoundLatitude, "EPSG:4326", targetCrs);
 
-      return "" + minis.x + "," + minis.y + "," + maxis.x + "," + maxis.y;
-    }
+                        return "" + minis.x + "," + minis.y + "," + maxis.x + "," + maxis.y;
+                }
 
-  }
-  catch (error) {
-    throw error;
-  }
+        } catch (error) {
+                throw error;
+        }
 
 }
 
@@ -198,5 +221,6 @@ module.exports = {
         getMap: getMap,
         layerValid: layerValid,
         getCRS: getCRS,
-        getdefaultBbox: getdefaultBbox
+        getdefaultBbox: getdefaultBbox,
+        getBbox: getBbox
 }
