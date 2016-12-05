@@ -5,6 +5,10 @@
             "code": 100,
             "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
         },
+        "width": {
+            "code": 101,
+            "description": "The default width is not a number > 0'."
+        },
         "wmsCacheNotReady": {
             "code": 200,
             "description": "The cache for the wms getCapabilities is not ready."
