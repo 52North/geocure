@@ -50,6 +50,10 @@
         "crs": {
             "code": 70,
             "description": "The requested crs is not supported."
+        },
+        "bbox": {
+            "code": 80,
+            "description": "The requestes bbox is not valid."
         }
 
     }
