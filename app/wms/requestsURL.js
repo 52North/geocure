@@ -91,6 +91,8 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
 
 }
 
+function getFormat (){}
+
 /**
  * If no width is given as request argument, the default width (services.json) will be checked and returned.
  * If a width is given, it will be checked and returned.
@@ -100,6 +102,7 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
  * @throws {Error}                        Otherwise
  */
 function getWidth(serviceConfiguration, requestargs){
+  "use strict";
   try{
     if(!requestargs.width){
       const defaultWidth = serviceConfiguration.capabilities.maps.defaultvalues.width;
@@ -133,6 +136,7 @@ function getWidth(serviceConfiguration, requestargs){
  * @throws {Error}                        Otherwise
  */
 function getHeight(serviceConfiguration, requestargs){
+  "use  strict";
   try{
     if(!requestargs.height){
       const defaultHeight = serviceConfiguration.capabilities.maps.defaultvalues.height;
