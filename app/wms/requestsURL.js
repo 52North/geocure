@@ -37,7 +37,9 @@ function getMap(serviceURL, requestargs) {
 function GetMapURL(serviceCache, baseURL, requestargs, services) {
         "use strict"
 
-        const serviceConfiguration = services.find(service => {return service.id === requestargs.id});
+        const serviceConfiguration = services.find(service => {
+                return service.id === requestargs.id
+        });
 
         //TODO: Damit, für ein service welcher später von enabled = true auf false gesetzt wurde nicht mehr zugegruffen werden kann,
         //Hier überprüfen, ob der service enabled ist. Wenn nicht, dann Fehler zurück gegben!!!!
@@ -65,33 +67,80 @@ function GetMapURL(serviceCache, baseURL, requestargs, services) {
 
         // Adding bbox
 
-        try{
-          url += "&BBOX=" + getBbox(serviceCache, requestargs)
-        }
-        catch (error){
-          throw error;
+        try {
+                url += "&BBOX=" + getBbox(serviceCache, requestargs)
+        } catch (error) {
+                throw error;
         }
 
         // Adding width
 
-        try{
-          url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs)
-        }
-        catch(error){
-          throw error;
+        try {
+                url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs)
+        } catch (error) {
+                throw error;
         }
 
         // Adding height
-        try{
-          url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs)
-        }
-        catch(error){
-          throw error;
+        try {
+                url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs)
+        } catch (error) {
+                throw error;
         }
 
 }
 
-function getFormat (){}
+/**
+ * Returns a valid format for map-requests.
+ * If no format is given, the default value in services.json will be checked and returned.
+ * Otherwise the value for the format-argument will be checked.
+ * @method getFormat
+ * @param  {Object}  serviceConfiguration The configuration of the requested service (services.json)
+ * @param  {Object}  serviceCache         The getCapabilities of the service
+ * @param  {Object}  requestargs          The arguments of the request
+ * @return {String}                       The format
+ * @throws {Error}                        Otherwise
+ */
+function getFormat(serviceConfiguration, serviceCache, requestargs) {
+        try {
+                const supportedFormats = serviceCache.capabilities.WMS_Capabilities.capability.request.getMap.format;
+
+                // No format requested;
+                if (!requestargs.format) {
+
+                        const defaultFormat = serviceConfiguration.capabilities.maps.defaultvalues.format;
+
+                        const formatValid = supportedFormats.find(format => {
+                                return format === defaultFormat;
+                        });
+
+
+                        if (formatValid) {
+                                return defaultFormat;
+                        } else {
+                                throw errorhandling.getError("services", "format", ("format = " + defaultFormat));
+                        }
+                }
+
+                // Format requested
+                else {
+                  const requestedFormat = decodeURI(requestargs.format);
+
+                  const formatValid = supportedFormats.find(format => {
+                          return format === requestedFormat;
+                  });
+
+                  if (formatValid) {
+                          return requestedFormat;
+                  } else {
+                          throw errorhandling.getError("services", "format", ("format = " + requestedFormat));
+                  }
+                }
+
+        } catch (error) {
+          throw error;
+        }
+}
 
 /**
  * If no width is given as request argument, the default width (services.json) will be checked and returned.
@@ -101,31 +150,28 @@ function getFormat (){}
  * @return {Number}                      The width
  * @throws {Error}                        Otherwise
  */
-function getWidth(serviceConfiguration, requestargs){
-  "use strict";
-  try{
-    if(!requestargs.width){
-      const defaultWidth = serviceConfiguration.capabilities.maps.defaultvalues.width;
-      // If no width is given in the request
-      if (typeof defaultWidth === "number" && defaultWidth > 0){
-        return defaultWidth;
-      }
-      else {
-        throw errorhandling.getError("services", "width", ("width = " + defaultWidth));
-      }
-    }
+function getWidth(serviceConfiguration, requestargs) {
+        "use strict";
+        try {
+                if (!requestargs.width) {
+                        const defaultWidth = serviceConfiguration.capabilities.maps.defaultvalues.width;
+                        // If no width is given in the request
+                        if (typeof defaultWidth === "number" && defaultWidth > 0) {
+                                return defaultWidth;
+                        } else {
+                                throw errorhandling.getError("services", "width", ("width = " + defaultWidth));
+                        }
+                }
 
-    // If width is given.
-    if(typeof requestargs.width != "number" || requestargs.width < 0){
-      throw errorhandling.getError("services", "width", ("width = " + requestargs.width));
-    }
-    else{
-      return requestargs.width;
-    }
-  }
-  catch (error) {
-    throw error;
-  }
+                // If width is given.
+                if (typeof requestargs.width != "number" || requestargs.width < 0) {
+                        throw errorhandling.getError("services", "width", ("width = " + requestargs.width));
+                } else {
+                        return requestargs.width;
+                }
+        } catch (error) {
+                throw error;
+        }
 }
 /**
  * If no height is given as request argument, the default height (services.json) will be checked and returned.
@@ -135,31 +181,28 @@ function getWidth(serviceConfiguration, requestargs){
  * @return {Number}                      The width
  * @throws {Error}                        Otherwise
  */
-function getHeight(serviceConfiguration, requestargs){
-  "use  strict";
-  try{
-    if(!requestargs.height){
-      const defaultHeight = serviceConfiguration.capabilities.maps.defaultvalues.height;
-      // If no height is given in the request
-      if (typeof defaultHeight === "number" && defaultHeight > 0){
-        return defaultHeight;
-      }
-      else {
-        throw errorhandling.getError("services", "height", ("height = " + defaultHeight));
-      }
-    }
+function getHeight(serviceConfiguration, requestargs) {
+        "use  strict";
+        try {
+                if (!requestargs.height) {
+                        const defaultHeight = serviceConfiguration.capabilities.maps.defaultvalues.height;
+                        // If no height is given in the request
+                        if (typeof defaultHeight === "number" && defaultHeight > 0) {
+                                return defaultHeight;
+                        } else {
+                                throw errorhandling.getError("services", "height", ("height = " + defaultHeight));
+                        }
+                }
 
-    // If height is given.
-    if(typeof requestargs.height != "number" || requestargs.height < 0){
-      throw errorhandling.getError("services", "height", ("height = " + requestargs.height));
-    }
-    else{
-      return requestargs.height;
-    }
-  }
-  catch (error) {
-    throw error;
-  }
+                // If height is given.
+                if (typeof requestargs.height != "number" || requestargs.height < 0) {
+                        throw errorhandling.getError("services", "height", ("height = " + requestargs.height));
+                } else {
+                        return requestargs.height;
+                }
+        } catch (error) {
+                throw error;
+        }
 }
 
 
@@ -320,5 +363,6 @@ module.exports = {
         getdefaultBbox: getdefaultBbox,
         getBbox: getBbox,
         getWidth: getWidth,
-        getHeight: getHeight
+        getHeight: getHeight,
+        getFormat: getFormat
 }

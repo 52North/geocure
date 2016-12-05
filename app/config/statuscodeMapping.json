@@ -7,11 +7,15 @@
         },
         "width": {
             "code": 101,
-            "description": "The default width is not a number > 0'."
+            "description": "The width is not a number > 0."
         },
         "height": {
             "code": 102,
-            "description": "The default height is not a number > 0'."
+            "description": "The height is not a number > 0."
+        },
+        "format": {
+            "code": 103,
+            "description": "The format is not supported."
         },
         "wmsCacheNotReady": {
             "code": 200,
