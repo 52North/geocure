@@ -70,6 +70,10 @@
         "transparent": {
             "code": 90,
             "description": "Value for transparent has to be 'true' or 'false'"
+        },
+        "bgcolor" : {
+            "code": 100,
+            "description": "The requested bgcolor is not supported."
         }
 
 
