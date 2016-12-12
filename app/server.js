@@ -10,6 +10,7 @@ const services = require("./config/services.json");
 const wmsServices = require("./wms/wmsServices.js");
 const url = require("./general/url.js");
 const maps = require("./wms/maps.js");
+const requestURL = require("./wms/requestsURL.js");
 
 // Chaches
 const cacheWMS = require("./wms/capabilitiesCache.js");
@@ -93,7 +94,7 @@ server.get({
                 res.send(response);
         } catch (error) {
 
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+                error.message === "requestResponses", "/services:id" ? res.send(404, error) : res.send(500, error);
         }
 });
 
@@ -102,13 +103,46 @@ server.get({
         url: "/services/:id/maps",
         swagger: {
                 summary: "services resource",
-                notes: "this resource provides access maps",
+                notes: "this resource provides access to a layer overview",
         }
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
                 const response = maps.describeMap(cacheWMS.getCache(), req)
                 res.send(response);
+        } catch (error) {
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+        }
+});
+
+server.get({
+        url: "/services/:id/maps/render",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access to layers",
+        }
+}, function(req, res, next) {
+        url.injectFullUrl(req);
+        try {
+                const getMapUrl = requestURL.getMapURL(cacheWMS, req, services);
+                requesting.get(String(getMapUrl)).pipe(res);
+        } catch (error) {
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+        }
+});
+
+
+server.get({
+        url: "/services/:id/features",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access to layers",
+        }
+}, function(req, res, next) {
+        url.injectFullUrl(req);
+        try {
+                const getMapUrl = requestURL.getMapURL(cacheWMS, req, services);
+                requesting.get(String(getMapUrl)).pipe(res);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
@@ -126,6 +160,20 @@ server.get({
         res.send(serve.get());
 });
 
+server.get({
+        url: "/test/error",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access maps",
+        }
+}, function(req, res, next) {
+
+let eri = "BadRequestError";
+
+
+res.send(myErr);
+});
+
 
 restifySwagger.loadRestifyRoutes();
 
@@ -138,6 +186,7 @@ restifySwagger.loadRestifyRoutes();
  * TODO
  * // Check the configuration of services before startup
  //serviceCheck.check(services, servicesMetadescription)
+ Check the correctnes of transformationParameter.js EPSG:4326 must be given!
  */
 wmsCache.loadCache().then(() => {
         server.listen(8000, function() {
