@@ -10,11 +10,6 @@ function describeMap(serviceCache, requestargs){
   // console.log(serviceCache);
   try{
     const serviceCapabilities = serviceCache.find(service => {return service.id == requestargs.params.id});
-    //console.log("serviceCapabilities = " + JSON.stringify(serviceCapabilities))
-    // if(!serviceCapabilites){
-    //   console.log("I throw sm")
-    //   throw errorhandling.getError("requestResponses", "bad:id");
-    // }
     const layers = getAllLayers(serviceCapabilities, requestargs);
     const crs = getExGeographicBoundingBox(serviceCapabilities);
 
@@ -39,11 +34,14 @@ catch (error) {
 function getExGeographicBoundingBox(capabilities){
   try
   {
-    const response = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
+    const maxBbox = capabilities.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
 
+    if(!maxBbox){
+      throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
+    }
     // Adding missing Information
-    response["crs"] = "EPSG:4326";
-    return response;
+    maxBbox["crs"] = "EPSG:4326";
+    return maxBbox;
   }
   catch (error)
   {
@@ -67,7 +65,7 @@ function getAllLayers(capabilities, requestargs){
       const layerObject = {};
       layerObject["id"] = layer.name;
       layerObject["title"] = layer.title;
-      layerObject["href"] = requestargs.fullUrl + "/render";
+      layerObject["href"] = requestargs.fullUrl + "/render?layer=" + layer.name;
       layerCollection.push(layerObject);
     });
     return layerCollection;
@@ -77,11 +75,13 @@ function getAllLayers(capabilities, requestargs){
   }
 }
 
+
 function render(capabilities, requestargs){
 
 }
 
 module.exports = {
     getExGeographicBoundingBox : getExGeographicBoundingBox,
-    describeMap : describeMap
+    describeMap : describeMap,
+    getAllLayers: getAllLayers
 }
