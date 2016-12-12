@@ -30,16 +30,18 @@ function getCapabilities(serviceURL) {
 
 
 
-
 function getMapURL(cacheWMS, requestargs, services) {
         "use strict"
+
+
         const serviceConfiguration = services.find(service => {
                 return service.id === requestargs.params.id
         });
 
 
-        //TODO: Damit, für ein service welcher später von enabled = true auf false gesetzt wurde nicht mehr zugegruffen werden kann,
-        //Hier überprüfen, ob der service enabled ist. Wenn nicht, dann Fehler zurück gegben!!!!
+        if(!serviceConfiguration.capabilities.maps.enabled){
+          throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
+        }
 
         if (!serviceConfiguration){
           throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
@@ -90,13 +92,19 @@ function getMapURL(cacheWMS, requestargs, services) {
         } catch (error) {
                 throw error
         }
-
 }
 
 
 
 
-
+/**
+ * If no BGcolor is in requestargs.params, then the global defaultColor will be returned.
+ * Else the given color will be checked and returned, if valid - otherwise an error.
+ * @method getBGcolor
+ * @param  {Object}   requestargs RequestArguments
+ * @return {String}               BGColorCode
+ * @throws {Error}                Otherwise
+ */
 function getBGcolor(requestargs){
   if(!requestargs.params.bgcolor){
     return defaultBGcolor;
