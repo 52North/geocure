@@ -141,8 +141,8 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const getMapUrl = requestURL.getMapURL(cacheWMS, req, services);
-                requesting.get(String(getMapUrl)).pipe(res);
+                const response = maps.describeFeatures(cacheWFS.getCache(), req)
+                res.send(response);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
