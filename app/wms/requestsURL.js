@@ -29,7 +29,15 @@ function getCapabilities(serviceURL) {
 }
 
 
-
+/**
+ * Returns the URL for a "getMap - request"
+ * @method getMapURL
+ * @param  {Object}   cacheWMS     The whole cache for WM-Services
+ * @param  {Object}   requestargs  Arguments of the request
+ * @param  {Array}    services      Array with all services
+ * @return {String}               The URL
+ * @throws {Object}                Otherwise
+ */
 function getMapURL(cacheWMS, requestargs, services) {
         "use strict"
 
