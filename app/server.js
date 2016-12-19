@@ -5,15 +5,16 @@ const requesting = require("request");
 const errors = require("restify-errors");
 
 // Local libraries
-const wmsCache = require("./wms/capabilitiesCache.js");
 const services = require("./config/services.json");
 const wmsServices = require("./wms/wmsServices.js");
 const url = require("./general/url.js");
 const maps = require("./wms/maps.js");
+const features = require("./wfs/features.js");
 const requestURL = require("./wms/requestsURL.js");
 
 // Chaches
-const cacheWMS = require("./wms/capabilitiesCache.js");
+const cacheLoaderWFS = require("./wfs/cacheLoader.js");
+const cacheLoaderWMS = require("./wms/cacheLoader.js");
 
 const server = module.exports.server = restify.createServer();
 
@@ -108,7 +109,7 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = maps.describeMap(cacheWMS.getCache(), req)
+                const response = maps.describeMap(cacheLoaderWMS.getCache(), req)
                 res.send(response);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
@@ -136,12 +137,12 @@ server.get({
         url: "/services/:id/features",
         swagger: {
                 summary: "services resource",
-                notes: "this resource provides access to layers",
+                notes: "this resource provides access to features",
         }
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = maps.describeFeatures(cacheWFS.getCache(), req)
+                const response = features.describeFeatures(cacheLoaderWFS.getCache(), req);
                 res.send(response);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
@@ -149,30 +150,85 @@ server.get({
 });
 
 
+
 server.get({
-        url: "/test",
+        url: "/services/:id/features/:featureId/data",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access to the data of a feature",
+        }
+}, function(req, res, next) {
+        url.injectFullUrl(req);
+        try {
+                const getFeatureRequest = features.getFeature(cacheLoaderWFS.getCache(), req);
+                requesting.get(String(getFeatureRequest)).pipe(res);
+        } catch (error) {
+                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+        }
+});
+
+
+
+
+
+
+
+
+/**
+ * TESTS
+ */
+
+server.get({
+        url: "/loadCacheWFS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
         }
 }, function(req, res, next) {
-        var serve = require("../spec/expetedWMSGetCapabilities");
-        res.send(serve.get());
+          cacheLoaderWFS.loadCache();
+          res.send("loading cache");
 });
 
+
+
+
 server.get({
-        url: "/test/error",
+        url: "/getCacheWFS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
         }
 }, function(req, res, next) {
 
-let eri = "BadRequestError";
-
-
-res.send(myErr);
+          res.send(cacheLoaderWFS.getCache());
 });
+
+
+server.get({
+        url: "/loadCacheWMS",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access maps",
+        }
+}, function(req, res, next) {
+          cacheLoaderWMS.loadCache();
+          res.send("loading cache");
+});
+
+
+
+
+server.get({
+        url: "/getCacheWMS",
+        swagger: {
+                summary: "services resource",
+                notes: "this resource provides access maps",
+        }
+}, function(req, res, next) {
+
+          res.send(cacheLoaderWMS.getCache());
+});
+
 
 
 restifySwagger.loadRestifyRoutes();
@@ -182,14 +238,9 @@ restifySwagger.loadRestifyRoutes();
  * Start server
  */
 
-/**
- * TODO
- * // Check the configuration of services before startup
- //serviceCheck.check(services, servicesMetadescription)
- Check the correctnes of transformationParameter.js EPSG:4326 must be given!
- */
-wmsCache.loadCache().then(() => {
-        server.listen(8000, function() {
-                console.log("%s started: %s", server.name, server.url);
-        });
+
+cacheLoaderWMS.loadCache().then(() => cacheLoaderWFS.loadCache()).then(() => {
+  server.listen(8002, function() {
+          console.log("%s started: %s", server.name, server.url);
+  });
 })
