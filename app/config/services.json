@@ -39,7 +39,7 @@
 
             },
             "features" : {
-                "enabled" : false,
+                "enabled" : true,
                 "defaultvalues" : {
                     "format" : "application/json"
                 }
