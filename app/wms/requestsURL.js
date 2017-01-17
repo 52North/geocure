@@ -158,44 +158,7 @@ function getTransparent(requestargs){
 function getFormat(serviceConfiguration, serviceCache, requestargs) {
 
 return requestargs.params.format ? requestargs.params.format : serviceConfiguration.capabilities.maps.defaultvalues.format;
-        // try {
-        //         const supportedFormats = serviceCache.capabilities.WMS_Capabilities.capability.request.getMap.format;
-        //
-        //         // No format requested;
-        //         if (!requestargs.params.format) {
-        //
-        //                 const defaultFormat = serviceConfiguration.capabilities.maps.defaultvalues.format;
-        //
-        //                 const formatValid = supportedFormats.find(format => {
-        //                         return format === defaultFormat;
-        //                 });
-        //
-        //
-        //                 if (formatValid) {
-        //                         return defaultFormat;
-        //                 } else {
-        //                         throw errorhandling.getError("services", "format", ("format = " + defaultFormat));
-        //                 }
-        //         }
-        //
-        //         // Format requested
-        //         else {
-        //           const requestedFormat = decodeURI(requestargs.params.format);
-        //
-        //           const formatValid = supportedFormats.find(format => {
-        //                   return format === requestedFormat;
-        //           });
-        //
-        //           if (formatValid) {
-        //                   return requestedFormat;
-        //           } else {
-        //                   throw errorhandling.getError("services", "format", ("format = " + requestedFormat));
-        //           }
-        //         }
-        //
-        // } catch (error) {
-        //   throw error;
-        // }
+
 }
 
 /**
@@ -210,27 +173,6 @@ function getWidth(serviceConfiguration, requestargs) {
 "use strict";
   return requestargs.params.width ? requestargs.params.width : serviceConfiguration.capabilities.maps.defaultvalues.width;
 
-        // try {
-        //         if (!requestargs.params.width) {
-        //                 const defaultWidth = serviceConfiguration.capabilities.maps.defaultvalues.width;
-        //                 // If no width is given in the request
-        //                 if (typeof defaultWidth === "number" && defaultWidth > 0) {
-        //                         return defaultWidth;
-        //                 } else {
-        //                         throw errorhandling.getError("services", "width", ("width = " + defaultWidth));
-        //                 }
-        //         }
-        //
-        //         // If width is given.
-        //         console.log("Width: " + (requestargs.params.width > 0 ));
-        //         if (requestargs.params.width < 0) {
-        //                 throw errorhandling.getError("services", "width", ("width = " + requestargs.params.width));
-        //         } else {
-        //                 return requestargs.params.width;
-        //         }
-        // } catch (error) {
-        //         throw error;
-        // }
 }
 /**
  * If no height is given as request argument, the default height (services.json) will be checked and returned.
@@ -243,27 +185,6 @@ function getWidth(serviceConfiguration, requestargs) {
 function getHeight(serviceConfiguration, requestargs) {
         "use  strict";
         return requestargs.params.height ? requestargs.params.height : serviceConfiguration.capabilities.maps.defaultvalues.height;
-        // try {
-        //         if (!requestargs.params.height) {
-        //                 const defaultHeight = serviceConfiguration.capabilities.maps.defaultvalues.height;
-        //                 // If no height is given in the request
-        //                 if (typeof defaultHeight === "number" && defaultHeight > 0) {
-        //                         return defaultHeight;
-        //                 } else {
-        //                         throw errorhandling.getError("services", "height", ("height = " + defaultHeight));
-        //                 }
-        //         }
-        //
-        //         // If height is given.
-        //         console.log("Height = " + requestargs.params.height);
-        //         if (requestargs.params.height < 0) {
-        //                 throw errorhandling.getError("services", "height", ("height = " + requestargs.params.height));
-        //         } else {
-        //                 return requestargs.params.height;
-        //         }
-        // } catch (error) {
-        //         throw error;
-        // }
 }
 
 
@@ -283,33 +204,6 @@ function getBbox(serviceCache, requestargs) {
         // Otherwise use cooedinates in the given crs.
         // This is important, because images can be returned with a spatial reference.
 return requestargs.params.bbox ? requestargs.params.bbox : (getdefaultBbox(serviceCache, requestargs));
-        // try {
-        //         const defaultBbox = getdefaultBbox(serviceCache, requestargs);
-        //
-        //         if (!requestargs.params.bbox) {
-        //                 return defaultBbox;
-        //         } else {
-        //                 const defaultBboxArray = defaultBbox.split(",");
-        //                 console.log(defaultBboxArray)
-        //                 const givenCoordinatesArray = requestargs.params.bbox.split(",");
-        //
-        //                 const validRequstedBbox = givenCoordinatesArray[0] >= defaultBboxArray[0] &&
-        //                                           givenCoordinatesArray[1] >= defaultBboxArray[1] &&
-        //                                           givenCoordinatesArray[2] <= defaultBboxArray[2] &&
-        //                                           givenCoordinatesArray[3] <= defaultBboxArray[3] &&
-        //                                           givenCoordinatesArray[0] < givenCoordinatesArray[2] &&
-        //                                           givenCoordinatesArray[1] <   givenCoordinatesArray[3];
-        //
-        //                 if (!validRequstedBbox) {
-        //                         throw errorhandling.getError("requestResponses", "bbox");
-        //                 }
-        //
-        //                 return requestargs.params.bbox;
-        //         }
-        // } catch (error) {
-        //         throw error;
-        // }
-
 }
 
 /**
@@ -376,7 +270,7 @@ function getCRS(serviceCache, requestargs) {
                 if (supportedByTransformationParameter && supportedByGetCapabilities) {
                         return requestargs.params.crs;
                 } else {
-                        throw errorhandling.getError("requestResponses", "crs", requestargs.params.crs);
+                        throw errorhandling.getError(404, "invalid CRS", "getCRS", "The requested is not supported");
                 }
         }
 }
@@ -414,59 +308,7 @@ function getLayer(serviceCache,requestargs){
   }
 
   return requestargs.params.layer;
-
-  // Otherwise layers were given. But are they valid?
-
-  // try{
-  //   return layerValid(serviceCache, requestargs);
-  // }
-  // catch (error){
-  //   throw error;
-  // }
 }
-
-
-// /**
-//  * Checks the layer, given as a queryparameter, whether they are valid
-//  * @param  {Object}   capabilities Cache of the WMS-getCapabilities
-//  * @param  {Object}   requestargs  Arguments of the request
-//  * @return {Boolean}               If everything is ok
-//  * @throws {Exception}             Esle
-//  */
-// function layerValid(capabilities, requestargs) {
-//         "use strict"
-//
-//         // We need at least one layer for a request
-//         if (requestargs.params.layer === "undefined") {
-//           console.log("params.layer is undefinded")
-//                 throw errorhandling.getError("requestResponses", "badLayerRequest", "No layer was given.");
-//         }
-//
-//         // Are all requested layer supported?
-//         console.log("layers = " + requestargs.params.layer);
-//         var requestedLayers = requestargs.params.layer.split(",");
-//
-//
-//         // As the result is constructed from the getCapabilities, it can be used to validate the layer request
-//         let supportedLayers = maps.getAllLayers(capabilities, requestargs);
-//
-//         try{
-//           requestedLayers.forEach(requestedLayer => {
-//             const searchRes = supportedLayers.find(supportedLayer => {
-//               return supportedLayer.id = requestedLayer;
-//             });
-//
-//             if(!searchRes){
-//               throw errorhandling.getError("requestResponses", "badLayerRequest", ("The requested layer '" + requested + " is not supported"));
-//             }
-//           });
-//
-//           return requestedLayers;
-//         }
-//         catch(error) {
-//           throw error;
-//         }
-// }
 
 module.exports = {
         getCapabilities: getCapabilities,
