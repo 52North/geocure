@@ -76,9 +76,6 @@ function getAllLayers(capabilities, requestargs){
 }
 
 
-function render(capabilities, requestargs){
-
-}
 
 module.exports = {
     getExGeographicBoundingBox : getExGeographicBoundingBox,

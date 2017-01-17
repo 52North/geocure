@@ -2,7 +2,7 @@
     "services": {
         "praefix": 1000,
         "schemaError": {
-            "code": 100,
+            "type": 100,
             "description": "The file 'app/services/services.json' does not correspond to 'app/services/servicesMetadescription.json'."
         },
         "width": {

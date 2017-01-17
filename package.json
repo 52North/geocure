@@ -21,7 +21,6 @@
   "homepage": "https://github.com/Trzaska/geocure#readme",
   "devDependencies": {
     "jasmine-node": "^1.14.5"
-
   },
   "dependencies": {
     "jsonix": "^2.4.1",

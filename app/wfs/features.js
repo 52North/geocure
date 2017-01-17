@@ -1,9 +1,10 @@
+
+
 function describeFeatures(serviceCache, requestargs){
   try{
     const serviceCapabilities = serviceCache.find(service => {return service.id == requestargs.params.id});
     const layers = getAllFeatures(serviceCapabilities, requestargs);
     const crs = getExGeographicBoundingBox(serviceCapabilities);
-
     return {"features": layers, "crs": crs};
   }
 catch (error) {
@@ -24,7 +25,7 @@ catch (error) {
 function getExGeographicBoundingBox(capabilities){
   try
   {
-    const maxBbox = capabilities.capabilities.value.featureTypeList.featureType[1].wgs84BoundingBox;
+    const maxBbox = capabilities.capabilities.value.featureTypeList.featureType[0].wgs84BoundingBox;
 
     const response = {};
     response["TYPE_NAME"] = maxBbox[0].TYPE_NAME;
@@ -70,6 +71,8 @@ function getAllFeatures(capabilities, requestargs){
   }
 }
 
+
 module.exports = {
-  describeFeatures : describeFeatures
+  describeFeatures : describeFeatures,
+  getExGeographicBoundingBox: getExGeographicBoundingBox
 }

@@ -10,8 +10,8 @@ const wmsServices = require("./wms/wmsServices.js");
 const url = require("./general/url.js");
 const maps = require("./wms/maps.js");
 const features = require("./wfs/features.js");
-const requestURL = require("./wms/requestsURL.js");
-
+const requestURLWMS = require("./wms/requestsURL.js");
+const requestURLWFS = require("./wfs/requestsURL.js");
 // Chaches
 const cacheLoaderWFS = require("./wfs/cacheLoader.js");
 const cacheLoaderWMS = require("./wms/cacheLoader.js");
@@ -57,6 +57,11 @@ restifySwagger.configure(server, {
  * Services Resource base controller
  */
 
+
+/**
+ * TODO: ERRORHANDLING:
+ * TODO: FÜR ERRORHANDLING: FEHLER FOM GEOSERVER WEITER DRUCHREICHEN. ANDERE FEHLER SELBER HANDHABEN!
+ */
 
 server.get({
         url: "/services",
@@ -125,9 +130,12 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const getMapUrl = requestURL.getMapURL(cacheWMS, req, services);
+                console.log("Render map");
+                const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
+                console.log("xxx");
                 requesting.get(String(getMapUrl)).pipe(res);
         } catch (error) {
+          console.log("error cought = " +  error);
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
 });
@@ -160,8 +168,9 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const getFeatureRequest = features.getFeature(cacheLoaderWFS.getCache(), req);
-                requesting.get(String(getFeatureRequest)).pipe(res);
+                const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
+                res.send(getFeatureRequestURL)
+                //requesting.get(String(getFeatureRequestURL)).pipe(res);
         } catch (error) {
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
