@@ -1,39 +1,34 @@
-var statuscodeMapping = require("../config/statuscodeMapping.json")
-
 
 /**
- * This function generates errors.
- * Taking information from statuscodeMapping.json
- * it returns new error-objects.
- * @param  {[type]} category [The "top-level" description. Example: services (see statuscodeMapping)]
- * @param  {[type]} type     [The "child" of the "top-level" description. Example: schemaError ("...")]
- * @param  {[type]} info     [Optional information.]
- * @return {[type]}          [An error-Object]
+ * Returns an object to communicate an errorObject
+ * The structure is based on the exception = application/json errors from GeoServer.
+ * Only the first property - statuscode - is different (GeoServer uses 'version').
+ * @method getError
+ * @param  {Number} statuscode Statuscode for the HTTP response
+ * @param  {String} code       Short errordescription
+ * @param  {String} locator    Where the error occured
+ * @param  {String} text       Description of the error
+ * @return {object}            The error-object
  */
+function getError(statuscode, code, locator, text) {
 
-function getError(category, type, info) {
-        "use strict";
+          const errorObject = {
+            statuscode : "not specified",
+            exceptions : [
+              {
+                code : "not specified",
+                locator : "not specified",
+                text : "not specified"
+              }
+            ]
+          }
 
-        try {
-                const response = new Error(category + " " + type);
-                const statuscodePraefix = statuscodeMapping[category]["praefix"];
-                const mappingObject = JSON.parse(JSON.stringify(statuscodeMapping[category][type])); // Make a copy of the statuscodeMapping-Object
-                response["code"] = statuscodePraefix + mappingObject["code"];
-                response["description"] = mappingObject["description"];
+        errorObject.statuscode = statuscode;
+        errorObject.exceptions[0].code = code;
+        errorObject.exceptions[0].locator = locator;
+        errorObject.exceptions[0].text = text;
 
-                if (info) {
-                        response["info"] = info;
-                }
-
-                return response;
-
-        } catch (error) {
-                const err = new Error("getError - error");
-                err["code"] = "0000";
-                err["description"] = "An error occured during the execution of getError()."
-                err["info"] = error;
-                throw err;
-        }
+        return errorObject;
 }
 
 
