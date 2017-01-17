@@ -102,11 +102,16 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = wmsServices.getServiceDescriptionById(services, req);
-                res.send(response);
+          const response = wmsServices.getServiceDescriptionById(services, req);
+          if(response.exceptions && response.statuscode){
+            typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+          }
+          else {
+            res.send(200, response);
+          }
         } catch (error) {
 
-                error.message === "requestResponses", "/services:id" ? res.send(404, error) : res.send(500, error);
+            res.send(500, error);
         }
 });
 
@@ -121,10 +126,16 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const response = maps.describeMap(cacheLoaderWMS.getCache(), req)
-                res.send(response);
-        } catch (error) {
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
-        }
+                if(response.exceptions && response.statuscode){
+                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+                }
+                else {
+                  res.send(200, response);
+                }
+              } catch (error) {
+
+                  res.send(500, error);
+              }
 });
 
 server.get({
@@ -137,9 +148,15 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
-                requesting.get(String(getMapUrl)).pipe(res);
+                if(getMapUrl.exceptions && getMapUrl.statuscode){
+                  typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(getMapUrl);
+                }
+                else {
+                  requesting.get(String(getMapUrl)).pipe(res);
+                }
+
         } catch (error) {
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
+                res.send(500, error);
         }
 });
 

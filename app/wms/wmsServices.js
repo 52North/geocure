@@ -32,11 +32,11 @@ function getAllServices(services, requestargs) {
                                         description["href"] = requestargs.fullUrl + "/" + service.id;
                                         response.push(description);
                                 } else {
-                                        throw errorhandling.getError("requestResponses", "/services", "Not all attributes available");
+                                        throw errorhandling.getError(500, "AttributeError", "getAllServices", "Not all attributes available");
                                 }
                         }
                 } catch (error) {
-                        throw errorhandling.getError("requestResponses", "/services", error);
+                        throw error;
                 }
 
         });
@@ -57,20 +57,12 @@ function getServiceDescriptionById(services, requestargs) {
         "use strict";
         try {
                 const allServices = getAllServices(services, requestargs);
-                /* Use information from endpoint /services
-                    {
-                    "id": "service1COLABIS",
-                    "label": "name of the service",
-                    "description": "Returns sample data via a WM-Service",
-                    "href": "http://localhost:8888/geocure/services/service1COLABIS"
-                    }
-                 */
                 const serviceById = allServices.find(service => {
                         return service.id == requestargs.params.id
                 })
 
                 if (!serviceById) {
-                        throw errorhandling.getError("requestResponses", "bad:id");
+                        throw errorhandling.getError(400, "Not found", "getServiceDescriptionById", "No service for requested id");
                 }
 
 

@@ -47,11 +47,11 @@ function getMapURL(cacheWMS, requestargs, services) {
 
 
         if (!serviceConfiguration){
-          throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
+          throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
         if(!serviceConfiguration.capabilities.maps.enabled){
-          throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
+          throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
         const serviceCache = cacheWMS.getCache().find(obj => {return obj.id === requestargs.params.id});
