@@ -80,8 +80,8 @@ server.get({
          controlExecution.logEnd(req.fullUrl);*/
         try {
                 const response = wmsServices.getAllServices(services, req);
-                if(response.exceptions && response.statuscode){
-                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+                if(response.exceptions){
+                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
                 }
                 else {
                   res.send(200, response);
@@ -103,8 +103,8 @@ server.get({
         url.injectFullUrl(req);
         try {
           const response = wmsServices.getServiceDescriptionById(services, req);
-          if(response.exceptions && response.statuscode){
-            typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+          if(response.exceptions){
+            typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
           }
           else {
             res.send(200, response);
@@ -126,8 +126,8 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const response = maps.describeMap(cacheLoaderWMS.getCache(), req)
-                if(response.exceptions && response.statuscode){
-                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+                if(response.exceptions){
+                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
                 }
                 else {
                   res.send(200, response);
@@ -148,11 +148,15 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
-                if(getMapUrl.exceptions && getMapUrl.statuscode){
-                  typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(getMapUrl);
+                if(getMapUrl.exceptions){
+                  typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
                 }
                 else {
-                  requesting.get(String(getMapUrl)).pipe(res);
+                  requesting.get(String(getMapUrl)).on('response', response => {
+                    if(response.getContentType() === "application/json"){
+                      response.statusCode = 900;
+                    }
+                  }).pipe(res);
                 }
 
         } catch (error) {
@@ -171,10 +175,16 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const response = features.describeFeatures(cacheLoaderWFS.getCache(), req);
-                res.send(response);
-        } catch (error) {
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
-        }
+                if(response.exceptions){
+                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                }
+                else {
+                  res.send(200, response);
+                }
+              } catch (error) {
+
+                  res.send(500, error);
+              }
 });
 
 
