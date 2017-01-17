@@ -80,9 +80,15 @@ server.get({
          controlExecution.logEnd(req.fullUrl);*/
         try {
                 const response = wmsServices.getAllServices(services, req);
-                res.send(response);
+                if(response.exceptions && response.statuscode){
+                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(response);
+                }
+                else {
+                  res.send(200, response);
+                }
+
         } catch (error) {
-                res.send(500, JSON.stringify(error));
+                res.send(500, error);
         }
 });
 
@@ -130,12 +136,9 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                console.log("Render map");
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
-                console.log("xxx");
                 requesting.get(String(getMapUrl)).pipe(res);
         } catch (error) {
-          console.log("error cought = " +  error);
                 error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
         }
 });
