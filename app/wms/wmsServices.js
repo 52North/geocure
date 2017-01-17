@@ -62,7 +62,7 @@ function getServiceDescriptionById(services, requestargs) {
                 })
 
                 if (!serviceById) {
-                        throw errorhandling.getError(400, "Not found", "getServiceDescriptionById", "No service for requested id");
+                        throw errorhandling.getError(404, "Not found", "getServiceDescriptionById", "No service for requested id");
                 }
 
 
