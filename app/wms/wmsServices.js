@@ -93,7 +93,7 @@ function getServiceDescriptionById(services, requestargs) {
 
 
         } catch (error) {
-                throw error;
+                return error;
         }
 }
 
