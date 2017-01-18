@@ -91,8 +91,6 @@ function getMapURL(cacheWMS, requestargs, services) {
               // Exception
               url += "&EXCEPTIONS=json"
 
-              console.log("REQUEST URL");
-              console.log(url);
 
               return url;
 
