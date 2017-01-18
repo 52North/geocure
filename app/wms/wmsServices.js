@@ -12,35 +12,41 @@ const errorhandling = require("../general/errorhandling.js");
 function getAllServices(services, requestargs) {
         "use strict";
         const response = [];
-        services.forEach(service => {
-                try {
-                        const description = {};
-                        /**
-                         * logs for tests
-                         */
-                        // console.log("********************")
-                        // console.log("service.id = " + service.id)
-                        // console.log("service.label = " + service.label)
-                        // console.log("service.description = " + service.description)
-                        // console.log("requestargs.fullUrl = " + requestargs.fullUrl)
-                        // console.log("*********************")
-                        if (service.capabilities.maps.enabled || service.capabilities.features.enabled) {
-                                if (service.id && service.label && service.description && requestargs.fullUrl) {
-                                        description["id"] = service.id;
-                                        description["label"] = service.label;
-                                        description["description"] = service.description;
-                                        description["href"] = requestargs.fullUrl + "/" + service.id;
-                                        response.push(description);
-                                } else {
-                                        throw errorhandling.getError(500, "AttributeError", "getAllServices", "Not all attributes available");
-                                }
-                        }
-                } catch (error) {
-                        throw error;
-                }
+        try{
+          services.forEach(service => {
+                  try {
+                          const description = {};
+                          /**
+                           * logs for tests
+                           */
+                          // console.log("********************")
+                          // console.log("service.id = " + service.id)
+                          // console.log("service.label = " + service.label)
+                          // console.log("service.description = " + service.description)
+                          // console.log("requestargs.fullUrl = " + requestargs.fullUrl)
+                          // console.log("*********************")
+                          if (service.capabilities.maps.enabled || service.capabilities.features.enabled) {
+                                  if (service.hasOwnProperty("id") && service.hasOwnProperty("label") && service.hasOwnProperty("description") && requestargs.hasOwnProperty("fullUrl")) {
+                                          description["id"] = service.id;
+                                          description["label"] = service.label;
+                                          description["description"] = service.description;
+                                          description["href"] = requestargs.fullUrl + "/" + service.id;
+                                          response.push(description);
+                                  } else {
+                                          throw errorhandling.getError(500, "AttributeError", "getAllServices", "Not all attributes available");
+                                  }
+                          }
+                  } catch (error) {
+                          throw error;
+                  }
 
-        });
-        return response;
+          });
+          return response;
+        }
+        catch (error){
+          return error;
+        }
+
 }
 
 
