@@ -6,9 +6,17 @@ const errorhandling = require("../general/errorhandling.js");
  * @param  {Object}    requestargs  Argument of the requests
  * @return {Object}                 JSON-Object
  */
-function describeMap(serviceCache, requestargs){
+function describeMap(serviceCache, requestargs, services){
   // console.log(serviceCache);
   try{
+
+    services.find(service => {
+      if(service.id == requestargs.params.id && service.capabilities.maps.enabled === false){
+        throw errorhandling.getError(404, "id not found", "describeMap", "Service with requested id is not supported");
+      }
+    });
+
+
     const serviceCapabilities = serviceCache.find(service => {return service.id == requestargs.params.id});
     const layers = getAllLayers(serviceCapabilities, requestargs);
     const crs = getExGeographicBoundingBox(serviceCapabilities);
