@@ -1,6 +1,6 @@
 const wmsServices = require("../../app/wms/wmsServices.js");
 const validServices = require("./validServices.json");
-const validServices_disabled_map_features = require("./ValidServices_disabled_map&features.json")
+const validServices_disabled_map_features = require("./validServices_disabled_map&features.json")
 const inValidServices = require("./inValidServices.json");
 
 const req = {fullUrl: "http://localhost:8002/services"};
