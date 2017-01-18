@@ -31,18 +31,18 @@ function getFeature(cacheWFS, requestargs, services){
   });
 
   if (!serviceConfiguration){
-    throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
+    throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
   }
 
   if(!serviceConfiguration.capabilities.features.enabled){
-    throw errorhandling.getError("services", "id", ("id = " + requestargs.params.id));
+    throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
   }
 
 
   const serviceCache = cacheWFS.getCache().find(obj => {return obj.id === requestargs.params.id});
 
   if (!serviceCache){
-    throw errorhandling.getError("services", "serviceCache");
+    throw errorhandling.getError(500, "serviceCache", "getFeature", "serviceCache not available");
   }
 
   try {
@@ -59,8 +59,6 @@ function getFeature(cacheWFS, requestargs, services){
           // Adding format
           url += "&OUTPUTFORMAT=" + getOutputFormat(serviceConfiguration, serviceCache, requestargs);
 
-        // Exception
-        // //TODO: Exception als JSON zurück gegebn können.
         url += "&EXCEPTIONS=application/json"
 
         console.log("REQUEST URL");
@@ -69,16 +67,12 @@ function getFeature(cacheWFS, requestargs, services){
         return url;
 
   } catch (error) {
-          throw error
+          return error
   }
 }
 
 function getOutputFormat(serviceConfiguration, serviceCache, requestargs){
-  if(!requestargs.params.format){
-    return "application/json";
-  }
-
-
+  return requestargs.params.format ? requestargs.params.format : "application/json";
 }
 
 function  getTypeNames(serviceCache,requestargs){
@@ -87,10 +81,7 @@ function  getTypeNames(serviceCache,requestargs){
 };
 
 function getCRS(serviceCache, requestargs){
-  if(requestargs.params.crs){
-    return requestargs.params.crs;
-  }
-  return "EPSG:4326";
+  return requestargs.params.crs ? requestargs.params.crs : defaultCRS;
 }
 
 
@@ -112,29 +103,29 @@ function getBbox(serviceCache, requestargs) {
         // This is important, because images can be returned with a spatial reference.
 
         try {
-                console.log("getBbox")
                 const defaultBbox = getdefaultBbox(serviceCache, requestargs);
-                console.log("defaultBbox = " + defaultBbox);
                 if (!requestargs.params.bbox) {
-                  console.log("!requestargs.params.bbox")
                         return defaultBbox;
                 } else {
-                        const defaultBboxArray = defaultBbox.split(",");
-                        console.log(defaultBboxArray)
-                        const givenCoordinatesArray = requestargs.params.bbox.split(",");
+                  return requestargs.params.bbox
 
-                        const validRequstedBbox = givenCoordinatesArray[0] >= defaultBboxArray[0] &&
-                                                  givenCoordinatesArray[1] >= defaultBboxArray[1] &&
-                                                  givenCoordinatesArray[2] <= defaultBboxArray[2] &&
-                                                  givenCoordinatesArray[3] <= defaultBboxArray[3] &&
-                                                  givenCoordinatesArray[0] < givenCoordinatesArray[2] &&
-                                                  givenCoordinatesArray[1] <   givenCoordinatesArray[3];
-
-                        if (!validRequstedBbox) {
-                                throw errorhandling.getError("requestResponses", "bbox");
-                        }
-
-                        return requestargs.params.bbox;
+        //           // TODO funktioniert das?
+        //                 const defaultBboxArray = defaultBbox.split(",");
+        //                 console.log(defaultBboxArray)
+        //                 const givenCoordinatesArray = requestargs.params.bbox.split(",");
+        //
+        //                 const validRequstedBbox = givenCoordinatesArray[0] >= defaultBboxArray[0] &&
+        //                                           givenCoordinatesArray[1] >= defaultBboxArray[1] &&
+        //                                           givenCoordinatesArray[2] <= defaultBboxArray[2] &&
+        //                                           givenCoordinatesArray[3] <= defaultBboxArray[3] &&
+        //                                           givenCoordinatesArray[0] < givenCoordinatesArray[2] &&
+        //                                           givenCoordinatesArray[1] <   givenCoordinatesArray[3];
+        //
+        //                 if (!validRequstedBbox) {
+        //                         throw errorhandling.getError("requestResponses", "bbox");
+        //                 }
+        //
+        //                 return requestargs.params.bbox;
                 }
         } catch (error) {
                 throw error;
@@ -158,14 +149,14 @@ function getdefaultBbox(serviceCache, requestargs) {
                 const maxBbox = features.getExGeographicBoundingBox(serviceCache);
                 console.log("maxBbox " + maxBbox);
                 if (!maxBbox) {
-                        throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
+                  throw errorhandling.getError(500, "maxBbox", "getdefaultBbox", "Tried to get 'exGeographicBoundingBox'");
                 }
 
                 const targetCrs = getCRS(serviceCache, requestargs);
 
                 if (targetCrs === "EPSG:4326") {
                         //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
-                        return "" + maxBbox.southBoundLatitude + "," + maxBbox.westBoundLongitude + "," + maxBbox.northBoundLatitude + "," + maxBbox.eastBoundLongitude;
+                        return "" + + maxBbox.westBoundLongitude + "," +maxBbox.southBoundLatitude + "," + maxBbox.eastBoundLongitude + "," + maxBbox.northBoundLatitude;
                 } else {
                         // Targetsystem validation already happened in getCrs
                         const minis = coordinates.transformation(maxBbox.westBoundLongitude, maxBbox.southBoundLatitude, "EPSG:4326", targetCrs);

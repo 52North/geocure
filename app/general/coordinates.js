@@ -12,9 +12,9 @@ const transformationParameters = require("../config/transformationParameter.js")
  */
 function transformation(x, y, from, to){
   "use strict";
-  
+
   if(!(typeof x === "number" && typeof y === "number")){
-    throw errorhandling.getError("requestResponses","coordinateTransformation", "Not all coordinates are numbers.");
+    throw errorhandling.getError(404, "coordinates", "transformation", "Not all coordinates are numbers.");
   }
 
   try{
@@ -31,7 +31,7 @@ function transformation(x, y, from, to){
 
   }
   catch (error) {
-    throw errorhandling.getError("requestResponses","coordinateTransformation", ("'" + error + "'is not supported."));
+    throw errorhandling.getError(404, "coordinates","transformation", ("'" + error + "'is not supported."));
   }
 
 }

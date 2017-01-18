@@ -1,7 +1,7 @@
 const requestsURL = require("./requestsURL.js");
 const services = require("../config/services.json");
 const Jsonix = require("jsonix").Jsonix;
-
+const errorhandling = require("../general/errorhandling.js");
 
 
 // let and not const so it can be cleared by cache = []
@@ -20,8 +20,7 @@ let ready = false;
  */
 function getCache() {
         "use strict";
-        return cache;
-        return (ready ? cache : (errorhandling("services", "wmsCacheNotReady")));
+        return (ready ? cache : (errorhandling(500, "cache not ready", "getCache", "wfsCache not ready")));
 }
 
 /**

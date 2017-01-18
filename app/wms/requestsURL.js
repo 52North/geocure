@@ -57,7 +57,7 @@ function getMapURL(cacheWMS, requestargs, services) {
         const serviceCache = cacheWMS.getCache().find(obj => {return obj.id === requestargs.params.id});
 
         if (!serviceCache){
-          throw errorhandling.getError("services", "serviceCache");
+          throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
         }
 
         // Adding Layers
@@ -221,7 +221,7 @@ function getdefaultBbox(serviceCache, requestargs) {
                 const maxBbox = serviceCache.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
 
                 if (!maxBbox) {
-                        throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
+                        throw errorhandling.getError(500, "maxBbox", "getdefaultBbox", "Tried to get 'exGeographicBoundingBox'");
                 }
 
                 const targetCrs = getCRS(serviceCache, requestargs);

@@ -199,16 +199,34 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
-                res.send(getFeatureRequestURL)
-                //requesting.get(String(getFeatureRequestURL)).pipe(res);
+                if(getFeatureRequestURL.exceptions){
+                  typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
+                }
+                else {
+                  requesting.get(String(getFeatureRequestURL)).on('response', response => {
+                    if(!response.headers["content-disposition"]){
+                      response.statusCode = 900;
+                    }
+                  }).pipe(res);
+                }
         } catch (error) {
-                error.message === "requestResponses", "/services:id" ? res.send(404, JSON.stringify(error)) : res.send(500, JSON.stringify(error));
-        }
+            res.send(500, error);
+                  }
 });
 
 
 
-
+// const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
+// if(getMapUrl.exceptions){
+//   typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
+// }
+// else {
+//   requesting.get(String(getMapUrl)).on('response', response => {
+//     if(response.getContentType() === "application/json"){
+//       response.statusCode = 900;
+//     }
+//   }).pipe(res);
+// }
 
 
 

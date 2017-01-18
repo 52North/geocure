@@ -1,4 +1,4 @@
-
+const errorhandling = require("../general/errorhandling.js");
 
 function describeFeatures(serviceCache, requestargs){
   try{
@@ -8,7 +8,7 @@ function describeFeatures(serviceCache, requestargs){
     return {"features": layers, "crs": crs};
   }
 catch (error) {
-  throw error;
+  return error;
 }
 }
 
@@ -39,7 +39,7 @@ function getExGeographicBoundingBox(capabilities){
   }
   catch (error)
   {
-    throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get 'exGeographicBoundingBox'");
+    throw errorhandling.getError(500, "bbox error", "getExGeographicBoundingBox", "Error while getting 'exGeographicBoundingBox'");
   }
 
 }
@@ -67,7 +67,7 @@ function getAllFeatures(capabilities, requestargs){
     return layerCollection;
   }
   catch (error) {
-    throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get all Layers");
+    throw errorhandling.getError(404, "Bad feature request", "getAllFeatures", "Requested feature is not supported");
   }
 }
 

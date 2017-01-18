@@ -24,7 +24,7 @@ function getAllServices(services, requestargs) {
                         // console.log("service.description = " + service.description)
                         // console.log("requestargs.fullUrl = " + requestargs.fullUrl)
                         // console.log("*********************")
-                        if (service.capabilities.maps.enabled || services.capabilities.features.enabled) {
+                        if (service.capabilities.maps.enabled || service.capabilities.features.enabled) {
                                 if (service.id && service.label && service.description && requestargs.fullUrl) {
                                         description["id"] = service.id;
                                         description["label"] = service.label;
@@ -40,7 +40,6 @@ function getAllServices(services, requestargs) {
                 }
 
         });
-
         return response;
 }
 

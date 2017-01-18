@@ -17,7 +17,7 @@ function describeMap(serviceCache, requestargs){
 
   }
 catch (error) {
-  throw error;
+  return error;
 }
 
 }
@@ -71,7 +71,7 @@ function getAllLayers(capabilities, requestargs){
     return layerCollection;
   }
   catch (error) {
-    throw errorhandling.getError("requestResponses", "badCapabilitiesAccess", "Tried to get all Layers");
+    throw errorhandling.getError(404, "map not supported", "getAllLayers", "Requested map is not supported.");
   }
 }
 
