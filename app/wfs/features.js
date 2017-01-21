@@ -34,7 +34,7 @@ function getExGeographicBoundingBox(capabilities){
   {
     const maxBbox = capabilities.capabilities.value.featureTypeList.featureType[0].wgs84BoundingBox;
 
-    const response = {};
+    const response = {};getAllFeatures
     response["TYPE_NAME"] = maxBbox[0].TYPE_NAME;
     response["westBoundLongitude"] = maxBbox[0].lowerCorner[0];
     response["eastBoundLongitude"] = maxBbox[0].upperCorner[0];

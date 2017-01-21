@@ -109,23 +109,6 @@ function getBbox(serviceCache, requestargs) {
                 } else {
                   return requestargs.params.bbox
 
-        //           // TODO funktioniert das?
-        //                 const defaultBboxArray = defaultBbox.split(",");
-        //                 console.log(defaultBboxArray)
-        //                 const givenCoordinatesArray = requestargs.params.bbox.split(",");
-        //
-        //                 const validRequstedBbox = givenCoordinatesArray[0] >= defaultBboxArray[0] &&
-        //                                           givenCoordinatesArray[1] >= defaultBboxArray[1] &&
-        //                                           givenCoordinatesArray[2] <= defaultBboxArray[2] &&
-        //                                           givenCoordinatesArray[3] <= defaultBboxArray[3] &&
-        //                                           givenCoordinatesArray[0] < givenCoordinatesArray[2] &&
-        //                                           givenCoordinatesArray[1] <   givenCoordinatesArray[3];
-        //
-        //                 if (!validRequstedBbox) {
-        //                         throw errorhandling.getError("requestResponses", "bbox");
-        //                 }
-        //
-        //                 return requestargs.params.bbox;
                 }
         } catch (error) {
                 throw error;

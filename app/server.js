@@ -58,11 +58,6 @@ restifySwagger.configure(server, {
  */
 
 
-/**
- * TODO: ERRORHANDLING:
- * TODO: FÜR ERRORHANDLING: FEHLER FOM GEOSERVER WEITER DRUCHREICHEN. ANDERE FEHLER SELBER HANDHABEN!
- */
-
 server.get({
         url: "/services",
         swagger: {
@@ -71,13 +66,7 @@ server.get({
         }
 }, function(req, res, next) {
         url.injectFullUrl(req);
-        /*
-         // Information for tracing
-         requestUtils.injectFullUrl(req);
-         controlExecution.logStart(req.fullUrl);
 
-         res.send(processGetCapabilities.getServicesInfo(services, serviceCache, req));
-         controlExecution.logEnd(req.fullUrl);*/
         try {
                 const response = wmsServices.getAllServices(services, req);
                 if(response.exceptions){
@@ -125,7 +114,7 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = maps.describeMap(cacheLoaderWMS.getCache(), req)
+                const response = maps.describeMap(cacheLoaderWMS.getCache(), req, services);
                 if(response.exceptions){
                   typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
                 }
@@ -174,7 +163,7 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-                const response = features.describeFeatures(cacheLoaderWFS.getCache(), req);
+                const response = features.describeFeatures(cacheLoaderWFS.getCache(), req, services);
                 if(response.exceptions){
                   typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
                 }
