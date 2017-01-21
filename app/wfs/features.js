@@ -1,11 +1,11 @@
 const errorhandling = require("../general/errorhandling.js");
 
-function describeFeatures(serviceCache, requestargs){
+function describeFeatures(serviceCache, requestargs, services){
   try{
 
     services.find(service => {
       if(service.id == requestargs.params.id && service.capabilities.features.enabled === false){
-        throw errorhandling.getError(404, "id not found", "describeMap", "Service with requested id is not supported");
+        throw errorhandling.getError(404, "id not found", "describeFeatures", "Service with requested id is not supported");
       }
     });
 
