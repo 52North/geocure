@@ -2,6 +2,13 @@ const errorhandling = require("../general/errorhandling.js");
 
 function describeFeatures(serviceCache, requestargs){
   try{
+
+    services.find(service => {
+      if(service.id == requestargs.params.id && service.capabilities.features.enabled === false){
+        throw errorhandling.getError(404, "id not found", "describeMap", "Service with requested id is not supported");
+      }
+    });
+
     const serviceCapabilities = serviceCache.find(service => {return service.id == requestargs.params.id});
     const layers = getAllFeatures(serviceCapabilities, requestargs);
     const crs = getExGeographicBoundingBox(serviceCapabilities);
