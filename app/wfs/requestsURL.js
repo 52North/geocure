@@ -103,8 +103,8 @@ function getBbox(serviceCache, requestargs) {
         // This is important, because images can be returned with a spatial reference.
 
         try {
-                const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                 if (!requestargs.params.bbox) {
+                  const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                         return defaultBbox;
                 } else {
                   return requestargs.params.bbox
