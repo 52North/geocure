@@ -40,21 +40,6 @@ restifySwagger.configure(server, {
 });
 
 /**
- * API Docs contents
- * see http://mcavage.me/node-restify/#serve-static for usage
- **/
-/*server.get(/\/apidocs\/?.*!/, restify.serveStatic({
- directory: "./documentation",
- default: "index.html"
- }));
- server.get("/", function(req, res, next) {
- res.header("Location", "/apidocs/index.html");
- res.send(302);
- return next(false);
- });*/
-
-
-/**
  * Services Resource base controller
  */
 
