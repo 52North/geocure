@@ -69,11 +69,10 @@ server.get({
 
         try {
                 const response = wmsServices.getAllServices(services, req);
-                if(response.exceptions){
-                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
-                }
-                else {
-                  res.send(200, response);
+                if (response.exceptions) {
+                        typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                } else {
+                        res.send(200, response);
                 }
 
         } catch (error) {
@@ -91,16 +90,15 @@ server.get({
 }, function(req, res, next) {
         url.injectFullUrl(req);
         try {
-          const response = wmsServices.getServiceDescriptionById(services, req);
-          if(response.exceptions){
-            typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
-          }
-          else {
-            res.send(200, response);
-          }
+                const response = wmsServices.getServiceDescriptionById(services, req);
+                if (response.exceptions) {
+                        typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                } else {
+                        res.send(200, response);
+                }
         } catch (error) {
 
-            res.send(500, error);
+                res.send(500, error);
         }
 });
 
@@ -115,16 +113,15 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const response = maps.describeMap(cacheLoaderWMS.getCache(), req, services);
-                if(response.exceptions){
-                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                if (response.exceptions) {
+                        typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                } else {
+                        res.send(200, response);
                 }
-                else {
-                  res.send(200, response);
-                }
-              } catch (error) {
+        } catch (error) {
 
-                  res.send(500, error);
-              }
+                res.send(500, error);
+        }
 });
 
 server.get({
@@ -138,19 +135,18 @@ server.get({
         try {
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
                 //console.log(getMapUrl);
-                if(getMapUrl.exceptions){
-                  typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
-                }
-                else {
-                  requesting.get(String(getMapUrl)).on('response', response => {
-                    if(response.getContentType() === "application/json"){
-                      response.statusCode = 900;
-                    }
-                  }).pipe(res);
+                if (getMapUrl.exceptions) {
+                        typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
+                } else {
+                        requesting.get(String(getMapUrl)).on('response', response => {
+                                if (response.getContentType() === "application/json") {
+                                        response.statusCode = 900;
+                                }
+                        }).pipe(res);
                 }
 
         } catch (error) {
-                res.send(500, error);
+                res.send(404, error);
         }
 });
 
@@ -165,16 +161,15 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const response = features.describeFeatures(cacheLoaderWFS.getCache(), req, services);
-                if(response.exceptions){
-                  typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                if (response.exceptions) {
+                        typeof response.statuscode === "number" ? res.send(response.statuscode, response) : res.send(500, response);
+                } else {
+                        res.send(200, response);
                 }
-                else {
-                  res.send(200, response);
-                }
-              } catch (error) {
+        } catch (error) {
 
-                  res.send(500, error);
-              }
+                res.send(500, error);
+        }
 });
 
 
@@ -190,19 +185,18 @@ server.get({
         try {
                 const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
                 console.log(getFeatureRequestURL);
-                if(getFeatureRequestURL.exceptions){
-                  typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
-                }
-                else {
-                  requesting.get(String(getFeatureRequestURL)).on('response', response => {
-                    if(!response.headers["content-disposition"]){
-                      response.statusCode = 900;
-                    }
-                  }).pipe(res);
+                if (getFeatureRequestURL.exceptions) {
+                        typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
+                } else {
+                        requesting.get(String(getFeatureRequestURL)).on('response', response => {
+                                if (!response.headers["content-disposition"]) {
+                                        response.statusCode = 900;
+                                }
+                        }).pipe(res);
                 }
         } catch (error) {
-            res.send(500, error);
-                  }
+                res.send(500, error);
+        }
 });
 
 
@@ -233,8 +227,8 @@ server.get({
                 notes: "this resource provides access maps",
         }
 }, function(req, res, next) {
-          cacheLoaderWFS.loadCache();
-          res.send("loading cache");
+        cacheLoaderWFS.loadCache();
+        res.send("loading cache");
 });
 
 
@@ -248,7 +242,7 @@ server.get({
         }
 }, function(req, res, next) {
 
-          res.send(cacheLoaderWFS.getCache());
+        res.send(cacheLoaderWFS.getCache());
 });
 
 
@@ -259,8 +253,8 @@ server.get({
                 notes: "this resource provides access maps",
         }
 }, function(req, res, next) {
-          cacheLoaderWMS.loadCache();
-          res.send("loading cache");
+        cacheLoaderWMS.loadCache();
+        res.send("loading cache");
 });
 
 
@@ -274,7 +268,7 @@ server.get({
         }
 }, function(req, res, next) {
 
-          res.send(cacheLoaderWMS.getCache());
+        res.send(cacheLoaderWMS.getCache());
 });
 
 
@@ -288,7 +282,7 @@ restifySwagger.loadRestifyRoutes();
 
 
 cacheLoaderWMS.loadCache().then(() => cacheLoaderWFS.loadCache()).then(() => {
-  server.listen(8002, function() {
-          console.log("%s started: %s", server.name, server.url);
-  });
+        server.listen(8002, function() {
+                console.log("%s started: %s", server.name, server.url);
+        });
 })
