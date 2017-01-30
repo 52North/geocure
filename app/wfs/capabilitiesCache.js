@@ -36,7 +36,7 @@ function getCache() {
  * @return {Boolean}  Will be returned, if the loading finished.
  */
 function loadCache() {
-  console.log("loadCache 000");
+        console.log("loadCache 000");
         "use strict";
 
         return new Promise((resolve, reject) => {
@@ -62,20 +62,18 @@ function loadCache() {
  * @return {Array} The getCapabilitie urls
  */
 function loadCapabilitiesURLs() {
-  console.log("loadCapabilitiesURLs")
+        console.log("loadCapabilitiesURLs")
         "use strict";
         const getCapabilitiesURL = [];
         services.forEach(currentObject => {
                 try {
                         if (currentObject["capabilities"]["features"]["enabled"] && currentObject["id"]) {
-                          console.log("A!");
                                 const capabilitiesRequestParameters = {
                                         "id": currentObject["id"],
                                         "capabilitiesURL": requestsURL.getCapabilities(currentObject["url"])
                                 };
 
                                 getCapabilitiesURL.push(capabilitiesRequestParameters);
-                                console.log("getCapabilitiesURL.length = " + getCapabilitiesURL.length);
                         }
                 } catch (error) {
                         console.log("Error in loadURLS :" + error);
@@ -94,7 +92,7 @@ function* getCapabilitiesGenerator() {
         "use strict";
         let count = 0;
         while (count < requestURLs.length) {
-          console.log("WFS getCapabilities")
+                console.log("WFS getCapabilities")
                 let capabilities = yield getCapabilities.getJSON_WFS(requestURLs[count]["capabilitiesURL"]);
                 cache.push({
                         "id": requestURLs[count]["id"],
