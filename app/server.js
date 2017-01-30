@@ -137,6 +137,7 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
+                //console.log(getMapUrl);
                 if(getMapUrl.exceptions){
                   typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
                 }
@@ -188,6 +189,7 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
+                console.log(getFeatureRequestURL);
                 if(getFeatureRequestURL.exceptions){
                   typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
                 }

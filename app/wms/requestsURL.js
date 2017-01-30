@@ -243,10 +243,6 @@ function getdefaultBbox(serviceCache, requestargs) {
 
 
 /**
- * If no CRS is given in the requestarguments, a default CRS will be returned
- * If crs is a requestargument, it will be checked against the crs in the getCapabilities
- * and transformationParameter.js. If everything is ok, the crs will be returned,
- * otherwise an error will be thrown.
  * @param  {Object} serviceCache Object describing the Capabilities of a service (JSON)
  * @param  {Object} requestargs  Arguments of the request
  * @return {String}              EPSG Code of a crs
