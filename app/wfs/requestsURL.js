@@ -7,81 +7,83 @@ const features = require("./features");
 const version = "2.0.0";
 const defaultCRS = "EPSG:4326"
 
-        /**
-         * Takes the URL of an service and creates the basic part for all requests.
-         * Basic part consists of: the requested service ("wfs") and the version.
-         * @method getCapabilities
-         * @param  {String}        serviceURL The Baseurl to the service
-         * @return {String}                   The constructed url
-         */
+/**
+ * Takes the URL of an service and creates the basic part for all requests.
+ * Basic part consists of: the requested service ("wfs") and the version.
+ * @method getCapabilities
+ * @param  {String}        serviceURL The Baseurl to the service
+ * @return {String}                   The constructed url
+ */
 function getCapabilities(serviceURL) {
         "use strict"
 
         let url = generalURLConstructor.getBaseURL(serviceURL, ["wfs", version]);
-        console.log(url + "&REQUEST=getCapabilities");
+        //console.log(url + "&REQUEST=getCapabilities");
         return url + "&REQUEST=getCapabilities";
 }
 
-function getFeature(cacheWFS, requestargs, services){
-  "use strict"
+function getFeature(cacheWFS, requestargs, services) {
+        "use strict"
 
-  // Securing Service
-  const serviceConfiguration = services.find(service => {
-          return service.id === requestargs.params.id
-  });
+        // Securing Service
+        const serviceConfiguration = services.find(service => {
+                return service.id === requestargs.params.id
+        });
 
-  if (!serviceConfiguration){
-    throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
-  }
+        if (!serviceConfiguration) {
+                throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
+        }
 
-  if(!serviceConfiguration.capabilities.features.enabled){
-    throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
-  }
+        if (!serviceConfiguration.capabilities.features.enabled) {
+                throw errorhandling.getError(404, "Not Found", "getFeature", "Service with requested id not found");
+        }
 
 
-  const serviceCache = cacheWFS.getCache().find(obj => {return obj.id === requestargs.params.id});
+        const serviceCache = cacheWFS.getCache().find(obj => {
+                return obj.id === requestargs.params.id
+        });
 
-  if (!serviceCache){
-    throw errorhandling.getError(500, "serviceCache", "getFeature", "serviceCache not available");
-  }
+        if (!serviceCache) {
+                throw errorhandling.getError(500, "serviceCache", "getFeature", "serviceCache not available");
+        }
 
-  try {
-          let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wfs", version]) + "&REQUEST=GetFeature";
+        try {
+                let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wfs", version]) + "&REQUEST=GetFeature";
 
-          url += "&TYPENAMES=" + getTypeNames(serviceCache,requestargs);
+                url += "&TYPENAMES=" + getTypeNames(serviceCache, requestargs);
 
-          // Adding CRS
-          url += "&SRSNAME=" + getCRS(serviceCache, requestargs);
+                // Adding CRS
+                url += "&SRSNAME=" + getCRS(serviceCache, requestargs);
 
-          // Adding bbox
-          url += "&BBOX=" + getBbox(serviceCache, requestargs);
+                // Adding bbox
+                url += "&BBOX=" + getBbox(serviceCache, requestargs);
 
-          // Adding format
-          url += "&OUTPUTFORMAT=" + getOutputFormat(serviceConfiguration, serviceCache, requestargs);
+                // Adding format
+                url += "&OUTPUTFORMAT=" + getOutputFormat(serviceConfiguration, serviceCache, requestargs);
 
-        url += "&EXCEPTIONS=application/json"
+                url += "&EXCEPTIONS=application/json"
 
-        console.log("REQUEST URL");
-        console.log(url);
+                console.log("REQUEST URL");
+                console.log(url);
 
-        return url;
+                return url;
 
-  } catch (error) {
-          return error
-  }
+        } catch (error) {
+                return error
+        }
 }
 
-function getOutputFormat(serviceConfiguration, serviceCache, requestargs){
-  return requestargs.params.format ? requestargs.params.format : "application/json";
+function getOutputFormat(serviceConfiguration, serviceCache, requestargs) {
+        return requestargs.params.format ? requestargs.params.format : "application/json";
 }
 
-function  getTypeNames(serviceCache,requestargs){
-  return requestargs.params.featureId
+function getTypeNames(serviceCache, requestargs) {
+        return requestargs.params.featureId
 
 };
 
-function getCRS(serviceCache, requestargs){
-  return requestargs.params.crs ? requestargs.params.crs : defaultCRS;
+function getCRS(serviceCache, requestargs) {
+        return requestargs.params.crs ? requestargs.params.crs : defaultCRS;
 }
 
 
@@ -104,10 +106,10 @@ function getBbox(serviceCache, requestargs) {
 
         try {
                 if (!requestargs.params.bbox) {
-                  const defaultBbox = getdefaultBbox(serviceCache, requestargs);
+                        const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                         return defaultBbox;
                 } else {
-                  return requestargs.params.bbox
+                        return requestargs.params.bbox
 
                 }
         } catch (error) {
@@ -128,18 +130,18 @@ function getBbox(serviceCache, requestargs) {
 function getdefaultBbox(serviceCache, requestargs) {
         "use strict";
         try {
-              console.log("getdefaultBbox");
+                console.log("getdefaultBbox");
                 const maxBbox = features.getExGeographicBoundingBox(serviceCache);
                 console.log("maxBbox " + maxBbox);
                 if (!maxBbox) {
-                  throw errorhandling.getError(500, "maxBbox", "getdefaultBbox", "Tried to get 'exGeographicBoundingBox'");
+                        throw errorhandling.getError(500, "maxBbox", "getdefaultBbox", "Tried to get 'exGeographicBoundingBox'");
                 }
 
                 const targetCrs = getCRS(serviceCache, requestargs);
 
                 if (targetCrs === "EPSG:4326") {
                         //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
-                        return "" + + maxBbox.westBoundLongitude + "," +maxBbox.southBoundLatitude + "," + maxBbox.eastBoundLongitude + "," + maxBbox.northBoundLatitude;
+                        return "" + +maxBbox.westBoundLongitude + "," + maxBbox.southBoundLatitude + "," + maxBbox.eastBoundLongitude + "," + maxBbox.northBoundLatitude;
                 } else {
                         // Targetsystem validation already happened in getCrs
                         const minis = coordinates.transformation(maxBbox.westBoundLongitude, maxBbox.southBoundLatitude, "EPSG:4326", targetCrs);
@@ -154,10 +156,10 @@ function getdefaultBbox(serviceCache, requestargs) {
 
 }
 
-function getOutputFormat(serviceConfiguration, serviceCache, requestargs){
-  return "application/json";
+function getOutputFormat(serviceConfiguration, serviceCache, requestargs) {
+        return "application/json";
 }
 module.exports = {
-  getCapabilities : getCapabilities,
-  getFeature: getFeature
+        getCapabilities: getCapabilities,
+        getFeature: getFeature
 }

@@ -43,8 +43,6 @@ function loadCache() {
                  */
                 cache = [];
                 requestURLs = loadCapabilitiesURLs();
-                console.log("h")
-                console.log("requestURLs.length = " + requestURLs.length);
                 async.async(getCapabilitiesGenerator, resolve());
         });
 
@@ -89,7 +87,7 @@ function* getCapabilitiesGenerator() {
         "use strict";
         let count = 0;
         while (count < requestURLs.length) {
-          console.log("WMS getCapabilities");
+                console.log("WMS getCapabilities");
                 let capabilities = yield getCapabilities.getJSON_WMS(requestURLs[count]["capabilitiesURL"]);
                 cache.push({
                         "id": requestURLs[count]["id"],

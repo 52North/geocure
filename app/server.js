@@ -184,7 +184,7 @@ server.get({
         url.injectFullUrl(req);
         try {
                 const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
-                console.log(getFeatureRequestURL);
+                // console.log(getFeatureRequestURL);
                 if (getFeatureRequestURL.exceptions) {
                         typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
                 } else {
