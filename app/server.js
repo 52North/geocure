@@ -20,6 +20,7 @@ const server = module.exports.server = restify.createServer();
 
 server.name = "geocure";
 
+server.use(restify.gzipResponse());
 server.use(restify.queryParser());
 server.use(restify.CORS());
 server.use(restify.bodyParser());
