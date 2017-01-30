@@ -44,7 +44,7 @@
                     <li>
                         <a data-toggle="collapse" data-parent="#contents" data-target="#general-subitems" href="#general">General</a>
                         <ul id="general-subitems" class="nav collapse">
-                            <li><a href="#architecture-and-role">Architecture and Role</a></li>
+                            <li><a href="#architecture-and-role">Role of Geocure</a></li>
                             <li><a href="#configuration">Configuration</a></li>
                             <li><a href="#general-common-status-codes">Common Status Codes</a></li>
                         </ul>
@@ -82,36 +82,6 @@
                             <li><a href="#service-features-examples">Examples</a></li>
                         </ul>
                     </li>
-
-                    <li>
-                        <!-- Global View --><a data-toggle="collapse" data-parent="#contents" data-target="#global-view-subitems" href="#global-view">Global View</a>
-                        <ul id="global-view-subitems" class="nav collapse">
-                            <li>
-                                <!-- Service Maps Global Rendering --><a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-global-rendering-subitems" href="#service-maps-global-rendering">Service Maps Global Rendering</a>
-                                <ul id="service-maps-global-rendering-subitems" class="nav collapse">
-                                    <li><a href="#service-maps-global-rendering-urls">URLs</a></li>
-                                    <li><a href="#service-maps-global-rendering-examples">Examples</a></li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <!-- Service Maps Layer Rendering --><a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-layer-rendering-subitems" href="#service-maps-layer-rendering">Service Maps Layer Rendering</a>
-                                <ul id="service-maps-layer-rendering-subitems" class="nav collapse">
-                                    <li><a href="#service-maps-layer-rendering-urls">URLs</a></li>
-                                    <li><a href="#service-maps-layer-rendering-examples">Examples</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
-
-                    <li>
-                        <!-- Queries --><a data-toggle="collapse" data-parent="#contents" data-target="#queries-subitems" href="#queries">Queries</a>
-                        <ul id="queries-subitems" class="nav collapse">
-                            <li><a href="#queries-urls">URLs</a></li>
-                            <li><a href="#queries-query-parameters">Query Parameters</a></li>
-                        </ul>
-                    </li>
-
                 </ul>
             </div>
         </div>
@@ -161,7 +131,7 @@
                 ================================================== -->
             <section id="general">
                 <div class="page-header">
-                    <h2>General</h2>
+                    <h2 class="anchor">General</h2>
                     <p class="pull-right up-link">
                         <a href="#"><i class="icon-chevron-up"></i> top</a>
                     </p>
@@ -169,23 +139,20 @@
                 <div>
 
                     <div id="architecture-and-role">
-                        <h3>Architecture and Role of Geocure REST API</h3>
+                        <h3 class="anchor">Role of Geocure</h3>
                         <img src="img/ComponentDiagram.png" title="Role of the Geocure Proxy." />
                         <p>
-                            As you can see in the diagram above, the client communicates with Geocure, using the REST-API described in this documentation. Geocure translates the requests for the Geoserver and returns the answers as JSON.
+                            As you can see in the diagram above, the client communicates with Geocure, using the REST-API described in this documentation. Geocure translates the requests for the Geoserver and returns the answers per defaultas JSON.
                         </p>
-                        <img src="img/ComponentDiagramDetail.png" title="Modules in detail." />
-                        <p>
-                            The above image shows the internal structure of Geocure. Modules in blue are developed for - and are delivered with the service. Modules in gray are imported from external sources.
-                        </p>
+
                     </div>
 
 
 
                     <div id="configuration">
                         <!-- Status Codes -->
-                        <h3>Configuration</h3>
-                        <p>All configurations are carried out in the services.json, locatet in the folder app/config. In this file an array is used to aggregate objects. Each object is used to described an offered service. An offered service is a service
+                        <h3 class="anchor">Configuration</h3>
+                        <p>All configurations are carried out in services.json, locatet in the folder app/config. In this file an array is used to aggregate objects. Each object is used to described an offered service. An offered service is a service
                             which is offered by the used Geoserver.</p>
 
                         <pre id="services_json_example" class="collapse">
@@ -583,7 +550,7 @@ Content-Type: application/json;charset=UTF-8
                             <tr>
                                 <td><code>bbox</code></td>
                                 <td><code>bbox=5.86,47.27,15.04,15.04,55.05</code></td>
-                                <td>Puts the minimal x value.</td>
+                                <td>Changes the extend of the uses bbox</td>
                                 <td>Values from WMS_1_3_0.EXGeographicBoundingBox.<br>See <a href="#service-maps-examples"> resource <i>maps</i></a>
                                     <br>The order for the coordinates is minx,miny,maxx,maxy </td>
                             </tr>
@@ -769,7 +736,9 @@ Content-Type: application/json;charset=UTF-8
 
                                     <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
                                 </button>
-
+                                <div class="n52-callout n52-callout-info">
+                                    This example shows a request, asking for two layers and using all supported request parameters.
+                                </div>
                                 </div>
 
                             </div>
@@ -1038,6 +1007,9 @@ Content-Type: text/csv;
 
                     <button data-toggle="collapse" data-parent="#service-feature-data-request-example" data-target="#service-feature-data-request-example" class="btn btn-primary">Show/Hide Response
                </button>
+               <div class="n52-callout n52-callout-info">
+                   In this request, all query parameters are used.
+               </div>
             </section>
 
             <!-- Footer
