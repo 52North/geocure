@@ -34,7 +34,7 @@ function loadCapabilitiesURLs() {
         const getCapabilitiesURL = [];
         services.forEach(currentObject => {
                 try {
-                        if (currentObject.capabilities.features.enabled && currentObject.id) {
+                        if (currentObject.capabilities.maps.enabled && currentObject.id) {
 
                                 const capabilitiesRequestParameters = {
                                         "id": currentObject["id"],
@@ -67,12 +67,11 @@ function loadCache() {
                 cache = [];
                 requestURLs = [];
                 requestURLs = loadCapabilitiesURLs();
-                try{
-                  async(getCapabilitiesGenerator, resolve);
+                try {
+                        async(getCapabilitiesGenerator, resolve);
 
-                }
-                catch(error){
-                  reject(error);
+                } catch (error) {
+                        reject(error);
                 }
         });
 }
@@ -116,8 +115,8 @@ function async(generator, resolve) {
 
         function handle(iteratorResult) {
                 if (iteratorResult.done) {
-                  resolve();
-                  return;
+                        resolve();
+                        return;
                 }
 
                 let iteratorValue = iteratorResult.value;
@@ -146,35 +145,35 @@ function async(generator, resolve) {
  * @return {Promise}                     Promise which performes the request
  */
 
- const XLink_1_0 = require("w3c-schemas").XLink_1_0;
- const WMS_1_3_0 = require("ogc-schemas").WMS_1_3_0;
+const XLink_1_0 = require("w3c-schemas").XLink_1_0;
+const WMS_1_3_0 = require("ogc-schemas").WMS_1_3_0;
 
 function getJSON_WMS(getCapabilitiesUrl) {
-    'use strict';
-    return new Promise((resolve, reject) => {
-        try {
+        'use strict';
+        return new Promise((resolve, reject) => {
+                try {
 
-            // Create a Jsonix context
-            var context = new Jsonix.Context([XLink_1_0, WMS_1_3_0], {
-                namespacePrefixes: {
-                    "http://www.opengis.net/wms": "",
-                    "http://www.w3.org/1999/xlink": "xlink"
-                },
-                mappingStyle: "simplified"
-            });
+                        // Create a Jsonix context
+                        var context = new Jsonix.Context([XLink_1_0, WMS_1_3_0], {
+                                namespacePrefixes: {
+                                        "http://www.opengis.net/wms": "",
+                                        "http://www.w3.org/1999/xlink": "xlink"
+                                },
+                                mappingStyle: "simplified"
+                        });
 
-            // Create an unmarshaller (parser)
-            var unmarshaller = context.createUnmarshaller();
+                        // Create an unmarshaller (parser)
+                        var unmarshaller = context.createUnmarshaller();
 
-            // Unmarshal from URL
-            unmarshaller.unmarshalURL(getCapabilitiesUrl, function(result) {
-                resolve(result);
-            });
+                        // Unmarshal from URL
+                        unmarshaller.unmarshalURL(getCapabilitiesUrl, function(result) {
+                                resolve(result);
+                        });
 
-        } catch (error) {
-            reject(error);
-        }
-    });
+                } catch (error) {
+                        reject(error);
+                }
+        });
 }
 
 // var context = new Jsonix.Context([XLink_1_0, Filter_2_0, OWS_1_1_0, WFS_2_0], {
@@ -187,6 +186,6 @@ function getJSON_WMS(getCapabilitiesUrl) {
 
 
 module.exports = {
-  loadCache: loadCache,
-  getCache: getCache
+        loadCache: loadCache,
+        getCache: getCache
 }
