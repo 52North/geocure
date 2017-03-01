@@ -1,58 +1,35 @@
 {
   "name": "geocure",
-  "version": "1.0.0-SNAPSHOT",
-  "author": {
-    "name": "Matthes Rieke"
-  },
-  "license": "MIT",
-  "keywords": [
-    "rest",
-    "api",
-    "geocure",
-    "geodata",
-    "SDI",
-    "raster",
-    "vector",
-    "wms",
-    "wfs",
-    "geojson"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/52North/geocure.git"
-  },
-  "bugs": {
-    "url": "https://github.com/52North/geocure/issues"
+  "version": "1.0.0",
+  "description": "_geocure_ is a REST API providing proxified access to an underlying geodata server. Currently [geoserver](http://geoserver.org/) is supported.",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test"
   },
   "scripts": {
-    "start": "node lib/server.js",
-    "test": "grunt test",
-    "blanket": {
-      "pattern": "//^(?!.*node_modules.*$).*lib//"
-    }
+    "test": "jasmine-node spec"
   },
-  "main": "lib/server",
-  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trzaska/geocure.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Trzaska/geocure/issues"
+  },
+  "homepage": "https://github.com/Trzaska/geocure#readme",
+  "devDependencies": {
+    "jasmine-node": "^1.14.5"
+  },
   "dependencies": {
-    "express": "^4.14.0",
     "jsonix": "^2.4.1",
     "node-restify-swagger": "^0.1.8",
     "ogc-schemas": "^2.6.1",
-    "proj4": "^2.3.14",
-    "request": "^2.71.0",
-    "restify": "~4.0.4",
-    "restify-error": "^1.0.0",
-    "underscore": "~1.8.3"
-  },
-  "devDependencies": {
-    "grunt": "~0.4.1",
-    "grunt-contrib-jshint": "~0.6.0",
-    "grunt-contrib-watch": "~0.5.1",
-    "grunt-mocha-cli": "~1.0.1",
-    "matchdep": "~0.1.1",
-    "should": "~1.2.2",
-    "sinon": "~1.7.3",
-    "grunt-mocha-cov": "0.0.7",
-    "grunt-nodemon": "~0.4.1"
+    "proj4": "^2.3.15",
+    "request": "^2.79.0",
+    "restify": "^4.3.0",
+    "restify-errors": "^4.3.0",
+    "w3c-schemas": "^1.4.0"
   }
 }

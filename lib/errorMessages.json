@@ -1,4 +1,0 @@
-{
-  "badRequestError" : "BadRequestError('The submittet parameters are not valid')",
-  "internalServerError" : "InternalServerError('An internal Error occured. Please try again later.')"
-}

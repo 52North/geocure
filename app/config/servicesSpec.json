@@ -1,0 +1,22 @@
+{
+  "id": "string",
+  "label": "string",
+  "description": "string",
+  "url": "string",
+  "capabilities": {
+    "maps": {
+      "enabled": "boolean",
+      "defaultvalues": {
+        "width": "number",
+        "height": "number",
+        "format": "string"
+      }
+    },
+    "features": {
+      "enabled": "boolean",
+      "defaultvalues": {
+        "format": "string"
+      }
+    }
+  }
+}
