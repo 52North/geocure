@@ -18,6 +18,8 @@ const cacheLoaderWMS = require("./wms/cacheLoader.js");
 
 const server = module.exports.server = restify.createServer();
 
+const BASE_URL = "/geocure";
+
 server.name = "geocure";
 
 server.use(restify.gzipResponse());
@@ -45,7 +47,7 @@ restifySwagger.configure(server, {
 
 
 server.get({
-        url: "/services",
+        url: BASE_URL + "/services",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to geodata services",
@@ -68,7 +70,7 @@ server.get({
 
 
 server.get({
-        url: "/services/:id",
+        url: BASE_URL + "/services/:id",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to a service by id",
@@ -90,7 +92,7 @@ server.get({
 
 
 server.get({
-        url: "/services/:id/maps",
+        url: BASE_URL + "/services/:id/maps",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to a layer overview",
@@ -111,7 +113,7 @@ server.get({
 });
 
 server.get({
-        url: "/services/:id/maps/render",
+        url: BASE_URL + "/services/:id/maps/render",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to layers",
@@ -138,7 +140,7 @@ server.get({
 
 
 server.get({
-        url: "/services/:id/features",
+        url: BASE_URL + "/services/:id/features",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to features",
@@ -161,7 +163,7 @@ server.get({
 
 
 server.get({
-        url: "/services/:id/features/:featureId/data",
+        url: BASE_URL + "/services/:id/features/:featureId/data",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to the data of a feature",
@@ -207,7 +209,7 @@ server.get({
  */
 
 server.get({
-        url: "/loadCacheWFS",
+        url: BASE_URL + "/loadCacheWFS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
@@ -221,7 +223,7 @@ server.get({
 
 
 server.get({
-        url: "/getCacheWFS",
+        url: BASE_URL + "/getCacheWFS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
@@ -233,7 +235,7 @@ server.get({
 
 
 server.get({
-        url: "/loadCacheWMS",
+        url: BASE_URL + "/loadCacheWMS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
@@ -247,7 +249,7 @@ server.get({
 
 
 server.get({
-        url: "/getCacheWMS",
+        url: BASE_URL + "/getCacheWMS",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access maps",
