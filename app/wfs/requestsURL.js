@@ -63,8 +63,8 @@ function getFeature(cacheWFS, requestargs, services) {
 
                 url += "&EXCEPTIONS=application/json"
 
-                // console.log("REQUEST URL");
-                // console.log(url);
+                console.log("REQUEST URL");
+                console.log(url);
 
                 return url;
 
