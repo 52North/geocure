@@ -35,20 +35,58 @@ function describeFeatures(serviceCache, requestargs, services) {
  */
 function getExGeographicBoundingBox(capabilities) {
         try {
-                const maxBbox = capabilities.capabilities.value.featureTypeList.featureType[0].wgs84BoundingBox;
-
+                const maxBbox = getExtremeBbox(capabilities);
                 const response = {};
-                getAllFeatures
-                response["TYPE_NAME"] = maxBbox[0].TYPE_NAME;
-                response["westBoundLongitude"] = maxBbox[0].lowerCorner[0];
-                response["eastBoundLongitude"] = maxBbox[0].upperCorner[0];
-                response["southBoundLatitude"] = maxBbox[0].lowerCorner[1];
-                response["northBoundLatitude"] = maxBbox[0].upperCorner[1];
+                response["TYPE_NAME"] = capabilities.capabilities.value.featureTypeList.featureType[0].TYPE_NAME;
+                response["westBoundLongitude"] = maxBbox.westBoundLongitude;
+                response["eastBoundLongitude"] = maxBbox.eastBoundLongitude;
+                response["southBoundLatitude"] = maxBbox.southBoundLatitude;
+                response["northBoundLatitude"] = maxBbox.northBoundLatitude;
                 response["crs"] = "EPSG:4326";
 
                 return response;
         } catch (error) {
                 throw errorhandling.getError(500, "bbox error", "getExGeographicBoundingBox", "Error while getting 'exGeographicBoundingBox'");
+        }
+
+}
+
+
+function getExtremeBbox(capabilities) {
+
+        try {
+                const extremCorners = initializeMaxBbox(capabilities);
+
+                //console.log(capabilities.capabilities.value.featureTypeList.featureType);
+                capabilities.capabilities.value.featureTypeList.featureType.forEach(feature => {
+                        //const featureWGS84Bbox = feature.wgs84BoundingBox;
+                        extremCorners["westBoundLongitude"] > feature.wgs84BoundingBox[0].lowerCorner[0] ? extremCorners["westBoundLongitude"] = feature.wgs84BoundingBox[0].lowerCorner[0] : extremCorners["westBoundLongitude"];
+                        extremCorners["eastBoundLongitude"] < feature.wgs84BoundingBox[0].upperCorner[0] ? extremCorners["eastBoundLongitude"] = feature.wgs84BoundingBox[0].upperCorner[0] : extremCorners["eastBoundLongitude"];
+                        extremCorners["southBoundLatitude"] > feature.wgs84BoundingBox[0].lowerCorner[1] ? extremCorners["southBoundLatitude"] = feature.wgs84BoundingBox[0].lowerCorner[1] : extremCorners["southBoundLatitude"];
+                        extremCorners["northBoundLatitude"] < feature.wgs84BoundingBox[0].upperCorner[1] ? extremCorners["northBoundLatitude"] = feature.wgs84BoundingBox[0].upperCorner[1] : extremCorners["northBoundLatitude"];
+                });
+
+                return extremCorners;
+
+        } catch (error) {
+                throw error;
+        }
+}
+
+function initializeMaxBbox(capabilities) {
+        const firstFeatureCoordinates = {};
+        try {
+                const maxBbox = capabilities.capabilities.value.featureTypeList.featureType[0].wgs84BoundingBox;
+
+                firstFeatureCoordinates["westBoundLongitude"] = maxBbox[0].lowerCorner[0];
+                firstFeatureCoordinates["eastBoundLongitude"] = maxBbox[0].upperCorner[0];
+                firstFeatureCoordinates["southBoundLatitude"] = maxBbox[0].lowerCorner[1];
+                firstFeatureCoordinates["northBoundLatitude"] = maxBbox[0].upperCorner[1];
+
+                //console.log("firstFeatureCoordinates = " + JSON.stringify(firstFeatureCoordinates));
+                return firstFeatureCoordinates;
+        } catch (error) {
+                throw errorhandling.getError(500, "bbox error", "initializeMaxBbox", "Error while getting 'initializeMaxBbox'");
         }
 
 }
