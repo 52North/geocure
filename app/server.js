@@ -92,7 +92,7 @@ server.get({
 
 
 server.get({
-        url: BASE_URL + "/services/:id/maps",
+        url: BASE_URL + "/services/:id/map",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to a layer overview",
@@ -113,7 +113,7 @@ server.get({
 });
 
 server.get({
-        url: BASE_URL + "/services/:id/maps/render",
+        url: BASE_URL + "/services/:id/map/render",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to layers",
