@@ -66,7 +66,7 @@
                     </li>
 
                     <li>
-                        <a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-subitems" href="#resource-maps">Resource Maps</a>
+                        <a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-subitems" href="#resource-maps">Resource Map</a>
                         <ul id="service-maps-subitems" class="nav collapse">
                             <li><a href="#service-maps-urls">URLs</a></li>
                             <li><a href="#parameters">Query Parameters</a></li>
@@ -164,7 +164,7 @@
                                   "description" : "Description of the service",
                                   "url" : "http://localhost:8080/geoserver/example_A",
                                   "capabilities" : {
-                                      "maps" : {
+                                      "map" : {
                                           "enabled" : true,
                                           "defaultvalues" : {
                                               "width" : 1330,
@@ -188,7 +188,7 @@
                                   "description" : "Description of the service",
                                   "url" : "http://localhost:8080/geoserver/example_B",
                                   "capabilities" : {
-                                      "maps" : {
+                                      "map" : {
                                           "enabled" : true,
                                           "defaultvalues" : {
                                               "width" : 1330,
@@ -212,7 +212,7 @@
                                   "description" : "Description of the service",
                                   "url" : "http://localhost:8080/geoserver/example_C",
                                   "capabilities" : {
-                                      "maps" : {
+                                      "map" : {
                                           "enabled" : false,
                                           "defaultvalues" : {
                                               "width" : 1330,
@@ -267,9 +267,9 @@
                                     <td>The elements of this object are used to configure capabilities and defaultvalues for the service.</td>
                                 </tr>
                                 <tr>
-                                    <td>maps</td>
+                                    <td>map</td>
                                     <td>object</td>
-                                    <td>This object describes the capabilities for maps/images.</td>
+                                    <td>This object describes the capabilities of a map.</td>
                                 </tr>
                                 <tr>
                                     <td>features</td>
@@ -474,7 +474,7 @@ Content-Type: application/json;charset=UTF-8
     "label": "name of the service",
     "description": "Returns sample data via a WM-Service",
     "capabilities": [
-        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/maps",
+        "http://colabis.dev.52north.org/geocure/services/service1COLABIS/map",
         "http://colabis.dev.52north.org/geocure/services/service1COLABIS/features"
     ]
 
@@ -484,7 +484,7 @@ Content-Type: application/json;charset=UTF-8
 
 
                             <div class="n52-callout n52-callout-info">
-                                The value of the <i>key</i> capabilities is an array, containing hrefs. As the endpoints of these indicate, they are poining to the resources <i>maps</i> and <i>features</i>.
+                                The value of the <i>key</i> capabilities is an array, containing hrefs. As the endpoints of these indicate, they are poining to the resources <i>map</i> and <i>features</i>.
                                 <br> Only for enabled services the corresponding href is returned. For further information, see <a href="#configuration">Configuration</a>.
                             </div>
 
@@ -500,7 +500,7 @@ Content-Type: application/json;charset=UTF-8
                 ================================================== -->
             <section id="resource-maps">
                 <div class="page-header">
-                    <h2>Resource Maps</h2>
+                    <h2>Resource Map</h2>
                     <p class="pull-right up-link">
                         <a href="#"><i class="icon-chevron-up"></i> top</a>
                     </p>
@@ -520,7 +520,7 @@ Content-Type: application/json;charset=UTF-8
 
                             <tr>
                                 <td><code>GET</code></td>
-                                <td><code>&lt;base-url&gt;/services/{service-id}/maps</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/map</code></td>
                                 <td><code>application/json</code></td>
                                 <td>Returns an overview of the offered layers and their global extent for the service with id <code>{service-id}</code>.</td>
                             </tr>
@@ -551,7 +551,7 @@ Content-Type: application/json;charset=UTF-8
                                 <td><code>bbox</code></td>
                                 <td><code>bbox=5.86,47.27,15.04,15.04,55.05</code></td>
                                 <td>Changes the extend of the uses bbox</td>
-                                <td>Values from WMS_1_3_0.EXGeographicBoundingBox.<br>See <a href="#service-maps-examples"> resource <i>maps</i></a>
+                                <td>Values from WMS_1_3_0.EXGeographicBoundingBox.<br>See <a href="#service-maps-examples"> resource <i>map</i></a>
                                     <br>The order for the coordinates is minx,miny,maxx,maxy </td>
                             </tr>
 
@@ -639,17 +639,17 @@ Content-Type: application/json;charset=UTF-8
             {
                 "id": "ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2",
                 "title": "Sample measurements of road pollution in Dresden ",
-                "href": "http://localhost:8001/services/service1COLABIS/maps/render?layer=ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2"
+                "href": "http://localhost:8001/services/service1COLABIS/map/render?layer=ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2"
             },
             {
                 "id": "ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e",
                 "title": "DWD administrative areas",
-                "href": "http://localhost:8001/services/service1COLABIS/maps/render?layer=ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e"
+                "href": "http://localhost:8001/services/service1COLABIS/map/render?layer=ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e"
             },
             {
                 "id": "ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116",
                 "title": "dwd-regionen-staedte-und-gemeinden",
-                "href": "http://localhost:8001/services/service1COLABIS/maps/render?layer=ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116"
+                "href": "http://localhost:8001/services/service1COLABIS/map/render?layer=ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116"
             }
         ],
         "crs": [
@@ -690,7 +690,7 @@ Content-Type: application/json;charset=UTF-8
 
                                     <tr>
                                         <td><code>GET</code></td>
-                                        <td><code>&lt;base-url&gt;/services/{service-id}/maps/render</code></td>
+                                        <td><code>&lt;base-url&gt;/services/{service-id}/map/render</code></td>
                                         <td><code>image/png</code></td>
                                         <td>This is the basic url for request. But keep in minde, that it has to be<br> completed with at least the requested layer(s)</td>
                                     </tr>
@@ -704,7 +704,7 @@ Content-Type: application/json;charset=UTF-8
 
                                     <h5><b>Minimal Examples</b></h5>
                                     <div>
-                                        <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/render?layer=ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e HTTP/1.1
+                                        <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/map/render?layer=ckandev:_a2508d4e_74c1_4a02_b1cc_c05db68f538e HTTP/1.1
                                         <br>Host: colabis.dev.52north.org<br>Accept: image/png</pre>
                                         <div id="service-maps-layer-rendering-example-single-layer" class="collapse">
                                             <pre>HTTP/1.1 200 OK
@@ -724,7 +724,7 @@ Content-Type: application/json;charset=UTF-8
                                     </div>
 
                                     <h5><b>Maximal Examples</b></h5>
-                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/maps/render?layer=ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2&bbox=13,50,14,52&width=250&height=350&EPSG:4326&format=image/tiff&transparent=false&bgcolor=0xFFFFFF
+                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/map/render?layer=ckandev:_eece6e0c_0384_4889_9cb8_8529bd148116,ckandev:_23964ffe_67e1_476c_9c71_f25ed8dfe5e2&bbox=13,50,14,52&width=250&height=350&EPSG:4326&format=image/tiff&transparent=false&bgcolor=0xFFFFFF
                                   <br>Host: localhost:8001<br>Accept: image/tiff</pre>
                                     <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
                                         <pre>HTTP/1.1 200 OK
@@ -906,7 +906,7 @@ Content-Type: application/json;charset=UTF-8
 
                                     <tr>
                                         <td><code>GET</code></td>
-                                        <td><code>&lt;base-url&gt;/services/{service-id}/maps/{feature-id}/data</code></td>
+                                        <td><code>&lt;base-url&gt;/services/{service-id}/map/{feature-id}/data</code></td>
                                         <td><code>application/json</code></td>
                                         <td>Returns the by <code>{feature-id}</code> specified feature for a service with id <code>service-id</code> in the default format, which is defined in file <code>services/services.json</code>.
                                     </tr>
