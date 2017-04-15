@@ -126,6 +126,7 @@ server.get({
                 if (getMapUrl.exceptions) {
                         typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
                 } else {
+                        console.log("getMapUrl = " + getMapUrl);
                         requesting.get(String(getMapUrl)).on('response', response => {
                                 if (response.getContentType() === "application/json") {
                                         response.statusCode = 900;
