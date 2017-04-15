@@ -25,7 +25,7 @@ function getAllServices(services, requestargs) {
                           // console.log("service.description = " + service.description)
                           // console.log("requestargs.fullUrl = " + requestargs.fullUrl)
                           // console.log("*********************")
-                          if (service.capabilities.maps.enabled || service.capabilities.features.enabled) {
+                          if (service.capabilities.map.enabled || service.capabilities.features.enabled) {
                                   if (service.hasOwnProperty("id") && service.hasOwnProperty("label") && service.hasOwnProperty("description") && requestargs.hasOwnProperty("fullUrl")) {
                                           description["id"] = service.id;
                                           description["label"] = service.label;

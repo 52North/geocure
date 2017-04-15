@@ -36,7 +36,7 @@ const expectedResponseMapsFeaturesEnables = {
   id : 'local01',
   label : 'Local Testservice',
   description : 'Offers data (points and areas) for development.',
-  capabilities : { maps : 'http://localhost:8002/services/local01/maps',
+  capabilities : { maps : 'http://localhost:8002/services/local01/map',
   features : 'http://localhost:8002/services/local01/features' }
 };
 
@@ -44,8 +44,8 @@ const expectedResponseMapsEnables = {
   id : 'local01',
   label : 'Local Testservice',
   description : 'Offers data (points and areas) for development.',
-  capabilities : { maps : 'http://localhost:8002/services/local01/maps' }
-};
+  capabilities : { maps : 'http://localhost:8002/services/local01/map' }
+}
 
 const expectedResponseFeaturesEnables = {
   id : 'local01',

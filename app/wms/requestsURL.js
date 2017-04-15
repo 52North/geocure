@@ -51,7 +51,7 @@ function getMapURL(cacheWMS, requestargs, services) {
           throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
-        if(!serviceConfiguration.capabilities.maps.enabled){
+        if(!serviceConfiguration.capabilities.map.enabled){
           throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
@@ -156,7 +156,7 @@ function getTransparent(requestargs){
  */
 function getFormat(serviceConfiguration, serviceCache, requestargs) {
 
-return requestargs.params.format ? requestargs.params.format : serviceConfiguration.capabilities.maps.defaultvalues.format;
+return requestargs.params.format ? requestargs.params.format : serviceConfiguration.capabilities.map.defaultvalues.format;
 
 }
 
@@ -170,7 +170,7 @@ return requestargs.params.format ? requestargs.params.format : serviceConfigurat
  */
 function getWidth(serviceConfiguration, requestargs) {
 "use strict";
-  return requestargs.params.width ? requestargs.params.width : serviceConfiguration.capabilities.maps.defaultvalues.width;
+  return requestargs.params.width ? requestargs.params.width : serviceConfiguration.capabilities.map.defaultvalues.width;
 
 }
 /**
@@ -183,7 +183,7 @@ function getWidth(serviceConfiguration, requestargs) {
  */
 function getHeight(serviceConfiguration, requestargs) {
         "use  strict";
-        return requestargs.params.height ? requestargs.params.height : serviceConfiguration.capabilities.maps.defaultvalues.height;
+        return requestargs.params.height ? requestargs.params.height : serviceConfiguration.capabilities.map.defaultvalues.height;
 }
 
 

@@ -34,7 +34,7 @@ function loadCapabilitiesURLs() {
         const getCapabilitiesURL = [];
         services.forEach(currentObject => {
                 try {
-                        if (currentObject.capabilities.maps.enabled && currentObject.id) {
+                        if (currentObject.capabilities.map.enabled && currentObject.id) {
 
                                 const capabilitiesRequestParameters = {
                                         "id": currentObject["id"],

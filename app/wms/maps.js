@@ -11,7 +11,7 @@ function describeMap(serviceCache, requestargs, services) {
         try {
 
                 services.find(service => {
-                        if (service.id == requestargs.params.id && service.capabilities.maps.enabled === false) {
+                        if (service.id == requestargs.params.id && service.capabilities.map.enabled === false) {
                                 throw errorhandling.getError(404, "id not found", "describeMap", "Service with requested id is not supported");
                         }
                 });
