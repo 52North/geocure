@@ -24,6 +24,7 @@ function getCapabilities(serviceURL) {
         "use strict"
 
         let url = generalURLConstructor.getBaseURL(serviceURL, ["wms", version]);
+        console.log("wms.requestURL.js getCapabilities url: " + url);
         return url + "&REQUEST=getCapabilities";
 }
 
