@@ -3,9 +3,9 @@
         "id" : "local01",
         "label" : "Local Testservice",
         "description" : "Offers data (points and areas) for development.",
-        "url" : "http://localhost:8080/geoserver/topp",
+        "url" : "https://urlToService/geoserver",
         "capabilities" : {
-            "maps" : {
+            "map" : {
                 "enabled" : true,
                 "defaultvalues" : {
                     "width" : 1330,
@@ -27,9 +27,9 @@
         "id" : "local10",
         "label" : "Local Testservice disabled wfs",
         "description" : "Offers data (points and areas) for development.",
-        "url" : "http://localhost:8080/geoserver/topp",
+        "url" : "https://urlToService/geoserver",
         "capabilities" : {
-            "maps" : {
+            "map" : {
                 "enabled" : true,
                 "defaultvalues" : {
                     "width" : 1330,

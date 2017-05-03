@@ -92,7 +92,7 @@ server.get({
 
 
 server.get({
-        url: BASE_URL + "/services/:id/maps",
+        url: BASE_URL + "/services/:id/map",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to a layer overview",
@@ -113,7 +113,7 @@ server.get({
 });
 
 server.get({
-        url: BASE_URL + "/services/:id/maps/render",
+        url: BASE_URL + "/services/:id/map/render",
         swagger: {
                 summary: "services resource",
                 notes: "this resource provides access to layers",
@@ -126,6 +126,7 @@ server.get({
                 if (getMapUrl.exceptions) {
                         typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
                 } else {
+                        console.log("getMapUrl = " + getMapUrl);
                         requesting.get(String(getMapUrl)).on('response', response => {
                                 if (response.getContentType() === "application/json") {
                                         response.statusCode = 900;
@@ -187,77 +188,6 @@ server.get({
         }
 });
 
-
-
-// const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
-// if(getMapUrl.exceptions){
-//   typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
-// }
-// else {
-//   requesting.get(String(getMapUrl)).on('response', response => {
-//     if(response.getContentType() === "application/json"){
-//       response.statusCode = 900;
-//     }
-//   }).pipe(res);
-// }
-
-
-
-
-/**
- * TESTS
- */
-
-server.get({
-        url: BASE_URL + "/loadCacheWFS",
-        swagger: {
-                summary: "services resource",
-                notes: "this resource provides access maps",
-        }
-}, function(req, res, next) {
-        cacheLoaderWFS.loadCache();
-        res.send("loading cache");
-});
-
-
-
-
-server.get({
-        url: BASE_URL + "/getCacheWFS",
-        swagger: {
-                summary: "services resource",
-                notes: "this resource provides access maps",
-        }
-}, function(req, res, next) {
-
-        res.send(cacheLoaderWFS.getCache());
-});
-
-
-server.get({
-        url: BASE_URL + "/loadCacheWMS",
-        swagger: {
-                summary: "services resource",
-                notes: "this resource provides access maps",
-        }
-}, function(req, res, next) {
-        cacheLoaderWMS.loadCache();
-        res.send("loading cache");
-});
-
-
-
-
-server.get({
-        url: BASE_URL + "/getCacheWMS",
-        swagger: {
-                summary: "services resource",
-                notes: "this resource provides access maps",
-        }
-}, function(req, res, next) {
-
-        res.send(cacheLoaderWMS.getCache());
-});
 
 
 

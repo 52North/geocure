@@ -13,17 +13,18 @@ const version = "1.3.0";
 const version_getRequest = "1.3"
 const defaultCRS = "EPSG:4326"
 const defaultBGcolor = "0xFFFFFF";
-        /**
-         * Takes the URL of an service and creates the basic part for all requests.
-         * Basic part consists of: the requested service ("wms") and the version.
-         * @method getCapabilities
-         * @param  {String}        serviceURL The Baseurl to the service
-         * @return {String}                   The constructed url
-         */
+/**
+ * Takes the URL of an service and creates the basic part for all requests.
+ * Basic part consists of: the requested service ("wms") and the version.
+ * @method getCapabilities
+ * @param  {String}        serviceURL The Baseurl to the service
+ * @return {String}                   The constructed url
+ */
 function getCapabilities(serviceURL) {
         "use strict"
 
         let url = generalURLConstructor.getBaseURL(serviceURL, ["wms", version]);
+        console.log("wms.requestURL.js getCapabilities url: " + url);
         return url + "&REQUEST=getCapabilities";
 }
 
@@ -46,25 +47,27 @@ function getMapURL(cacheWMS, requestargs, services) {
         });
 
 
-        if (!serviceConfiguration){
-          throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+        if (!serviceConfiguration) {
+                throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
-        if(!serviceConfiguration.capabilities.maps.enabled){
-          throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+        if (!serviceConfiguration.capabilities.map.enabled) {
+                throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
         }
 
-        const serviceCache = cacheWMS.getCache().find(obj => {return obj.id === requestargs.params.id});
+        const serviceCache = cacheWMS.getCache().find(obj => {
+                return obj.id === requestargs.params.id
+        });
 
-        if (!serviceCache){
-          throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
+        if (!serviceCache) {
+                throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
         }
 
         // Adding Layers
         try {
                 let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]) + "&REQUEST=GetMap";
 
-                url += "&LAYERS=" + getLayer(serviceCache,requestargs);
+                url += "&LAYERS=" + getLayer(serviceCache, requestargs);
                 // As no seperated styling is supported. So styles is empty to use default styling
                 url += "&STYLES=";
 
@@ -88,11 +91,11 @@ function getMapURL(cacheWMS, requestargs, services) {
 
                 url += "&BGCOLOR=" + getBGcolor(requestargs)
 
-              // Exception
-              url += "&EXCEPTIONS=json"
+                // Exception
+                url += "&EXCEPTIONS=json"
 
 
-              return url;
+                return url;
 
         } catch (error) {
                 throw error
@@ -110,14 +113,14 @@ function getMapURL(cacheWMS, requestargs, services) {
  * @return {String}               BGColorCode
  * @throws {Error}                Otherwise
  */
-function getBGcolor(requestargs){
-  if(!requestargs.params.bgcolor){
-    return defaultBGcolor;
-  }
-  // if(/^0x([A-Fa-f0-9]{6})$/.test(requestargs.params.bgcolor)){
-    return requestargs.params.bgcolor;
-  // }
-  // throw errorhandling.getError("requestResponses", "bgcolor");
+function getBGcolor(requestargs) {
+        if (!requestargs.params.bgcolor) {
+                return defaultBGcolor;
+        }
+        // if(/^0x([A-Fa-f0-9]{6})$/.test(requestargs.params.bgcolor)){
+        return requestargs.params.bgcolor;
+        // }
+        // throw errorhandling.getError("requestResponses", "bgcolor");
 }
 
 
@@ -130,16 +133,16 @@ function getBGcolor(requestargs){
  * @return {Boolean}                   see description
  * @throws {Error}                    Otherwise
  */
-function getTransparent(requestargs){
-  if(!requestargs.params.transparent){
-    return false;
-  }
+function getTransparent(requestargs) {
+        if (!requestargs.params.transparent) {
+                return false;
+        }
 
-  if(typeof requestargs.params.transparent === "boolean"){
-      return requestargs.params.transparent;
-    }
+        if (Boolean(requestargs.params.transparent)) {
+                return requestargs.params.transparent;
+        }
 
-  //throw errorhandling.getError("requestResponses", "transparent");
+        //throw errorhandling.getError("requestResponses", "transparent");
 }
 
 /**
@@ -155,7 +158,7 @@ function getTransparent(requestargs){
  */
 function getFormat(serviceConfiguration, serviceCache, requestargs) {
 
-return requestargs.params.format ? requestargs.params.format : serviceConfiguration.capabilities.maps.defaultvalues.format;
+        return requestargs.params.format ? requestargs.params.format : serviceConfiguration.capabilities.map.defaultvalues.format;
 
 }
 
@@ -168,8 +171,8 @@ return requestargs.params.format ? requestargs.params.format : serviceConfigurat
  * @throws {Error}                        Otherwise
  */
 function getWidth(serviceConfiguration, requestargs) {
-"use strict";
-  return requestargs.params.width ? requestargs.params.width : serviceConfiguration.capabilities.maps.defaultvalues.width;
+        "use strict";
+        return requestargs.params.width ? requestargs.params.width : serviceConfiguration.capabilities.map.defaultvalues.width;
 
 }
 /**
@@ -182,7 +185,7 @@ function getWidth(serviceConfiguration, requestargs) {
  */
 function getHeight(serviceConfiguration, requestargs) {
         "use  strict";
-        return requestargs.params.height ? requestargs.params.height : serviceConfiguration.capabilities.maps.defaultvalues.height;
+        return requestargs.params.height ? requestargs.params.height : serviceConfiguration.capabilities.map.defaultvalues.height;
 }
 
 
@@ -201,7 +204,7 @@ function getBbox(serviceCache, requestargs) {
         // If no crs is given, use EPGS:4326
         // Otherwise use cooedinates in the given crs.
         // This is important, because images can be returned with a spatial reference.
-return requestargs.params.bbox ? requestargs.params.bbox : (getdefaultBbox(serviceCache, requestargs));
+        return requestargs.params.bbox ? requestargs.params.bbox : (getdefaultBbox(serviceCache, requestargs));
 }
 
 /**
@@ -281,27 +284,26 @@ function getCRS(serviceCache, requestargs) {
  * @return {String}              Comma-separated string of layers
  * @throws {Error}               Otherwiese
  */
-function getLayer(serviceCache,requestargs){
-  "use strict";
+function getLayer(serviceCache, requestargs) {
+        "use strict";
 
-  // If no layers were given
-  if(!requestargs.params.layer){
-    try{
-      let supportedLayers = maps.getAllLayers(serviceCache, requestargs);
-      let response = [];
+        // If no layers were given
+        if (!requestargs.params.layer) {
+                try {
+                        let supportedLayers = maps.getAllLayers(serviceCache, requestargs);
+                        let response = [];
 
-      supportedLayers.forEach(layer => {
-        response.push(layer.id);
-      })
+                        supportedLayers.forEach(layer => {
+                                response.push(layer.id);
+                        })
 
-      return response.toString();
-    }
-    catch (error){
-      throw error;
-    }
-  }
+                        return response.toString();
+                } catch (error) {
+                        throw error;
+                }
+        }
 
-  return requestargs.params.layer;
+        return requestargs.params.layer;
 }
 
 module.exports = {
