@@ -109,7 +109,14 @@ function getBbox(serviceCache, requestargs) {
                         const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                         return defaultBbox;
                 } else {
-                        return requestargs.params.bbox
+                        const requestedBbox = String(requestargs.params.bbox).split(",");
+                        console.log("Swapping Bbox values for wfs 2.0 from lat, lon to lon, lat")
+                        // WFS 2.0 requires lat, lon BUT WFS 1.3 requires lon, lat.
+                        // To offer an unified interface, we request also lon, lat from the user for WFS-request.
+                        // In the following we change the order of the given values.
+                        
+                        let requestBbox = requestedBbox[1] + "," + requestedBbox[0] + "," + requestedBbox[3] + "," + requestedBbox[2];
+                        return requestBbox;
 
                 }
         } catch (error) {

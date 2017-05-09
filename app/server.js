@@ -126,7 +126,7 @@ server.get({
                 if (getMapUrl.exceptions) {
                         typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
                 } else {
-                        console.log("getMapUrl = " + getMapUrl);
+                        console.log("getMapUrl: " + getMapUrl);
                         requesting.get(String(getMapUrl)).on('response', response => {
                                 if (response.getContentType() === "application/json") {
                                         response.statusCode = 900;
@@ -177,6 +177,7 @@ server.get({
                 if (getFeatureRequestURL.exceptions) {
                         typeof getFeatureRequestURL.statuscode === "number" ? res.send(getFeatureRequestURL.statuscode, getFeatureRequestURL) : res.send(500, getFeatureRequestURL);
                 } else {
+                    console.log("getFeatureRequestURL: " + getFeatureRequestURL);
                         requesting.get(String(getFeatureRequestURL)).on('response', response => {
                                 if (!response.headers["content-disposition"]) {
                                         response.statusCode = 900;
