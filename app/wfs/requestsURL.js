@@ -103,13 +103,20 @@ function getBbox(serviceCache, requestargs) {
         // If no crs is given, use EPGS:4326
         // Otherwise use cooedinates in the given crs.
         // This is important, because images can be returned with a spatial reference.
-
         try {
-                if (!requestargs.params.bbox) {
+                var bbox;
+                var queryParams = requestargs.query;
+                for(var property in queryParams){
+                        if(property.hasOwnProperty(property) || property.toLowerCase() == "bbox"){
+                                bbox = queryParams[property];
+                                break;
+                        }
+                }
+                if (!bbox) {
                         const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                         return defaultBbox;
                 } else {
-                        return requestargs.params.bbox
+                        return bbox;
 
                 }
         } catch (error) {
