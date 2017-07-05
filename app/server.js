@@ -27,6 +27,11 @@ server.use(restify.queryParser());
 server.use(restify.CORS());
 server.use(restify.bodyParser());
 
+server.use(function(req, res, next){
+        url.injectFullUrl(req);
+        next();
+});
+
 restifySwagger.configure(server, {
         info: {
                 title: "52°North geocure API",
@@ -53,8 +58,6 @@ server.get({
                 notes: "this resource provides access to geodata services",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
-
         try {
                 const response = wmsServices.getAllServices(services, req);
                 if (response.exceptions) {
@@ -76,7 +79,6 @@ server.get({
                 notes: "this resource provides access to a service by id",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
         try {
                 const response = wmsServices.getServiceDescriptionById(services, req);
                 if (response.exceptions) {
@@ -98,7 +100,6 @@ server.get({
                 notes: "this resource provides access to a layer overview",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
         try {
                 const response = maps.describeMap(cacheLoaderWMS.getCache(), req, services);
                 if (response.exceptions) {
@@ -119,7 +120,6 @@ server.get({
                 notes: "this resource provides access to layers",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
         try {
                 const getMapUrl = requestURLWMS.getMapURL(cacheLoaderWMS, req, services);
                 //console.log(getMapUrl);
@@ -147,7 +147,6 @@ server.get({
                 notes: "this resource provides access to features",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
         try {
                 const response = features.describeFeatures(cacheLoaderWFS.getCache(), req, services);
                 if (response.exceptions) {
@@ -170,7 +169,6 @@ server.get({
                 notes: "this resource provides access to the data of a feature",
         }
 }, function(req, res, next) {
-        url.injectFullUrl(req);
         try {
                 const getFeatureRequestURL = requestURLWFS.getFeature(cacheLoaderWFS, req, services);
                 // console.log(getFeatureRequestURL);
@@ -197,8 +195,6 @@ restifySwagger.loadRestifyRoutes();
 /**
  * Start server
  */
-
-
 cacheLoaderWMS.loadCache().then(() => cacheLoaderWFS.loadCache()).then(() => {
         server.listen(8002, function() {
                 console.log("%s started: %s", server.name, server.url);
