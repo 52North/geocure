@@ -92,6 +92,8 @@ server.get({
         }
 });
 
+// neue Rest Ressource /:id/map/styles
+// JSON File mit styles raus jagen und bei Request eine Referenz darauf verwenden.
 
 server.get({
         url: BASE_URL + "/services/:id/map",
@@ -113,6 +115,16 @@ server.get({
         }
 });
 
+// service, version, request, layers, styles, srs or crs, bbox, width, height, query_layers, info_format, feature_count, x, by
+// service, version, request, styles, info_format=JSON, feature_count (opt)
+server.get({
+        url: BASE_URL + "/services/:id/map/info",
+        swagger: {
+
+        }
+}) 
+
+// sld_body 
 server.get({
         url: BASE_URL + "/services/:id/map/render",
         swagger: {
