@@ -3,7 +3,7 @@
         "id" : "local01",
         "label" : "Local Testservice",
         "description" : "Offers data (points and areas) for development.",
-        "url" : "https://urlToService/geoserver",
+        "url" : "http://localhost:8080/geoserver",
         "capabilities" : {
             "map" : {
                 "enabled" : true,
@@ -27,7 +27,7 @@
         "id" : "local10",
         "label" : "Local Testservice disabled wfs",
         "description" : "Offers data (points and areas) for development.",
-        "url" : "https://urlToService/geoserver",
+        "url" : "http://localhost:8080/geoserver",
         "capabilities" : {
             "map" : {
                 "enabled" : true,
