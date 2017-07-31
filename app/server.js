@@ -90,32 +90,20 @@ server.get({
     }
 });
 
-
-
-/**
- *  predefined set of styles 
- */
-var styles = [
-    {
-        title: "friendly_hippo_points",
-
-    }
-];
-
-server.get({
-    url: BASE_URL + "/services/:id/map/styles",
-    swagger: {
-        summary: "service resource",
-        notes: "this resource provides access to a style ressource"
-    }
-}, function (req, res, next) {
-    try {
-
-        res.send(200, styles);
-    } catch (error) {
-        res.send(500, error);
-    }
-});
+//server.get({
+//    url: BASE_URL + "/services/:id/map/styles",
+//    swagger: {
+//        summary: "service resource",
+//        notes: "this resource provides access to a style ressource"
+//    }
+//}, function (req, res, next) {
+//    try {
+//        // access styles 
+//        res.send(200, res);
+//    } catch (error) {
+//        res.send(500, error);
+//    }
+//});
 
 server.get({
     url: BASE_URL + "/services/:id/map",

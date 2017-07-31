@@ -164,84 +164,84 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
     return xmlObj;
 }
 
-/**
- * Returns the URL for a "getMap - request"
- * @method getMapURL
- * @param  {Object}   cacheWMS     The whole cache for WM-Services
- * @param  {Object}   requestargs  Arguments of the request
- * @param  {Array}    services      Array with all services
- * @return {String}               The URL
- * @throws {Object}                Otherwise
- */
-function getMapURL(cacheWMS, requestargs, services) {
-    "use strict";
-
-    // Securing service
-    const serviceConfiguration = services.find(service => {
-        return service.id === requestargs.params.id;
-    });
-
-
-    if (!serviceConfiguration) {
-        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    }
-
-    if (!serviceConfiguration.capabilities.map.enabled) {
-        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    }
-
-    const serviceCache = cacheWMS.getCache().find(obj => {
-        return obj.id === requestargs.params.id;
-    });
-
-    if (!serviceCache) {
-        throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
-    }
-
-    // Adding Layers
-    try {
-
-        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]) + "&REQUEST=GetMap";
-
-        url += "&LAYERS=" + getLayer(serviceCache, requestargs);
-        // As no seperated styling is supported. So styles is empty to use default styling
-        if (requestargs.params.styles)
-            url += "&STYLES=" + requestargs.params.styles;
-        //else
-        //url += "&STYLES=";
-
-        if (requestargs.params.sldbody)
-            url += "&SLDBODY=" + requestargs.params.sldbody;
-
-        // Adding CRS
-        url += "&CRS=" + getCRS(serviceCache, requestargs);
-
-        // Adding bbox
-        url += "&BBOX=" + getBbox(serviceCache, requestargs);
-
-        // Adding width
-        url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs);
-
-        // Adding height
-        url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
-
-        // Adding format
-        url += "&FORMAT=" + getFormat(serviceConfiguration, serviceCache, requestargs);
-
-        // Adding transparent
-        url += "&TRANSPARENT=" + getTransparent(requestargs);
-
-        url += "&BGCOLOR=" + getBGcolor(requestargs);
-
-        // Exception
-        url += "&EXCEPTIONS=json";
-
-        return url;
-
-    } catch (error) {
-        throw error;
-    }
-}
+///**
+// * Returns the URL for a "getMap - request"
+// * @method getMapURL
+// * @param  {Object}   cacheWMS     The whole cache for WM-Services
+// * @param  {Object}   requestargs  Arguments of the request
+// * @param  {Array}    services      Array with all services
+// * @return {String}               The URL
+// * @throws {Object}                Otherwise
+// */
+//function getMapURL(cacheWMS, requestargs, services) {
+//    "use strict";
+//
+//    // Securing service
+//    const serviceConfiguration = services.find(service => {
+//        return service.id === requestargs.params.id;
+//    });
+//
+//
+//    if (!serviceConfiguration) {
+//        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+//    }
+//
+//    if (!serviceConfiguration.capabilities.map.enabled) {
+//        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+//    }
+//
+//    const serviceCache = cacheWMS.getCache().find(obj => {
+//        return obj.id === requestargs.params.id;
+//    });
+//
+//    if (!serviceCache) {
+//        throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
+//    }
+//
+//    // Adding Layers
+//    try {
+//
+//        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]) + "&REQUEST=GetMap";
+//
+//        url += "&LAYERS=" + getLayer(serviceCache, requestargs);
+//        // As no seperated styling is supported. So styles is empty to use default styling
+//        if (requestargs.params.styles)
+//            url += "&STYLES=" + requestargs.params.styles;
+//        //else
+//        //url += "&STYLES=";
+//
+//        if (requestargs.params.sldbody)
+//            url += "&SLDBODY=" + requestargs.params.sldbody;
+//
+//        // Adding CRS
+//        url += "&CRS=" + getCRS(serviceCache, requestargs);
+//
+//        // Adding bbox
+//        url += "&BBOX=" + getBbox(serviceCache, requestargs);
+//
+//        // Adding width
+//        url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs);
+//
+//        // Adding height
+//        url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
+//
+//        // Adding format
+//        url += "&FORMAT=" + getFormat(serviceConfiguration, serviceCache, requestargs);
+//
+//        // Adding transparent
+//        url += "&TRANSPARENT=" + getTransparent(requestargs);
+//
+//        url += "&BGCOLOR=" + getBGcolor(requestargs);
+//
+//        // Exception
+//        url += "&EXCEPTIONS=json";
+//
+//        return url;
+//
+//    } catch (error) {
+//        throw error;
+//    }
+//}
 
 /**
  * Returns the ...
