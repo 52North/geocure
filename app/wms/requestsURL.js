@@ -123,8 +123,8 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
     xmlObj += '</BoundingBox>';
 
     // add Output format:
-    var format = getFormat(serviceConfiguration, serviceCache, requestargs),   // default format
-            width = '600',      // default width
+    var format = getFormat(serviceConfiguration, serviceCache, requestargs), // default format
+            width = '600', // default width
             height = '400';     // default height
 
     width = getWidth(serviceConfiguration, requestargs);
@@ -142,22 +142,18 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
     var sld_dec = "<StyledLayerDescriptor></StyledLayerDescriptor>";
     if (requestargs.params.sldbody) {
         sld_dec = decodeURIComponent(requestargs.params.sldbody);
-        console.log("decodedSLD: "+sld_dec);
+        console.log("decodedSLD: " + sld_dec);
         xmlObj += sld_dec;
-    }
-    ;
+    } else {
 
-// might gonna come back to this to input the &LAYERS= requestparam into the <Name/> of the SLD
-//    xmlObj += '<StyledLayerDescriptor version="1.3.0" xsi:schemaLocation="http://schemas.opengis.net/sld/1.3.0/StyledLayerDescriptor.xsd" ';
-//    xmlObj += 'xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" ';
-//    xmlObj += 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
-//    xmlObj += '<NamedLayer>';
-//    xmlObj += '<Name>' + getLayer(serviceCache, requestargs) + '</Name>';
-//    xmlObj += '</NamedLayer>';
-//    
-//    xmlObj += // parse rest somehow :-)
-//    
-//    xmlObj += '</StyledLayerDescriptor>';
+        xmlObj += '<StyledLayerDescriptor version="1.3.0" xsi:schemaLocation="http://schemas.opengis.net/sld/1.3.0/StyledLayerDescriptor.xsd" ';
+        xmlObj += 'xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" ';
+        xmlObj += 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
+        xmlObj += '<NamedLayer>';
+        xmlObj += '<Name>' + getLayer(serviceCache, requestargs) + '</Name>';
+        xmlObj += '</NamedLayer>';
+        xmlObj += '</StyledLayerDescriptor>';
+    }
 
 
     xmlObj += '</GetMap>';
@@ -244,7 +240,7 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
 //}
 
 /**
- * Returns the ...
+ * Returns the URL for a "getFeatureInfo request"
  * @method getFeatureInfo
  * @param {type} CacheWMS
  * @param {type} requestargs
