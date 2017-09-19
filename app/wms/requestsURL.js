@@ -104,10 +104,12 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
     xmlObj += '</CRS>';
 
     // add BBox:
-    var x1 = '-180', // default BBox (i.e. max. Bbox)
-            y1 = '-90',
-            x2 = '180',
-            y2 = '90';
+    let bbx = getdefaultBbox(serviceCache, requestargs);
+    let splbx = bbx.split(',')
+    var x1 = splbx[0], // default BBox (i.e. max. Bbox)
+            y1 = splbx[1],
+            x2 = splbx[2],
+            y2 = splbx[3];
     xmlObj += '<BoundingBox srsName="http://www.opengis.net/gml/srs/epsg.xml#' + epsg_code + '">';
     if (requestargs.params.bbox) {
         var coords = requestargs.params.bbox.split(',');
