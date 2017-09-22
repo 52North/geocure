@@ -754,6 +754,238 @@ Content-Type: application/json;charset=UTF-8
             </section>
 
 
+
+
+
+
+
+
+            <!-- Service Maps Info
+                ================================================== -->
+            <section id="resource-maps-info">
+                <div class="page-header">
+                    <h2>Resource Map Info</h2>
+                    <p class="pull-right up-link">
+                        <a href="#"><i class="icon-chevron-up"></i> top</a>
+                    </p>
+                </div>
+                <div>
+                    <div id="service-maps-urls">
+                        <!-- URLs -->
+                        <h3>URLs</h3>
+                        <p>API calls are triggered by using the following URLs.</p>
+                        <table class="table">
+                            <tr>
+                                <th>Method</th>
+                                <th>Path</th>
+                                <th>Content-Type</th>
+                                <th>Description</th>
+                            </tr>
+
+                            <tr>
+                                <td><code>GET</code></td>
+                                <td><code>&lt;base-url&gt;/services/{service-id}/map/info</code></td>
+                                <td><code>application/json</code></td>
+                                <td>Provides information to elements on map.</td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <h3 id="parameters">Query Parameters</h3>
+                    Parameters to request information from elements on map.
+
+                    <section>
+                        <table class="table">
+                            <tr>
+                                <th>Parameter</th>
+                                <th>Example</th>
+                                <th>Description</th>
+                                <th>Default values</th>
+                            </tr>
+
+                            <tr>
+                                <td><code>layer</code></td>
+                                <td><code>layer=mapLayer1,mapLayer2</code></td>
+                                <td>Single layer or comma separated list of of layers. <br> The order matters. The first layer is drawn on top, and so on.</td>
+                                <td>No default value.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>bbox</code></td>
+                                <td><code>bbox=5.86,47.27,15.04,55.05</code></td>
+                                <td>Changes the extend of the uses bbox</td>
+                                <td>Values from WMS_1_3_0.EXGeographicBoundingBox.<br>See <a href="#service-maps-examples"> resource <i>map</i></a>
+                                    <br>The order for the coordinates is minx,miny,maxx,maxy </td>
+                            </tr>
+
+                            <tr>
+                                <td><code>width</code></td>
+                                <td><code>width=500</code></td>
+                                <td>Number of pixels for image width.</td>
+                                <td>Default taken from services.json<br>See <a href="#configuration">configuration</a></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>height</code></td>
+                                <td><code>height=500</code></td>
+                                <td>Number of pixels for image height.</td>
+                                <td>Default taken from services.json<br>See <a href="#configuration">configuration</a></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>format</code></td>
+                                <td><code>format=image/png</code></td>
+                                <td>Sets the response format</td>
+                                <td>Default taken from services.json<br>See <a href="#configuration">configuration</a></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>x</code></td>
+                                <td><code>x=320</code></td>
+                                <td>Pixel coordinate for getFeatureInfo request</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>y</code></td>
+                                <td><code>y=320</code></td>
+                                <td>Pixel coordinate for getFeatureInfo request</td>
+                                <td></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>feature_count</code></td>
+                                <td><code>feature_count=50</code></td>
+                                <td>Maximum number of features to return.</td>
+                                <td>Default is 1.</td>
+                            </tr>
+
+                            <tr>
+                                <td><code>buffer</code></td>
+                                <td><code>buffer=10</code></td>
+                                <td>search radius around query point.</td>
+                                <td>Default is 3.</td>
+                            </tr>
+
+
+                            <tr>
+                                <td><code>info_format</code></td>
+                                <td><code>info_format=text/html</code></td>
+                                <td> 	Format for the feature information response:
+                                    <ul>
+                                        <li>
+                                            <code>text/plain</code>
+                                        </li>
+                                        <li>
+                                            <code>application/vnd.ogc.gml</code>
+                                        </li>
+                                        <li>
+                                            <code>application/vnd.ogc.gml/3.1.1</code>
+                                        </li>
+                                        <li>
+                                            <code>text/html</code>
+                                        </li>
+                                        <li>
+                                            <code>application/json</code>
+                                        </li>
+                                        <li>
+                                            <code>text/javascript</code>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td><code>application/json</code></td>
+                            </tr>
+
+                            <tr>
+                                <td><code>crs</code></td>
+                                <td><code>crs=EPSG:4326</code></td>
+                                <td>Sets the coordinate reference system of the response.<br> May be restricted by the service.<br> Currently supported by Geocure:
+                                    <ul>
+                                        <li>
+                                            <code>EPSG:4326</code>
+                                        </li>
+                                        <li>
+                                            <code>EPSG:4269</code>
+                                        </li>
+                                        <li>
+                                            <code>EPSG:5243</code>
+                                        </li>
+                                        <li>
+                                            <code>EPSG:4839</code>
+                                        </li>
+                                        <li>
+                                            <code>EPSG:3068</code>
+                                        </li>
+                                        <li>
+                                            <code>EPSG:3857</code>
+                                        </li>
+                                    </ul>
+                                </td>
+                                <td><code>EPSG:4326</code></td>
+                            </tr>
+                        </table>
+                        <div class="n52-callout n52-callout-info">
+                            Since the query parameters <i>layer, x, y</i> have no default values, the client has to provide these.<br> All other parameters are optional.
+                        </div>
+
+                        <div>
+
+                            <div id="map-info-example">
+                                <!-- Examples -->
+                                <div>
+
+                                    <h5><b>Minimal Examples</b></h5>
+                                    <div>
+                                      <pre>GET http://colabis.dev.52north.org/geocure/services/service1COLABIS/map/info?layer=ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1,ckan:_7f1cce1a_62b3_49f3_ac3f_cf73ed1586fa,ckan:_8e2bef33_248f_42b5_bd50_0f474a54d11f,ckan:_9f064e17_799e_4261_8599_d3ee31b5392b&x=400&y=350 HTTP/1.1
+                                        <br>Host: colabis.dev.52north.org<br>Accept: application/json</pre>
+                                        <div id="map-info-example-min" class="collapse">
+                                            <pre>HTTP/1.1 200 OK
+                                  Content-Type: application/json;
+                                  </pre>
+                                  Content-Type: text/javascript ;charset=UTF-8
+                                parseResponse({"type":"FeatureCollection","totalFeatures":"unknown","features":[{"type":"Feature","id":"_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1.553","geometry":{"type":"MultiPolygon","coordinates":[[[[8.444678,52.361456],[8.46112,52.317408],[8.463046,52.276068],[8.396957,52.282587],[8.345655,52.27155],[8.324176,52.277571],[8.293352,52.304279],[8.290541,52.326978],[8.31145,52.349808],[8.329124,52.35047],[8.339329,52.36712],[8.360447,52.361563],[8.390992,52.38382],[8.444678,52.361456]]]]},"geometry_name":"wkb_geometry","properties":{"warncellid":803459003,"ags_2015":"03459003","name":"Bad Essen","typed_name":"Gemeinde Bad Essen","state":"NS","min_height":0,"max_height":400}}],"crs":{"type":"name","properties":{"name":"urn:ogc:def:crs:EPSG::4326"}}})
+                                        </div>
+
+
+                                        <button data-toggle="collapse" data-parent="#map-info-example" data-target="#map-info-example-min" class="btn btn-primary">Show/Hide Response
+                                      </button>
+                                    </div>
+
+                                    <h5><b>Maximal Examples</b></h5>
+                                    <pre>GET http://colabis.dev.52north.org/services/service1COLABIS/map/info?srs=EPSG:4326&format=application/json&layers=ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1,ckan:_7f1cce1a_62b3_49f3_ac3f_cf73ed1586fa,ckan:_8e2bef33_248f_42b5_bd50_0f474a54d11f,ckan:_9f064e17_799e_4261_8599_d3ee31b5392b&bbox=5.86599881341562,47.270362,15.037743335938,55.057374701071&WIDTH=1330&HEIGHT=944&x=400&y=350&info_format=text/plain&buffer=100
+                                  <br>Host: localhost:8001<br>Accept: text/plain</pre>
+                                    <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
+                                        <pre>HTTP/1.1 200 OK
+            Content-Type: text/html;
+            </pre>
+
+            Results for FeatureType 'de.colabis.ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1':
+--------------------------------------------
+wkb_geometry = [GEOMETRY (Polygon) with 14 points]
+warncellid = 803459003
+ags_2015 = 03459003
+name = Bad Essen
+typed_name = Gemeinde Bad Essen
+state = NS
+min_height = 0
+max_height = 400
+--------------------------------------------
+                                    </div>
+
+                                    <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
+                                </button>
+      
+                                </div>
+
+                            </div>
+
+                    </section>
+
+                </div>
+            </section>
+
+
             <!-- Service Features
                 ================================================== -->
             <section id="resource-features">
