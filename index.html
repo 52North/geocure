@@ -73,6 +73,14 @@
                             <li><a href="#service-maps-examples">Examples</a></li>
                         </ul>
                     </li>
+                    <li>
+                        <a data-toggle="collapse" data-parent="#contents" data-target="#service-maps-subitems" href="#resource-maps-info">Resource Map Info</a>
+                        <ul id="service-maps-subitems" class="nav collapse">
+                            <li><a href="#service-map-info-urls">URLs</a></li>
+                            <li><a href="#info-parameters">Query Parameters</a></li>
+                            <li><a href="#map-info-example">Examples</a></li>
+                        </ul>
+                    </li>
 
                     <li>
                         <a data-toggle="collapse" data-parent="#contents" data-target="#service-features-subitems" href="#resource-features">Resource Features</a>
@@ -770,7 +778,7 @@ Content-Type: application/json;charset=UTF-8
                     </p>
                 </div>
                 <div>
-                    <div id="service-maps-urls">
+                    <div id="service-map-info-urls">
                         <!-- URLs -->
                         <h3>URLs</h3>
                         <p>API calls are triggered by using the following URLs.</p>
@@ -792,7 +800,7 @@ Content-Type: application/json;charset=UTF-8
                         </table>
                     </div>
 
-                    <h3 id="parameters">Query Parameters</h3>
+                    <h3 id="info-parameters">Query Parameters</h3>
                     Parameters to request information from elements on map.
 
                     <section>
@@ -844,14 +852,14 @@ Content-Type: application/json;charset=UTF-8
                                 <td><code>x</code></td>
                                 <td><code>x=320</code></td>
                                 <td>Pixel coordinate for getFeatureInfo request</td>
-                                <td></td>
+                                <td>No default.</td>
                             </tr>
 
                             <tr>
                                 <td><code>y</code></td>
                                 <td><code>y=320</code></td>
                                 <td>Pixel coordinate for getFeatureInfo request</td>
-                                <td></td>
+                                <td>No default.</td>
                             </tr>
 
                             <tr>
@@ -975,7 +983,7 @@ max_height = 400
 
                                     <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
                                 </button>
-      
+
                                 </div>
 
                             </div>
