@@ -265,10 +265,13 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
         throw errorhandling.getError(404, "Not Found", "getFeatureInfo", "Service with requested id not found");
     }
 
-    const serviceCache = cacheWMS;
+    const serviceCache = cacheWMS.getCache().find(obj => {
+        return obj.id === requestargs.params.id;
+    });
 
     try {
-        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version]) + "&REQUEST=GetFeatureInfo";
+        const localVersion = '1.1.1'; // Needed as with 1.3.0 it seems not to work
+        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", localVersion]) + "&REQUEST=GetFeatureInfo";
 
         // Adding layers
         url += "&LAYERS=" + requestargs.params.layers;
@@ -292,24 +295,34 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
         // Adding height
         url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
 
-        url += "&QUERY_LAYERS=" + requestargs.params.query_layers;
 
-        if (requestargs.params.info_format)
-            url += "&INFO_FORMAT=" + requestargs.params.info_format;
-        else
+
+        url += "&QUERY_LAYERS=" + requestargs.params.layers;
+
+
+        if (requestargs.params.info_format) {
+              url += "&INFO_FORMAT=" + requestargs.params.info_format;
+        }
+        else {
             url += "&INFO_FORMAT=application/json";
+        }
 
-        if (requestargs.params.feature_count)
-            url += "&FEATURE_COUNT=" + requestargs.params.feature_count;
+        if (requestargs.params.feature_count) {
+          url += "&FEATURE_COUNT=" + requestargs.params.feature_count;
+        }
 
-        if (requestargs.params.x)
-            url += "&X=" + requestargs.params.x;
-        if (requestargs.params.i)
-            url += "&I=" + requestargs.params.i;
-        if (requestargs.params.y)
-            url += "&Y=" + requestargs.params.y;
-        if (requestargs.params.j)
-            url += "&J=" + requestargs.params.j
+        if (requestargs.params.x) {
+          url += "&X=" + requestargs.params.x;
+        }
+
+        if (requestargs.params.y) {
+          url += "&Y=" + requestargs.params.y;
+        }
+
+        if (requestargs.params.buffer) {
+          url += "&buffer=" + requestargs.params.buffer;
+        }
+
 
         url += "&EXCEPTIONS=application/json";
 
@@ -421,6 +434,8 @@ function getBbox(serviceCache, requestargs) {
     // If no crs is given, use EPGS:4326
     // Otherwise use cooedinates in the given crs.
     // This is important, because images can be returned with a spatial reference.
+
+    let returnvalue = (requestargs.params.bbox ? requestargs.params.bbox : (getdefaultBbox(serviceCache, requestargs)));
     return requestargs.params.bbox ? requestargs.params.bbox : (getdefaultBbox(serviceCache, requestargs));
 }
 
@@ -434,7 +449,7 @@ function getBbox(serviceCache, requestargs) {
  * @throws {Error}                     Otherwise
  */
 function getdefaultBbox(serviceCache, requestargs) {
-    "use strict";
+"use strict";
     try {
         const maxBbox = serviceCache.capabilities.WMS_Capabilities.capability.layer.exGeographicBoundingBox;
 
@@ -456,6 +471,7 @@ function getdefaultBbox(serviceCache, requestargs) {
         }
 
     } catch (error) {
+      console.log("error: " + error);
         throw error;
     }
 

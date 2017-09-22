@@ -98,7 +98,7 @@ server.get({
 //    }
 //}, function (req, res, next) {
 //    try {
-//        // access styles 
+//        // access styles
 //        res.send(200, res);
 //    } catch (error) {
 //        res.send(500, error);
@@ -133,7 +133,7 @@ server.get({
     }
 }, function (req, res, next) {
     try {
-        const getFeatureInfoUrl = requestURLWMS.getFeatureInfo(cacheLoaderWMS.getCache(), req, services);
+        const getFeatureInfoUrl = requestURLWMS.getFeatureInfo(cacheLoaderWMS, req, services);
         if (getFeatureInfoUrl.exceptions) {
             typeof getFeatureInfoUrl.statuscode === "number" ? res.send(getFeatureInfoUrl.statuscode, getFeatureInfoUrl) : res.send(500, getFeatureInfoUrl);
         } else {
