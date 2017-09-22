@@ -274,7 +274,7 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
         let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", localVersion]) + "&REQUEST=GetFeatureInfo";
 
         // Adding layers
-        url += "&LAYERS=" + requestargs.params.layers;
+        url += "&LAYERS=" + requestargs.params.layer;
 
         // As no seperated styling is supported. So styles is empty to use default styling
         // TODO: SUPPORT STYLES
@@ -297,7 +297,7 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
 
 
 
-        url += "&QUERY_LAYERS=" + requestargs.params.layers;
+        url += "&QUERY_LAYERS=" + requestargs.params.layer;
 
 
         if (requestargs.params.info_format) {
