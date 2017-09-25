@@ -762,18 +762,36 @@ Content-Type: application/json;charset=UTF-8
                   <h5><b>Examples with SLD</b></h5>
                   <pre>GET http://127.0.0.1:8002/geocure/services/colabis-geoserver/map/render?layer=ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1&sldbody=%3CStyledLayerDescriptor%0A%20version%3D%221.3.0%22%0A%20xsi%3AschemaLocation%3D%22http%3A%2F%2Fschemas.opengis.net%2Fsld%2F1.3.0%2FStyledLayerDescriptor.xsd%22%0A%20xmlns%3D%22http%3A%2F%2Fwww.opengis.net%2Fsld%22%0A%20xmlns%3Aogc%3D%22http%3A%2F%2Fwww.opengis.net%2Fogc%22%0A%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%0A%20xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%3E%20%20%3CNamedLayer%3E%0A%3CName%3Eckan%3A_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1%3C%2FName%3E%0A%20%20%20%3CUserStyle%3E%3CTitle%3ESLD%20Cook%20Book%3A%20Simple%20polygon%3C%2FTitle%3E%3CFeatureTypeStyle%3E%3CRule%3E%3CPolygonSymbolizer%3E%3CFill%3E%3CCssParameter%20name%3D%22fill%22%3E%230000FF%3C%2FCssParameter%3E%3C%2FFill%3E%20%3CStroke%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke%22%3E%23FF50AA%0A%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke-width%22%3E2%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FStroke%3E%3C%2FPolygonSymbolizer%3E%3C%2FRule%3E%3C%2FFeatureTypeStyle%3E%3C%2FUserStyle%3E%0A%20%3C%2FNamedLayer%3E%0A%3C%2FStyledLayerDescriptor%3E%0A%0A%0A
                       <br>Host: localhost:8001<br>Accept: image/tiff</pre>
-                  <div id="service-maps-layer-rendering-example-multiple-layers-with-query" class="collapse">
+                  <div id="service-maps-layer-rendering-example-sld-layers-with-query" class="collapse">
                     <pre>HTTP/1.1 200 OK
-                      Content-Type: image/tiff;
+                      Content-Type: image/png;
                       </pre>
 
-                    <img src="img/queryExample.png" alt="service maps layer rendering example with two layers and query" title="Examplar response for rendering two layers and query" style="width: 50%; height: 50%" />
+                    <img src="img/SLDExample.png" alt="service maps layer rendering example with sld" title="Examplar response for rendering layer with sld style" style="width: 50%; height: 50%" />
                   </div>
 
-                  <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-multiple-layers-with-query" class="btn btn-primary">Show/Hide Response
+                  <button data-toggle="collapse" data-parent="#service-maps-layer-rendering-examples" data-target="#service-maps-layer-rendering-example-sld-layers-with-query" class="btn btn-primary">Show/Hide Response
                                 </button>
                   <div class="n52-callout n52-callout-info">
-                    This example shows a request, asking for two layers and using all supported request parameters.
+                    This example shows a request, using sld to style the response.
+                    The sld part is:<br>
+                    <StyledLayerDescriptor
+version="1.3.0"
+xsi:schemaLocation="http://schemas.opengis.net/sld/1.3.0/StyledLayerDescriptor.xsd"
+xmlns="http://www.opengis.net/sld"
+xmlns:ogc="http://www.opengis.net/ogc"
+xmlns:xlink="http://www.w3.org/1999/xlink"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">  <NamedLayer>
+<Name>ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1</Name>
+  <UserStyle><Title>SLD Cook Book: Simple polygon</Title><FeatureTypeStyle><Rule><PolygonSymbolizer><Fill><CssParameter name="fill">#0000FF
+</CssParameter></Fill> <Stroke>
+                <CssParameter name="stroke">#FF50AA
+
+</CssParameter>
+                <CssParameter name="stroke-width">2</CssParameter>
+              </Stroke></PolygonSymbolizer></Rule></FeatureTypeStyle></UserStyle>
+</NamedLayer>
+</StyledLayerDescriptor>
                   </div>
                 </div>
               </div>
