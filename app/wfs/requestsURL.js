@@ -114,7 +114,8 @@ function getBbox(serviceCache, requestargs) {
                               const defaultBbox = getdefaultBbox(serviceCache, requestargs);
                               return defaultBbox;
                       } else {
-                              return requestargs.params.bbox
+                              let bboxArray = requestargs.params.bbox.split(',')
+                              return '' + bboxArray[1] + ',' + bboxArray[0] + ',' + bboxArray[3] + ',' + bboxArray[2];
                       }
     } catch (error) {
       console.log('error ' +  error);
@@ -146,7 +147,7 @@ function getdefaultBbox(serviceCache, requestargs) {
 
         if (targetCrs === "EPSG:4326") {
             //then no transformation is needed, because maxBbox is given in EGPS:4326 via specification.
-            return "" + +maxBbox.southBoundLatitude + "," + maxBbox.westBoundLongitude + "," + maxBbox.northBoundLatitude + "," + maxBbox.eastBoundLongitude;
+            return "" + maxBbox.southBoundLatitude + "," + maxBbox.westBoundLongitude + "," + maxBbox.northBoundLatitude + "," + maxBbox.eastBoundLongitude;
         } else {
             // Targetsystem validation already happened in getCrs
             const minis = coordinates.transformation(maxBbox.westBoundLongitude, maxBbox.southBoundLatitude, "EPSG:4326", targetCrs);
