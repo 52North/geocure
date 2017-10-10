@@ -23,6 +23,7 @@ function getCapabilities(serviceURL) {
 }
 
 function getFeature(cacheWFS, requestargs, services) {
+  console.log(('getFeature'));
     "use strict";
 
     // Securing Service
@@ -47,6 +48,7 @@ function getFeature(cacheWFS, requestargs, services) {
         throw errorhandling.getError(500, "serviceCache", "getFeature", "serviceCache not available");
     }
 
+    console.log('construct wfs url');
     try {
         let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wfs", version]) + "&REQUEST=GetFeature";
 
@@ -55,9 +57,10 @@ function getFeature(cacheWFS, requestargs, services) {
         // Adding CRS
         url += "&SRSNAME=" + getCRS(serviceCache, requestargs);
 
+        console.log('before bbox');
         // Adding bbox
         url += "&BBOX=" + getBbox(serviceCache, requestargs);
-
+console.log('AFTER BBOX');
         // Adding format
         url += "&OUTPUTFORMAT=" + getOutputFormat(serviceConfiguration, serviceCache, requestargs);
 
@@ -99,6 +102,7 @@ function getCRS(serviceCache, requestargs) {
  * @throws {Error}                     Otherwise        [description]
  */
 function getBbox(serviceCache, requestargs) {
+    console.log('getBbox');
     "use strict";
     // If no bbox is given, return a default-bbox.
     // If no crs is given, use EPGS:4326
@@ -106,22 +110,17 @@ function getBbox(serviceCache, requestargs) {
     // This is important, because images can be returned with a spatial reference.
 
     try {
-        var bbox;
-        var queryParams = requestargs.query;
-        for (var property in queryParams) {
-            if (property.hasOwnProperty(property) ||
-                    property.toLowercase() === "bbox") {
-                bbox = queryParams[property];
-                break;
-            }
-        }
-        if (!bbox) {
-            const defaultBbox = getdefaultBbox(serviceCache, requestargs);
-            return defaultBbox;
-        } else {
-            return bbox;
-        }
+      if (!requestargs.params.bbox) {
+                              const defaultBbox = getdefaultBbox(serviceCache, requestargs);
+                              return defaultBbox;
+                      } else {
+                              return requestargs.params.bbox
+
+                      }
+        
+
     } catch (error) {
+      console.log('error ' +  error);
         throw error;
     }
 
