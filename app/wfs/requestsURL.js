@@ -115,10 +115,7 @@ function getBbox(serviceCache, requestargs) {
                               return defaultBbox;
                       } else {
                               return requestargs.params.bbox
-
                       }
-        
-
     } catch (error) {
       console.log('error ' +  error);
         throw error;
