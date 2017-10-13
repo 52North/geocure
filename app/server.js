@@ -138,11 +138,11 @@ server.get({
             typeof getFeatureInfoUrl.statuscode === "number" ? res.send(getFeatureInfoUrl.statuscode, getFeatureInfoUrl) : res.send(500, getFeatureInfoUrl);
         } else {
             requesting.get(String(getFeatureInfoUrl))
-                    .on('response', response => {
-                        if (response.getContentType() === "application/json") {
-                            response.statusCode = 900;
-                        }
-                    })
+                    // .on('response', response => {
+                    //     if (response.getContentType() === "application/json") {
+                    //         response.statusCode = 900;
+                    //     }
+                    // })
                     .on('error', err => {
                         console.log(err);
                     })
