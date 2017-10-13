@@ -132,25 +132,47 @@ server.get({
         notes: "this resource provides access to layers"
     }
 }, function (req, res, next) {
+    // try {
+    //     const getFeatureInfoUrl = requestURLWMS.getFeatureInfo(cacheLoaderWMS, req, services);
+    //     if (getFeatureInfoUrl.exceptions) {
+    //         typeof getFeatureInfoUrl.statuscode === "number" ? res.send(getFeatureInfoUrl.statuscode, getFeatureInfoUrl) : res.send(500, getFeatureInfoUrl);
+    //     } else {
+    //         requesting.get(String(getFeatureInfoUrl))
+    //                 // .on('response', response => {
+    //                 //     if (response.getContentType() === "application/json") {
+    //                 //         response.statusCode = 900;
+    //                 //     }
+    //                 // })
+    //                 .on('error', err => {
+    //                     console.log(err);
+    //                 })
+    //                 .pipe(res);
+    //     }
+    // } catch (error) {
+    //     res.send(500, error);
+    // }
+
+
+
+
+
+
     try {
-        const getFeatureInfoUrl = requestURLWMS.getFeatureInfo(cacheLoaderWMS, req, services);
+      const getFeatureInfoUrl = requestURLWMS.getFeatureInfo(cacheLoaderWMS, req, services);
+        // console.log(getFeatureInfoUrl);
         if (getFeatureInfoUrl.exceptions) {
             typeof getFeatureInfoUrl.statuscode === "number" ? res.send(getFeatureInfoUrl.statuscode, getFeatureInfoUrl) : res.send(500, getFeatureInfoUrl);
         } else {
-            requesting.get(String(getFeatureInfoUrl))
-                    // .on('response', response => {
-                    //     if (response.getContentType() === "application/json") {
-                    //         response.statusCode = 900;
-                    //     }
-                    // })
-                    .on('error', err => {
-                        console.log(err);
-                    })
-                    .pipe(res);
+            requesting.get(String(getFeatureInfoUrl)).on('response', response => {
+                if (!response.headers["content-disposition"]) {
+                    response.statusCode = 900;
+                }
+            }).pipe(res);
         }
     } catch (error) {
         res.send(500, error);
     }
+
 });
 
 server.get({
