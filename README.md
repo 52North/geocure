@@ -1,16 +1,3 @@
-# Content
-
-- [52°North geocure](#52°North_geocure)
-  	- [How it works](# How_it_works)
-	- [Example interaction](#Example_interaction)
-- [Installation](#Installation)
-	- [Configuration](#Configuration)
-	- [Execution](#Execution)
-	- [Deployment with forever](#Deployment_with_forever)
-    - [Test](#Test) 
-- [License](#License)
-- [Disclaimer](#Disclaimer)
-
 ## 52°North geocure
 
 _geocure_ is a REST API providing proxified access to an underlying geodata
