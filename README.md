@@ -3,7 +3,7 @@
 _geocure_ is a REST API providing proxified access to an underlying geodata
 server. Currently [geoserver](http://geoserver.org/) in version 10.11-beta (for exceptions in JSON-Format) is supported.
 
-The development of GeoCure was performed as part of the COLABIS
+The development of geocure was performed as part of the COLABIS
 project ([https://colabis.de](http://geoserver.org/)).
 ![Alt text](https://colabis.de/images/bmbf_logo_en.png "bmbf_logo")
 ![Alt text](https://colabis.de/images/Logo_En.png "Colabis Logo")
