@@ -15,7 +15,7 @@ _gecure_ is placed between the used Geoserver and the client.
 Using _geocure_, WM- and WF-Services can be accessed by a comfortable REST API. 
 This facilitates not only the exploration of and access to data.
 From a developers point of view, it simplifies the development of clients.
-![Alt text](/geocure_solution.png?raw=true "geocure facilitates requests")
+![Alt text](/geocure_pattern.png?raw=true "geocure facilitates requests")
 
 
 ### Example interaction
