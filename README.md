@@ -2,7 +2,7 @@
 
 - [52°North geocure](#52°North_geocure)
     -  [How it works](# How_it_works)
-        - [Example interaction](#Example_interaction)
+        -[Example interaction](#Example_interaction)
 - [Installation](#Installation)
 	- [Configuration](#Configuration)
 	- [Execution](#Execution)
