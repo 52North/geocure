@@ -1,24 +1,39 @@
-# 52°North geocure
+# Content
+
+- [52°North geocure](#52°North_geocure)
+    -  [How it works](# How_it_works)
+        - [Example interaction](#Example_interaction)
+- [Installation](#Installation)
+	- [Configuration](#Configuration)
+	- [Execution](#Execution)
+	- [Deployment with forever](#Deployment_with_forever)
+    - [Test](#Test) 
+- [License](#License)
+- [Disclaimer](#Disclaimer)
+
+## 52°North geocure
 
 _geocure_ is a REST API providing proxified access to an underlying geodata
-server. Currently [geoserver](http://geoserver.org/) in version 10.11-beta (for exceptions in JSON-Format) is supported.
+server. 
+This facilitates not only the exploration of and access to data. From a developers point of view, it simplifies the development of clients.
+Currently [geoserver](http://geoserver.org/) in version 10.11-beta (for exceptions in JSON-Format) is supported.
 
 The development of geocure was performed as part of the COLABIS
 project ([https://colabis.de](http://geoserver.org/)).
 ![Alt text](https://colabis.de/images/bmbf_logo_en.png "bmbf_logo")
 ![Alt text](https://colabis.de/images/Logo_En.png "Colabis Logo")
 
-The documentation of _geocure_ can be found here: [http://52north.github.io/geocure/](http://52north.github.io/geocure/)
-## What it does
+The documentation of _geocure_ can be found here: [http://52north.github.io/geocure/](http://52north.github.io/geocure/).
+For an easy start with development 
 
-_gecure_ is placed between the used goadata server and the client.
-Using _geocure_, WM- and WF-Services can be accessed by a comfortable REST API. 
-This facilitates not only the exploration of and access to data.
-From a developers point of view, it simplifies the development of clients.
+### How it works
+
+_geocure_ is placed between an OGC conform WM-/WFS. It translates requests to the REST-API and forwards them. Metadata responses are preprocessed to provide easier access to them. Raster- and Vector data responses are piped directly to the client.
+
 ![Alt text](/geocure_pattern.png?raw=true "geocure facilitates requests")
 
 
-### Example interaction
+#### Example interaction
 The following examples illustrate how easily one can interact with a geodata provider through the REST interface.
 
 The `/services` endpoint gives an overview of the provided mapping services.
@@ -162,7 +177,7 @@ The responses from above endpoints contain the whole layer. As this would use to
 
 `npm install`
 
-## Configuration
+### Configuration
 To configure the service, only one file has to be changed ([./app/config/services.json](./app/config/services.json)).
 
 ```json
@@ -196,11 +211,12 @@ To configure the service, only one file has to be changed ([./app/config/service
 All configurations are carried out in this services.json. In this file an array is used to aggregate objects. Each object is used to described an offered service. An offered service is a service which is offered by the used Geoserver.
 
 The documentation for the configuration ([http://52north.github.io/geocure/#configuration](http://52north.github.io/geocure/#configuration)) describes the keys in detail.
-## Execution
+
+### Execution
 
 `grunt nodemon` or `node app/server.js`
 
-## Deployment with forever
+### Deployment with forever
 
 Install [forever](https://github.com/foreverjs/forever)  and
 [forever-service](https://github.com/zapty/forever-service) globally:
@@ -215,7 +231,7 @@ Create a startup script, with the root of the project as CWD:
 
 Now, geocure should start as a daemon process when the machine is booted.
 
-## Tests
+### Tests
 
 Unit tests are executed by default `grunt`.
 
