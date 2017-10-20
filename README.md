@@ -11,7 +11,7 @@ project ([https://colabis.de](http://geoserver.org/)).
 The documentation of _geocure_ can be found here: [http://52north.github.io/geocure/](http://52north.github.io/geocure/)
 ## What it does
 
-_gecure_ is placed between the used Geoserver and the client.
+_gecure_ is placed between the used goadata server and the client.
 Using _geocure_, WM- and WF-Services can be accessed by a comfortable REST API. 
 This facilitates not only the exploration of and access to data.
 From a developers point of view, it simplifies the development of clients.
