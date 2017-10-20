@@ -20,8 +20,43 @@ _geocure_ is placed between an OGC conform WM-/WFS. It translates requests to th
 ![Alt text](/geocure_pattern.png?raw=true "geocure facilitates requests")
 
 
-#### Example interaction
-The following examples illustrate how easily one can interact with a geodata provider through the REST interface.
+#### Example usage
+
+After installation (``` npm install ```), one has to configure it. This is quite simple by using the app/config/services.json.
+It contains an array, carrying objects. Each object contains a resource, with will be proxied by _geocure__.
+Furthermore one can specify default values. 
+A configuration could look like this:
+
+```json
+[
+    {
+        "id" : "colabis-geoserver",
+        "label" : "Colabis Geoserver",
+        "description" : "Offers data of the Colabis project",
+        "url" : "https://geoserver.colabis.de/geoserver",
+        "capabilities" : {
+            "map" : {
+                "enabled" : true,
+                "defaultvalues" : {
+                    "width" : 1330,
+                    "height" : 944,
+                    "format" : "image/png"
+                }
+
+            },
+            "features" : {
+                "enabled" : true,
+                "defaultvalues" : {
+                    "format" : "application/json"
+                }
+            }
+        }
+
+    }
+]
+```
+
+After starting the application, one can easily access the proxied geodata through the REST interface from _geocure_:
 
 The `/services` endpoint gives an overview of the provided mapping services.
 
