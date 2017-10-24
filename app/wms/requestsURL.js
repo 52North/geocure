@@ -57,6 +57,8 @@ function getPostGetMapURL(cacheWMS, requestargs, services) {
 
         let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]);
 
+        // Adding transparent
+        url += "&TRANSPARENT=" + getTransparent(requestargs);
         return url;
 
     } catch (error) {
@@ -294,9 +296,6 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
 
         // Adding height
         url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
-
-        // Adding transparent
-        url += "&TRANSPARENT=" + getTransparent(requestargs);
 
         url += "&QUERY_LAYERS=" + requestargs.params.layer;
 
