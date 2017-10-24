@@ -91,7 +91,7 @@ function getPostGetMapXML(cacheWMS, requestargs, services) {
     }
 
     // Create XML GetMap request object from param arguments:
-    var xmlObj = '<GetMap version="1.1.1" xmlns:gml="http://www.opengis.net/gml">';
+    var xmlObj = '<GetMap version= "'+ version_getRequest + '" xmlns:gml="http://www.opengis.net/gml">';
 
     // add CRS:
     var epsg_code = '4326'; // default epsgcode
