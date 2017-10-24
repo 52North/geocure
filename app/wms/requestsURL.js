@@ -10,7 +10,7 @@ const version = "1.3.0";
  * version_getRequest is introduced to deal with with the current 1.3.0 request-problem with geoserver 2.10.0
  * @type {String}
  */
-const version_getRequest = "1.3.0",
+const version_getRequest = "1.3", // Do not touch the version again! Have a look: https://osgeo-org.atlassian.net/browse/GEOS-7889
         defaultCRS = "EPSG:4326",
         defaultBGcolor = "0xFFFFFF";
 /**
@@ -295,7 +295,8 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
         // Adding height
         url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
 
-
+        // Adding transparent
+        url += "&TRANSPARENT=" + getTransparent(requestargs);
 
         url += "&QUERY_LAYERS=" + requestargs.params.layer;
 
@@ -324,9 +325,10 @@ function getFeatureInfo(cacheWMS, requestargs, services) {
         }
 
 
+
         url += "&EXCEPTIONS=application/json";
 
-        console.log(url);
+
 
         return url;
 
