@@ -142,6 +142,10 @@
               </td>
               <td>2017-09-26</td>
             </tr>
+              <tr>
+              <td>SLD update: sldbody -> sld</td>
+              <td>2017-10-24</td>
+            </tr>
 
           </table>
         </div>
@@ -611,7 +615,7 @@ Content-Type: application/json;charset=UTF-8
               </tr>
 
               <tr>
-                <td><code>sldbody</code></td>
+                <td><code>sld</code></td>
                 <td>See example below</td>
                 <td>Styling with sld</td>
                 <td>No default, but optional</td>
@@ -768,8 +772,8 @@ Content-Type: application/json;charset=UTF-8
                   </div>
 
                   <h5><b>Examples with SLD</b></h5>
-                  <pre>GET http://127.0.0.1:8002/geocure/services/colabis-geoserver/map/render?layer=ckan:_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1&sldbody=%3CStyledLayerDescriptor%0A%20version%3D%221.3.0%22%0A%20xsi%3AschemaLocation%3D%22http%3A%2F%2Fschemas.opengis.net%2Fsld%2F1.3.0%2FStyledLayerDescriptor.xsd%22%0A%20xmlns%3D%22http%3A%2F%2Fwww.opengis.net%2Fsld%22%0A%20xmlns%3Aogc%3D%22http%3A%2F%2Fwww.opengis.net%2Fogc%22%0A%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%0A%20xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%3E%20%20%3CNamedLayer%3E%0A%3CName%3Eckan%3A_53fbae20_e2fb_4fd1_b5d6_c798e11b96d1%3C%2FName%3E%0A%20%20%20%3CUserStyle%3E%3CTitle%3ESLD%20Cook%20Book%3A%20Simple%20polygon%3C%2FTitle%3E%3CFeatureTypeStyle%3E%3CRule%3E%3CPolygonSymbolizer%3E%3CFill%3E%3CCssParameter%20name%3D%22fill%22%3E%230000FF%3C%2FCssParameter%3E%3C%2FFill%3E%20%3CStroke%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke%22%3E%23FF50AA%0A%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke-width%22%3E2%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FStroke%3E%3C%2FPolygonSymbolizer%3E%3C%2FRule%3E%3C%2FFeatureTypeStyle%3E%3C%2FUserStyle%3E%0A%20%3C%2FNamedLayer%3E%0A%3C%2FStyledLayerDescriptor%3E%0A%0A%0A
-                      <br>Host: localhost:8001<br>Accept: image/tiff</pre>
+                  <pre>GET http://colabis.dev.52north.org/geocure/services/colabis-geoserver/map/render?service=WMS&version=1.3.0&request=GetMap&format=image/png&transparent=true&layer=ckan:_d6bea91f_ac86_4990_a2d5_c603de92e22c&tiled=true&width=256&height=256&crs=EPSG:4326&styles=&bbox=13.7109375,51.064453125,13.7548828125,51.1083984375&sld=%3CStyledLayerDescriptor%0A%20version%3D%221.3.0%22%0A%20xsi%3AschemaLocation%3D%22http%3A%2F%2Fschemas.opengis.net%2Fsld%2F1.3.0%2FStyledLayerDescriptor.xsd%22%0A%20xmlns%3D%22http%3A%2F%2Fwww.opengis.net%2Fsld%22%0A%20xmlns%3Aogc%3D%22http%3A%2F%2Fwww.opengis.net%2Fogc%22%0A%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%0A%20xmlns%3Axsi%3D%22http%3A%2F%2Fwww.w3.org%2F2001%2FXMLSchema-instance%22%3E%20%20%3CNamedLayer%3E%0A%3CName%3Eckan%3A_d6bea91f_ac86_4990_a2d5_c603de92e22c%3C%2FName%3E%0A%20%20%20%3CUserStyle%3E%3CTitle%3ESLD%20Cook%20Book%3A%20Simple%20polygon%3C%2FTitle%3E%3CFeatureTypeStyle%3E%3CRule%3E%3CPolygonSymbolizer%3E%3CFill%3E%3CCssParameter%20name%3D%22fill%22%3E%230000FF%3C%2FCssParameter%3E%3C%2FFill%3E%20%3CStroke%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke%22%3E%23FF50AA%0A%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3CCssParameter%20name%3D%22stroke-width%22%3E2%3C%2FCssParameter%3E%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%3C%2FStroke%3E%3C%2FPolygonSymbolizer%3E%3C%2FRule%3E%3C%2FFeatureTypeStyle%3E%3C%2FUserStyle%3E%0A%20%3C%2FNamedLayer%3E%0A%3C%2FStyledLayerDescriptor%3E%0A%0A%0A
+                      <br>Host: localhost:8001<br>Accept: image/png</pre>
                   <div id="service-maps-layer-rendering-example-sld-layers-with-query" class="collapse">
                     <pre>HTTP/1.1 200 OK
                       Content-Type: image/png;
