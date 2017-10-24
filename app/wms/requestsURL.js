@@ -70,178 +70,166 @@ function getPostGetMapURL(cacheWMS, requestargs, services) {
 function getPostGetMapXML(cacheWMS, requestargs, services) {
     "use strict";
 
-    // Securing service
-    const serviceConfiguration = services.find(service => {
-        return service.id === requestargs.params.id;
-    });
-
-
-    if (!serviceConfiguration) {
-        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    }
-
-    if (!serviceConfiguration.capabilities.map.enabled) {
-        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    }
-
-    const serviceCache = cacheWMS.getCache().find(obj => {
-        return obj.id === requestargs.params.id;
-    });
-
-    if (!serviceCache) {
-        throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
-    }
-
-    // Create XML GetMap request object from param arguments:
-    var xmlObj = '<GetMap version= "'+ version_getRequest + '" xmlns:gml="http://www.opengis.net/gml">';
-
-    // add CRS:
-    var epsg_code = '4326'; // default epsgcode
-    xmlObj += '<CRS>';
-    if (requestargs.params.crs) {
-        epsg_code = requestargs.params.crs.substr(5, 4);
-        console.log("epsgCode: " + epsg_code);
-    }
-    xmlObj += 'EPSG:' + epsg_code;
-    xmlObj += '</CRS>';
-
-    // add BBox:
-    let bbx = getdefaultBbox(serviceCache, requestargs);
-    let splbx = bbx.split(',')
-    var x1 = splbx[0], // default BBox (i.e. max. Bbox)
-            y1 = splbx[1],
-            x2 = splbx[2],
-            y2 = splbx[3];
-    xmlObj += '<BoundingBox srsName="http://www.opengis.net/gml/srs/epsg.xml#' + epsg_code + '">';
-    if (requestargs.params.bbox) {
-        var coords = requestargs.params.bbox.split(',');
-        x1 = coords[0];
-        y1 = coords[1];
-        x2 = coords[2];
-        y2 = coords[3];
-    }
-    xmlObj += '<gml:coord><gml:X>' + x1 + '</gml:X>';
-    xmlObj += '<gml:Y>' + y1 + '</gml:Y></gml:coord>';
-    xmlObj += '<gml:coord><gml:X>' + x2 + '</gml:X>';
-    xmlObj += '<gml:Y>' + y2 + '</gml:Y></gml:coord>';
-    xmlObj += '</BoundingBox>';
-
-    // add Output format:
-    var format = getFormat(serviceConfiguration, serviceCache, requestargs), // default format
-            width = '600', // default width
-            height = '400';     // default height
-
-    width = getWidth(serviceConfiguration, requestargs);
-    height = getHeight(serviceConfiguration, requestargs);
-    xmlObj += '<Output>';
-    xmlObj += '<Format>';
-    xmlObj += format;
-    xmlObj += '</Format>';
-    xmlObj += '<Size><Width>' + width + '</Width>';
-    xmlObj += '<Height>' + height + '</Height></Size>';
-    xmlObj += '</Output>';
+    // // Securing service
+    // const serviceConfiguration = services.find(service => {
+    //     return service.id === requestargs.params.id;
+    // });
+    //
+    //
+    // if (!serviceConfiguration) {
+    //     throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+    // }
+    //
+    // if (!serviceConfiguration.capabilities.map.enabled) {
+    //     throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+    // }
+    //
+    // const serviceCache = cacheWMS.getCache().find(obj => {
+    //     return obj.id === requestargs.params.id;
+    // });
+    //
+    // if (!serviceCache) {
+    //     throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
+    // }
+    //
+    // // Create XML GetMap request object from param arguments:
+    // var xmlObj = '<GetMap version= "'+ version_getRequest + '" xmlns:gml="http://www.opengis.net/gml">';
+    //
+    // // add CRS:
+    // var epsg_code = '4326'; // default epsgcode
+    // xmlObj += '<CRS>';
+    // if (requestargs.params.crs) {
+    //     epsg_code = requestargs.params.crs.substr(5, 4);
+    //     console.log("epsgCode: " + epsg_code);
+    // }
+    // xmlObj += 'EPSG:' + epsg_code;
+    // xmlObj += '</CRS>';
+    //
+    // // add BBox:
+    // let bbx = getdefaultBbox(serviceCache, requestargs);
+    // let splbx = bbx.split(',')
+    // var x1 = splbx[0], // default BBox (i.e. max. Bbox)
+    //         y1 = splbx[1],
+    //         x2 = splbx[2],
+    //         y2 = splbx[3];
+    // xmlObj += '<BoundingBox srsName="http://www.opengis.net/gml/srs/epsg.xml#' + epsg_code + '">';
+    // if (requestargs.params.bbox) {
+    //     var coords = requestargs.params.bbox.split(',');
+    //     x1 = coords[0];
+    //     y1 = coords[1];
+    //     x2 = coords[2];
+    //     y2 = coords[3];
+    // }
+    // xmlObj += '<gml:coord><gml:X>' + x1 + '</gml:X>';
+    // xmlObj += '<gml:Y>' + y1 + '</gml:Y></gml:coord>';
+    // xmlObj += '<gml:coord><gml:X>' + x2 + '</gml:X>';
+    // xmlObj += '<gml:Y>' + y2 + '</gml:Y></gml:coord>';
+    // xmlObj += '</BoundingBox>';
+    //
+    // // add Output format:
+    // var format = getFormat(serviceConfiguration, serviceCache, requestargs), // default format
+    //         width = '600', // default width
+    //         height = '400';     // default height
+    //
+    // width = getWidth(serviceConfiguration, requestargs);
+    // height = getHeight(serviceConfiguration, requestargs);
+    // xmlObj += '<Output>';
+    // xmlObj += '<Format>';
+    // xmlObj += format;
+    // xmlObj += '</Format>';
+    // xmlObj += '<Size><Width>' + width + '</Width>';
+    // xmlObj += '<Height>' + height + '</Height></Size>';
+    // xmlObj += '</Output>';
 
     // add SLD:
-    var sld = "";               // default style (none)
-    var sld_dec = "<StyledLayerDescriptor></StyledLayerDescriptor>";
-    if (requestargs.params.sldbody) {
-        sld_dec = decodeURIComponent(requestargs.params.sldbody);
+             // default style (none)
+    if (requestargs.params.sld) {
+        let sld_dec = decodeURIComponent(requestargs.params.sld);
         console.log("decodedSLD: " + sld_dec);
-        xmlObj += sld_dec;
+        return sld_dec;
     } else {
-
-        xmlObj += '<StyledLayerDescriptor version="1.3.0" xsi:schemaLocation="http://schemas.opengis.net/sld/1.3.0/StyledLayerDescriptor.xsd" ';
-        xmlObj += 'xmlns="http://www.opengis.net/sld" xmlns:ogc="http://www.opengis.net/ogc" xmlns:xlink="http://www.w3.org/1999/xlink" ';
-        xmlObj += 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">';
-        xmlObj += '<NamedLayer>';
-        xmlObj += '<Name>' + getLayer(serviceCache, requestargs) + '</Name>';
-        xmlObj += '</NamedLayer>';
-        xmlObj += '</StyledLayerDescriptor>';
+        return "";
     }
+};
+
+/**
+* Returns the URL for a "getMap - request"
+* @method getMapURL
+* @param  {Object}   cacheWMS     The whole cache for WM-Services
+* @param  {Object}   requestargs  Arguments of the request
+* @param  {Array}    services      Array with all services
+* @return {String}               The URL
+* @throws {Object}                Otherwise
+*/
+function getMapURL(cacheWMS, requestargs, services) {
+   "use strict";
+
+   // Securing service
+   const serviceConfiguration = services.find(service => {
+       return service.id === requestargs.params.id;
+   });
 
 
-    xmlObj += '</GetMap>';
-    return xmlObj;
+   if (!serviceConfiguration) {
+       throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+   }
+
+   if (!serviceConfiguration.capabilities.map.enabled) {
+       throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
+   }
+
+   const serviceCache = cacheWMS.getCache().find(obj => {
+       return obj.id === requestargs.params.id;
+   });
+
+   if (!serviceCache) {
+       throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
+   }
+
+   // Adding Layers
+   try {
+
+       let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]) + "&REQUEST=GetMap";
+
+       url += "&LAYERS=" + getLayer(serviceCache, requestargs);
+       // As no seperated styling is supported. So styles is empty to use default styling
+       if (requestargs.params.styles)
+           url += "&STYLES=" + requestargs.params.styles;
+       //else
+       //url += "&STYLES=";
+
+       if (requestargs.params.sldbody)
+           url += "&SLDBODY=" + requestargs.params.sldbody;
+
+       // Adding CRS
+       url += "&CRS=" + getCRS(serviceCache, requestargs);
+
+       // Adding bbox
+       url += "&BBOX=" + getBbox(serviceCache, requestargs);
+
+       // Adding width
+       url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs);
+
+       // Adding height
+       url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
+
+       // Adding format
+       url += "&FORMAT=" + getFormat(serviceConfiguration, serviceCache, requestargs);
+
+       // Adding transparent
+       url += "&TRANSPARENT=" + getTransparent(requestargs);
+
+       url += "&BGCOLOR=" + getBGcolor(requestargs);
+
+       // Exception
+       url += "&EXCEPTIONS=json";
+
+       return url;
+
+   } catch (error) {
+       throw error;
+   }
 }
-
-///**
-// * Returns the URL for a "getMap - request"
-// * @method getMapURL
-// * @param  {Object}   cacheWMS     The whole cache for WM-Services
-// * @param  {Object}   requestargs  Arguments of the request
-// * @param  {Array}    services      Array with all services
-// * @return {String}               The URL
-// * @throws {Object}                Otherwise
-// */
-//function getMapURL(cacheWMS, requestargs, services) {
-//    "use strict";
-//
-//    // Securing service
-//    const serviceConfiguration = services.find(service => {
-//        return service.id === requestargs.params.id;
-//    });
-//
-//
-//    if (!serviceConfiguration) {
-//        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-//    }
-//
-//    if (!serviceConfiguration.capabilities.map.enabled) {
-//        throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-//    }
-//
-//    const serviceCache = cacheWMS.getCache().find(obj => {
-//        return obj.id === requestargs.params.id;
-//    });
-//
-//    if (!serviceCache) {
-//        throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
-//    }
-//
-//    // Adding Layers
-//    try {
-//
-//        let url = generalURLConstructor.getBaseURL(serviceConfiguration.url, ["wms", version_getRequest]) + "&REQUEST=GetMap";
-//
-//        url += "&LAYERS=" + getLayer(serviceCache, requestargs);
-//        // As no seperated styling is supported. So styles is empty to use default styling
-//        if (requestargs.params.styles)
-//            url += "&STYLES=" + requestargs.params.styles;
-//        //else
-//        //url += "&STYLES=";
-//
-//        if (requestargs.params.sldbody)
-//            url += "&SLDBODY=" + requestargs.params.sldbody;
-//
-//        // Adding CRS
-//        url += "&CRS=" + getCRS(serviceCache, requestargs);
-//
-//        // Adding bbox
-//        url += "&BBOX=" + getBbox(serviceCache, requestargs);
-//
-//        // Adding width
-//        url += "&WIDTH=" + getWidth(serviceConfiguration, requestargs);
-//
-//        // Adding height
-//        url += "&HEIGHT=" + getHeight(serviceConfiguration, requestargs);
-//
-//        // Adding format
-//        url += "&FORMAT=" + getFormat(serviceConfiguration, serviceCache, requestargs);
-//
-//        // Adding transparent
-//        url += "&TRANSPARENT=" + getTransparent(requestargs);
-//
-//        url += "&BGCOLOR=" + getBGcolor(requestargs);
-//
-//        // Exception
-//        url += "&EXCEPTIONS=json";
-//
-//        return url;
-//
-//    } catch (error) {
-//        throw error;
-//    }
-//}
 
 /**
  * Returns the URL for a "getFeatureInfo request"
@@ -549,7 +537,8 @@ module.exports = {
     getHeight: getHeight,
     getFormat: getFormat,
     getFeatureInfo: getFeatureInfo,
-    getMapURL: getPostGetMapURL,
+    // getMapURL: getPostGetMapURL,
+    getMapURL: getMapURL,
     getMapXML: getPostGetMapXML,
     getTransparent: getTransparent,
     getBGcolor: getBGcolor
