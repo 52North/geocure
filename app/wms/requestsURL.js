@@ -64,85 +64,14 @@ function getPostGetMapURL(cacheWMS, requestargs, services) {
     } catch (error) {
         throw error;
     }
-}
-;
+};
 
-function getPostGetMapXML(cacheWMS, requestargs, services) {
+/**
+ * Used to get styling for map with sld
+ */
+function sldStyling(requestargs) {
     "use strict";
 
-    // // Securing service
-    // const serviceConfiguration = services.find(service => {
-    //     return service.id === requestargs.params.id;
-    // });
-    //
-    //
-    // if (!serviceConfiguration) {
-    //     throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    // }
-    //
-    // if (!serviceConfiguration.capabilities.map.enabled) {
-    //     throw errorhandling.getError(404, "Not Found", "getMapURL", "Service with requested id not found");
-    // }
-    //
-    // const serviceCache = cacheWMS.getCache().find(obj => {
-    //     return obj.id === requestargs.params.id;
-    // });
-    //
-    // if (!serviceCache) {
-    //     throw errorhandling.getError(500, "serviceCache", "getMapURL", "serviceCache not available");
-    // }
-    //
-    // // Create XML GetMap request object from param arguments:
-    // var xmlObj = '<GetMap version= "'+ version_getRequest + '" xmlns:gml="http://www.opengis.net/gml">';
-    //
-    // // add CRS:
-    // var epsg_code = '4326'; // default epsgcode
-    // xmlObj += '<CRS>';
-    // if (requestargs.params.crs) {
-    //     epsg_code = requestargs.params.crs.substr(5, 4);
-    //     console.log("epsgCode: " + epsg_code);
-    // }
-    // xmlObj += 'EPSG:' + epsg_code;
-    // xmlObj += '</CRS>';
-    //
-    // // add BBox:
-    // let bbx = getdefaultBbox(serviceCache, requestargs);
-    // let splbx = bbx.split(',')
-    // var x1 = splbx[0], // default BBox (i.e. max. Bbox)
-    //         y1 = splbx[1],
-    //         x2 = splbx[2],
-    //         y2 = splbx[3];
-    // xmlObj += '<BoundingBox srsName="http://www.opengis.net/gml/srs/epsg.xml#' + epsg_code + '">';
-    // if (requestargs.params.bbox) {
-    //     var coords = requestargs.params.bbox.split(',');
-    //     x1 = coords[0];
-    //     y1 = coords[1];
-    //     x2 = coords[2];
-    //     y2 = coords[3];
-    // }
-    // xmlObj += '<gml:coord><gml:X>' + x1 + '</gml:X>';
-    // xmlObj += '<gml:Y>' + y1 + '</gml:Y></gml:coord>';
-    // xmlObj += '<gml:coord><gml:X>' + x2 + '</gml:X>';
-    // xmlObj += '<gml:Y>' + y2 + '</gml:Y></gml:coord>';
-    // xmlObj += '</BoundingBox>';
-    //
-    // // add Output format:
-    // var format = getFormat(serviceConfiguration, serviceCache, requestargs), // default format
-    //         width = '600', // default width
-    //         height = '400';     // default height
-    //
-    // width = getWidth(serviceConfiguration, requestargs);
-    // height = getHeight(serviceConfiguration, requestargs);
-    // xmlObj += '<Output>';
-    // xmlObj += '<Format>';
-    // xmlObj += format;
-    // xmlObj += '</Format>';
-    // xmlObj += '<Size><Width>' + width + '</Width>';
-    // xmlObj += '<Height>' + height + '</Height></Size>';
-    // xmlObj += '</Output>';
-
-    // add SLD:
-             // default style (none)
     if (requestargs.params.sld) {
         let sld_dec = decodeURIComponent(requestargs.params.sld);
         console.log("decodedSLD: " + sld_dec);
@@ -537,9 +466,8 @@ module.exports = {
     getHeight: getHeight,
     getFormat: getFormat,
     getFeatureInfo: getFeatureInfo,
-    // getMapURL: getPostGetMapURL,
     getMapURL: getMapURL,
-    getMapXML: getPostGetMapXML,
+    sldStyling: sldStyling,
     getTransparent: getTransparent,
     getBGcolor: getBGcolor
 }

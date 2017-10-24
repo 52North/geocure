@@ -163,9 +163,7 @@ server.get({
         if (getMapUrl.exceptions) {
             typeof getMapUrl.statuscode === "number" ? res.send(getMapUrl.statuscode, getMapUrl) : res.send(500, getMapUrl);
         } else {
-            console.log("getMapUrl = " + getMapUrl);
-            var xmlObj = requestURLWMS.getMapXML(cacheLoaderWMS, req, services);
-            console.log("xmlObj = " + xmlObj);
+            var xmlObj = requestURLWMS.sldStyling(req);
             requesting.post({
                 url: String(getMapUrl),
                 headers: {
